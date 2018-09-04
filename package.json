@@ -1,0 +1,38 @@
+{
+  "name": "benadamstyles",
+  "version": "0.0.1",
+  "main": "src/index.js",
+  "license": "MIT",
+  "author": "benadamstyles",
+  "scripts": {
+    "lint": "eslint .",
+    "start": "react-static start",
+    "stage": "react-static build --staging",
+    "build": "react-static build",
+    "serve": "serve dist -p 3000"
+  },
+  "dependencies": {
+    "babel-plugin-emotion": "^9.2.8",
+    "emotion": "^9.2.8",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-emotion": "^9.2.8",
+    "react-hot-loader": "^4.0.0-beta.21",
+    "react-router": "^4.2.0",
+    "react-static": "^5.9.7",
+    "react-static-plugin-emotion": "^1.0.6"
+  },
+  "devDependencies": {
+    "eslint": "^5.5.0",
+    "eslint-config-mealsup": "^2.6.0",
+    "eslint-plugin-eslint-comments": "^3.0.1",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-fp": "^2.3.0",
+    "eslint-plugin-jest": "^21.22.0",
+    "eslint-plugin-react-native": "^3.2.1",
+    "flow-bin": "^0.80.0",
+    "flow-typed": "^2.5.1",
+    "prettier": "^1.14.2",
+    "serve": "^6.1.0"
+  }
+}
