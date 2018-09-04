@@ -3,8 +3,10 @@
 import React from 'react'
 import {Router, Link} from 'react-static'
 import {injectGlobal} from 'emotion'
-// eslint-disable-next-line import/no-unresolved
+/* eslint-disable import/no-unresolved */
+// $FlowIgnore
 import Routes from 'react-static-routes'
+/* eslint-enable import/no-unresolved */
 import {Sources} from './components/sources'
 
 // eslint-disable-next-line no-unused-expressions
