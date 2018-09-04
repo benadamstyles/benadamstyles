@@ -2,7 +2,6 @@
 
 import React from 'react'
 import {Router, Link} from 'react-static'
-import {hot} from 'react-hot-loader'
 import {injectGlobal} from 'emotion'
 // eslint-disable-next-line import/no-unresolved
 import Routes from 'react-static-routes'
@@ -70,4 +69,4 @@ const App = () => (
   </Router>
 )
 
-export default hot(module)(App)
+export default App

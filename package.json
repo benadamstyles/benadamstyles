@@ -8,19 +8,18 @@
     "lint": "eslint .",
     "start": "react-static start",
     "stage": "react-static build --staging",
-    "build": "react-static build",
+    "build": "(cd node_modules/react-static && yarn && yarn build) && react-static build",
     "serve": "serve dist -p 3000"
   },
   "dependencies": {
     "babel-plugin-emotion": "^9.2.8",
     "emotion": "^9.2.8",
     "immutable": "^3.8.2",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
     "react-emotion": "^9.2.8",
-    "react-hot-loader": "^4.0.0-beta.21",
-    "react-router": "^4.2.0",
-    "react-static": "^5.9.7",
+    "react-hot-loader": "^4.3.6",
+    "react-static": "nozzle/react-static#f6b808ce6789a58c8a24ec2b3c923c709600ec60",
     "react-static-plugin-emotion": "^1.0.6"
   },
   "devDependencies": {
@@ -29,11 +28,13 @@
     "eslint-plugin-eslint-comments": "^3.0.1",
     "eslint-plugin-flowtype": "^2.50.0",
     "eslint-plugin-fp": "^2.3.0",
+    "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jest": "^21.22.0",
+    "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-react-native": "^3.2.1",
     "flow-bin": "^0.80.0",
     "flow-typed": "^2.5.1",
     "prettier": "^1.14.2",
-    "serve": "^6.1.0"
+    "serve": "^10.0.0"
   }
 }
