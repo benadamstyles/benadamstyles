@@ -4,9 +4,9 @@ import React from 'react'
 import {Router, Link} from 'react-static'
 import {hot} from 'react-hot-loader'
 import {injectGlobal} from 'emotion'
-
 // eslint-disable-next-line import/no-unresolved
 import Routes from 'react-static-routes'
+import {Sources} from './components/sources'
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
@@ -15,6 +15,11 @@ injectGlobal`
       'Lucida Grande', sans-serif;
     font-weight: 300;
     font-size: 16px;
+    margin: 0;
+    padding: 0;
+  }
+
+  p {
     margin: 0;
     padding: 0;
   }
@@ -57,6 +62,9 @@ const App = () => (
       </nav>
       <div className="content">
         <Routes />
+      </div>
+      <div className="content">
+        <Sources />
       </div>
     </div>
   </Router>
