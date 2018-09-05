@@ -58,8 +58,7 @@ const App = () => (
         <Link exact to="/">
           Home
         </Link>
-        <Link to="/about">About</Link>
-        <Link to="/blog">Blog</Link>
+        <Link to="https://medium.com/@benadamstyles">Blog</Link>
       </nav>
       <div className="content">
         <Routes />
