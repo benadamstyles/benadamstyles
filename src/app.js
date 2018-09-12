@@ -11,6 +11,11 @@ import {Sources} from './components/sources'
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
+  html {
+    margin: 0;
+    padding: 0;
+  }
+
   body {
     font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial,
       'Lucida Grande', sans-serif;
@@ -37,7 +42,7 @@ injectGlobal`
 
   nav {
     width: 100%;
-    background: #108db8;
+    position: fixed;
   }
 
   nav a {
@@ -60,7 +65,7 @@ const App = () => (
         </Link>
         <Link to="https://medium.com/@benadamstyles">Blog</Link>
       </nav>
-      <div className="content">
+      <div>
         <Routes />
       </div>
       <div className="content">
