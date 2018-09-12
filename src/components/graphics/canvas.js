@@ -82,23 +82,31 @@ type Props = $ReadOnly<{|
 |}>
 
 export class Canvas extends PureComponent<Props> {
+  window = null
+
+  componentDidMount() {
+    this.window = window
+  }
+
   render() {
     return (
-      <Stage width={window.innerWidth} height={window.innerHeight}>
-        <PrevSessions prevSessions={this.props.prevSessions} />
+      this.window && (
+        <Stage width={window.innerWidth} height={window.innerHeight}>
+          <PrevSessions prevSessions={this.props.prevSessions} />
 
-        <Layer>
-          {this.props.points.map(({x, y, r}, i) => (
-            <AnimatedCircle
-              key={String(i)}
-              color={this.props.currentColor}
-              x={x}
-              y={y}
-              r={r}
-            />
-          ))}
-        </Layer>
-      </Stage>
+          <Layer>
+            {this.props.points.map(({x, y, r}, i) => (
+              <AnimatedCircle
+                key={String(i)}
+                color={this.props.currentColor}
+                x={x}
+                y={y}
+                r={r}
+              />
+            ))}
+          </Layer>
+        </Stage>
+      )
     )
   }
 }
