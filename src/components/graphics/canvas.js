@@ -2,7 +2,7 @@
 
 import React, {PureComponent, Component, Fragment} from 'react'
 import {Stage, Layer, Circle} from 'react-konva'
-import {Spring} from 'react-spring'
+import {Spring, animated} from 'react-spring/dist/konva'
 import type {List} from 'immutable'
 import type {Session, Points, Point} from '../context/mouse-map'
 
@@ -26,9 +26,9 @@ class AnimatedCircle extends Component<Point> {
 
   render() {
     return (
-      <Spring from={start} to={end}>
+      <Spring native from={start} to={end}>
         {({scale, opacity}) => (
-          <Circle
+          <animated.Circle
             x={this.props.x}
             y={this.props.y}
             radius={this.props.r}
