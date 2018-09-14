@@ -5,6 +5,7 @@ import {Stage, Layer, Circle} from 'react-konva'
 import {Spring, animated} from 'react-spring/dist/konva'
 import type {List} from 'immutable'
 import type {Session, Points, Point} from '../context/mouse-map'
+import {cachePointMapper} from '../../util/memo'
 
 const endScale = 2
 const endOpacity = 0.4
@@ -48,8 +49,10 @@ type PrevSessionsProps = $ReadOnly<{|
 |}>
 
 class PrevSessions extends Component<PrevSessionsProps> {
-  shouldComponentUpdate() {
-    return this.props.prevSessions.size === 0
+  shouldComponentUpdate(nextProps: PrevSessionsProps) {
+    return (
+      this.props.prevSessions.size === 0 || nextProps.prevSessions.size === 0
+    )
   }
 
   render() {
@@ -75,6 +78,10 @@ class PrevSessions extends Component<PrevSessionsProps> {
     )
   }
 }
+
+const pointMapper = cachePointMapper((point, i) => (
+  <AnimatedCircle key={String(i)} {...point} />
+))
 
 type Props = $ReadOnly<{|
   points: Points,
@@ -102,12 +109,7 @@ export class Canvas extends PureComponent<Props, State> {
         width={window ? window.innerWidth : 1024}
         height={window ? window.innerHeight : 768}>
         <PrevSessions prevSessions={this.props.prevSessions} />
-
-        <Layer>
-          {this.props.points.map((point, i) => (
-            <AnimatedCircle key={String(i)} {...point} />
-          ))}
-        </Layer>
+        <Layer>{this.props.points.map(pointMapper)}</Layer>
       </Stage>
     )
   }

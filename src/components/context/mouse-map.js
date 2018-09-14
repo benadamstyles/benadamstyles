@@ -26,6 +26,10 @@ type SessionSerialized = $ReadOnly<{|
 const retrieveSession = (index: number) =>
   window.localStorage.getItem(`session-${index}`)
 
+const storeSession = (index: number, session: SessionSerialized) => {
+  window.localStorage.setItem(`session-${index}`, JSON.stringify(session))
+}
+
 const findLatestPointsIndex = (): number => {
   const loop = latestPointsIndex => {
     if (retrieveSession(latestPointsIndex + 1)) {
@@ -77,11 +81,11 @@ const getLastHue = (latestPointsIndex: number): HSL => {
 }
 
 const {Consumer, Provider} = createContext({
-  currentColor: '',
   points: List(),
   prevSessions: List(),
   // eslint-disable-next-line no-unused-vars
   addPoint: (x: number, y: number) => void 0,
+  clearAll: () => void 0,
 })
 
 export const MouseMap = Consumer
@@ -94,6 +98,7 @@ type State = {|
   points: Points,
   prevSessions: List<Session>,
   addPoint: (number, number) => void,
+  clearAll: () => void,
 |}
 
 export class MouseMapProvider extends Component<Props, State> {
@@ -116,6 +121,14 @@ export class MouseMapProvider extends Component<Props, State> {
           }),
         }))
       }
+    },
+    clearAll: () => {
+      window.localStorage.clear()
+      this.latestPointsIndex = findLatestPointsIndex()
+      this.setState({
+        points: List(),
+        prevSessions: List(),
+      })
     },
   }
 
@@ -140,16 +153,13 @@ export class MouseMapProvider extends Component<Props, State> {
       prevState.points !== this.state.points
     ) {
       // TODO: debounce
-      window.requestIdleCallback(() =>
-        window.localStorage.setItem(
-          `session-${this.latestPointsIndex + 1}`,
-          JSON.stringify(
-            ({
-              points: this.state.points.toArray(),
-              lastColor: this.state.points.last().c,
-            }: SessionSerialized)
-          )
-        )
+      window.requestIdleCallback(
+        () =>
+          this.state.points.size > 0 &&
+          storeSession(this.latestPointsIndex + 1, {
+            points: this.state.points.toArray(),
+            lastColor: this.state.points.last().c,
+          })
       )
     }
   }

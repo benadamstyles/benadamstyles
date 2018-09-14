@@ -8,12 +8,14 @@ import {injectGlobal} from 'emotion'
 import Routes from 'react-static-routes'
 /* eslint-enable import/no-unresolved */
 import {Sources} from './components/sources'
+import {backgroundColor} from './constants/styles/colors'
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
   html {
     margin: 0;
     padding: 0;
+    background-color: ${backgroundColor};
   }
 
   body {
