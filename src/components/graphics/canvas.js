@@ -95,18 +95,20 @@ export class Canvas extends PureComponent<Props, State> {
   }
 
   render() {
-    return (
-      this.state.window && (
-        <Stage width={window.innerWidth} height={window.innerHeight}>
-          <PrevSessions prevSessions={this.props.prevSessions} />
+    const {window} = this.state
 
-          <Layer>
-            {this.props.points.map((point, i) => (
-              <AnimatedCircle key={String(i)} {...point} />
-            ))}
-          </Layer>
-        </Stage>
-      )
+    return (
+      <Stage
+        width={window ? window.innerWidth : 1024}
+        height={window ? window.innerHeight : 768}>
+        <PrevSessions prevSessions={this.props.prevSessions} />
+
+        <Layer>
+          {this.props.points.map((point, i) => (
+            <AnimatedCircle key={String(i)} {...point} />
+          ))}
+        </Layer>
+      </Stage>
     )
   }
 }
