@@ -20,21 +20,19 @@ const Content = styled.div`
 const content = (
   <Content>
     <Headline>Ben Styles</Headline>
+    <Headline invisible>freelance javascript developer</Headline>
   </Content>
 )
 
 const Home = () => (
   <MouseMapProvider>
     <MouseMap>
-      {({addPoint, currentColor, points, prevSessions}) => (
+      {({addPoint, points, prevSessions}) => (
         <MouseTracker addPoint={addPoint}>
           {onMouseMove => (
             <div onMouseMove={onMouseMove}>
-              <Canvas
-                points={points}
-                prevSessions={prevSessions}
-                currentColor={currentColor}
-              />
+              <Canvas points={points} prevSessions={prevSessions} />
+
               {content}
             </div>
           )}

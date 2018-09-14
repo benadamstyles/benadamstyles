@@ -12,6 +12,7 @@ export default App
 
 // Render your app
 if (typeof document !== 'undefined') {
+  // $FlowFixMe
   const renderMethod = module.hot
     ? ReactDOM.render
     : ReactDOM.hydrate || ReactDOM.render
@@ -20,6 +21,7 @@ if (typeof document !== 'undefined') {
       <AppContainer>
         <Comp />
       </AppContainer>,
+      // $FlowFixMe
       document.getElementById('root')
     )
   }
@@ -27,7 +29,9 @@ if (typeof document !== 'undefined') {
   // Render!
   render(App)
   // Hot Module Replacement
+  // $FlowFixMe
   if (module.hot) {
+    // $FlowFixMe
     module.hot.accept('./app', () => render(require('./app').default))
   }
 }
