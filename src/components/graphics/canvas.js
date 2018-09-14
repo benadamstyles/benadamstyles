@@ -1,7 +1,7 @@
 // @flow
 
 import React, {PureComponent, Component, Fragment} from 'react'
-import {Stage, Layer, Circle} from 'react-konva'
+import {Stage, FastLayer, Circle} from 'react-konva'
 import {Spring, animated} from 'react-spring/dist/konva'
 import type {List} from 'immutable'
 import type {Session, Points, Point} from '../context/mouse-map'
@@ -59,7 +59,7 @@ class PrevSessions extends Component<PrevSessionsProps> {
     return (
       <Fragment>
         {this.props.prevSessions.map((session, i) => (
-          <Layer key={String(i)}>
+          <FastLayer key={String(i)}>
             {session.points.map(({x, y, r, c}, j) => (
               <Circle
                 key={String(j)}
@@ -72,7 +72,7 @@ class PrevSessions extends Component<PrevSessionsProps> {
                 scaleY={endScale}
               />
             ))}
-          </Layer>
+          </FastLayer>
         ))}
       </Fragment>
     )
@@ -109,7 +109,7 @@ export class Canvas extends PureComponent<Props, State> {
         width={window ? window.innerWidth : 1024}
         height={window ? window.innerHeight : 768}>
         <PrevSessions prevSessions={this.props.prevSessions} />
-        <Layer>{this.props.points.map(pointMapper)}</Layer>
+        <FastLayer>{this.props.points.map(pointMapper)}</FastLayer>
       </Stage>
     )
   }
