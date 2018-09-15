@@ -23,6 +23,8 @@ type SessionSerialized = $ReadOnly<{|
   lastColor: HSL,
 |}>
 
+const whenIdle = window.requestIdleCallback || setTimeout
+
 const retrieveSession = (index: number) =>
   window.localStorage.getItem(`session-${index}`)
 
@@ -104,6 +106,7 @@ type State = {|
 export class MouseMapProvider extends Component<Props, State> {
   latestPointsIndex: number | null = null
   hsl: HSLRotation | void
+  maxPointRadius = 50
 
   /* eslint-disable react/no-unused-state */
   state = {
@@ -116,7 +119,7 @@ export class MouseMapProvider extends Component<Props, State> {
           points: points.push({
             x: pageX,
             y: pageY,
-            r: Math.random() * 50,
+            r: Math.random() * this.maxPointRadius,
             c: hsl.next(),
           }),
         }))
@@ -144,6 +147,8 @@ export class MouseMapProvider extends Component<Props, State> {
     } else {
       this.hsl = new HSLRotation(DEFAULT_HUE)
     }
+
+    this.maxPointRadius = Math.min(50, window.innerWidth / 12)
   }
   /* eslint-enable react/no-unused-state */
 
@@ -153,7 +158,7 @@ export class MouseMapProvider extends Component<Props, State> {
       prevState.points !== this.state.points
     ) {
       // TODO: debounce
-      window.requestIdleCallback(
+      whenIdle(
         () =>
           this.state.points.size > 0 &&
           storeSession(this.latestPointsIndex + 1, {

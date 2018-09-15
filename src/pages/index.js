@@ -31,7 +31,7 @@ const Home = () => (
       {({addPoint, points, prevSessions, clearAll}) => (
         <MouseTracker addPoint={addPoint}>
           {onMouseMove => (
-            <div onMouseMove={onMouseMove}>
+            <div onMouseMove={onMouseMove} onTouchMove={onMouseMove}>
               <Canvas points={points} prevSessions={prevSessions} />
               {content}
               <ClearMouseMap clearAll={clearAll} />

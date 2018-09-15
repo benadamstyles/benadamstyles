@@ -8,8 +8,13 @@ type Props = $ReadOnly<{|
 |}>
 
 export class MouseTracker extends Component<Props> {
-  onMouseMove = (event: MouseEvent) =>
-    this.props.addPoint(event.pageX, event.pageY)
+  onMouseMove = (event: MouseEvent | TouchEvent) =>
+    event instanceof MouseEvent
+      ? this.props.addPoint(event.pageX, event.pageY)
+      : event.changedTouches &&
+        [...event.changedTouches].forEach(touch =>
+          this.props.addPoint(touch.pageX, touch.pageY)
+        )
 
   render() {
     return this.props.children(this.onMouseMove)
