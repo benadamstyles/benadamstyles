@@ -43,7 +43,7 @@ injectGlobal`
   }
 
   nav {
-    position: absolute;
+    position: fixed;
     top: 0;
     pointer-events: none;
   }
@@ -57,7 +57,7 @@ injectGlobal`
 
   .footer {
     box-sizing: border-box;
-    position: absolute;
+    position: fixed;
     top: auto;
     bottom: 0;
     width: 100%;
