@@ -43,8 +43,8 @@ injectGlobal`
   }
 
   nav {
-    width: 100%;
-    position: fixed;
+    position: absolute;
+    top: 0;
   }
 
   nav a {
@@ -54,6 +54,9 @@ injectGlobal`
   }
 
   .content {
+    position: absolute;
+    top: auto;
+    bottom: 0;
     padding: 1rem;
   }
 `
@@ -61,15 +64,17 @@ injectGlobal`
 const App = () => (
   <Router>
     <div>
+      <div>
+        <Routes />
+      </div>
+
       <nav>
         <Link exact to="/">
           Home
         </Link>
         <Link to="https://medium.com/@benadamstyles">Blog</Link>
       </nav>
-      <div>
-        <Routes />
-      </div>
+
       <div className="content">
         <Sources />
       </div>

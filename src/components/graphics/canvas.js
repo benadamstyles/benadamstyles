@@ -89,25 +89,26 @@ type Props = $ReadOnly<{|
 |}>
 
 type State = {|
-  window: ?typeof window,
+  width: number,
+  height: number,
 |}
 
 export class Canvas extends PureComponent<Props, State> {
   state = {
-    window: null,
+    width: 1024,
+    height: 768,
   }
 
   componentDidMount() {
-    this.setState({window})
+    this.setState({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    })
   }
 
   render() {
-    const {window} = this.state
-
     return (
-      <Stage
-        width={window ? window.innerWidth : 1024}
-        height={window ? window.innerHeight : 768}>
+      <Stage width={this.state.width} height={this.state.height}>
         <PrevSessions prevSessions={this.props.prevSessions} />
         <FastLayer>{this.props.points.map(pointMapper)}</FastLayer>
       </Stage>
