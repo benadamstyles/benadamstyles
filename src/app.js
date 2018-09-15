@@ -55,23 +55,29 @@ injectGlobal`
     pointer-events: auto;
   }
 
-  .content {
+  .footer {
+    box-sizing: border-box;
     position: absolute;
     top: auto;
     bottom: 0;
+    width: 100%;
     padding: 1rem;
     pointer-events: none;
   }
 
-  .content a {
+  .footer a {
     pointer-events: auto;
+  }
+
+  .content {
+    position: fixed;
   }
 `
 
 const App = () => (
   <Router>
     <div>
-      <div>
+      <div className="content">
         <Routes />
       </div>
 
@@ -82,7 +88,7 @@ const App = () => (
         <Link to="https://medium.com/@benadamstyles">Blog</Link>
       </nav>
 
-      <div className="content">
+      <div className="footer">
         <Sources />
       </div>
     </div>
