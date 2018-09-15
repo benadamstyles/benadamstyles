@@ -45,12 +45,14 @@ injectGlobal`
   nav {
     position: absolute;
     top: 0;
+    pointer-events: none;
   }
 
   nav a {
     color: white;
     padding: 1rem;
     display: inline-block;
+    pointer-events: auto;
   }
 
   .content {
@@ -58,6 +60,11 @@ injectGlobal`
     top: auto;
     bottom: 0;
     padding: 1rem;
+    pointer-events: none;
+  }
+
+  .content a {
+    pointer-events: auto;
   }
 `
 
