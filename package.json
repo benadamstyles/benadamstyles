@@ -23,7 +23,8 @@
     "react-emotion": "^9.2.8",
     "react-konva": "^1.7.15",
     "react-spring": "^5.7.2",
-    "react-static": "^6.0.0-beta.20"
+    "react-static": "^6.0.0-beta.20",
+    "throttle-debounce": "^2.0.1"
   },
   "devDependencies": {
     "@babel/preset-flow": "^7.0.0",

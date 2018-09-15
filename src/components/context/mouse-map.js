@@ -2,6 +2,7 @@
 
 import React, {createContext, Component, type Node} from 'react'
 import {List} from 'immutable'
+import {debounce} from 'throttle-debounce'
 import {HSLRotation, type HSL, getHSLColor, DEFAULT_HUE} from '../../util/hsl'
 
 export type Point = $ReadOnly<{|
@@ -23,14 +24,14 @@ type SessionSerialized = $ReadOnly<{|
   lastColor: HSL,
 |}>
 
-const whenIdle = window.requestIdleCallback || setTimeout
-
 const retrieveSession = (index: number) =>
   window.localStorage.getItem(`session-${index}`)
 
-const storeSession = (index: number, session: SessionSerialized) => {
-  window.localStorage.setItem(`session-${index}`, JSON.stringify(session))
-}
+const storeSession = debounce(
+  200,
+  (index: number, session: SessionSerialized) =>
+    window.localStorage.setItem(`session-${index}`, JSON.stringify(session))
+)
 
 const findLatestPointsIndex = (): number => {
   const loop = latestPointsIndex => {
@@ -155,17 +156,13 @@ export class MouseMapProvider extends Component<Props, State> {
   componentDidUpdate(p: Props, prevState: State) {
     if (
       typeof this.latestPointsIndex === 'number' &&
+      this.state.points.size > 0 &&
       prevState.points !== this.state.points
     ) {
-      // TODO: debounce
-      whenIdle(
-        () =>
-          this.state.points.size > 0 &&
-          storeSession(this.latestPointsIndex + 1, {
-            points: this.state.points.toArray(),
-            lastColor: this.state.points.last().c,
-          })
-      )
+      storeSession(this.latestPointsIndex + 1, {
+        points: this.state.points.toArray(),
+        lastColor: this.state.points.last().c,
+      })
     }
   }
 
