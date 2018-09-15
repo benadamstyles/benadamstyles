@@ -14,12 +14,12 @@ type Props = $ReadOnly<{|
 
 export class MouseTracker extends Component<Props> {
   onMouseMove = (event: MouseEvent) =>
-    this.props.addPoint(event.pageX, event.pageY)
+    this.props.addPoint(event.clientX, event.clientY)
 
   onTouchMove = (event: TouchEvent) =>
     event.changedTouches &&
     [...event.changedTouches].forEach(touch =>
-      this.props.addPoint(touch.pageX, touch.pageY)
+      this.props.addPoint(touch.clientX, touch.clientY)
     )
 
   render() {
