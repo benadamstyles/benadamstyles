@@ -9,6 +9,7 @@ import Routes from 'react-static-routes'
 /* eslint-enable import/no-unresolved */
 import {Sources} from './components/sources'
 import {backgroundColor} from './constants/styles/colors'
+import {phone} from './constants/styles/media'
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
@@ -25,6 +26,12 @@ injectGlobal`
     font-size: 16px;
     margin: 0;
     padding: 0;
+  }
+
+  @media (max-width: ${phone}) {
+    body {
+      font-size: 14px;
+    }
   }
 
   p {

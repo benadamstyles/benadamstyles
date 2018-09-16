@@ -9,6 +9,7 @@ import {MouseTracker} from '../components/functionality/mouse-tracker'
 import {ClearMouseMap} from '../components/buttons/clear-map'
 import {ScreenSize} from '../components/functionality/screen-size'
 import {backgroundColor} from '../constants/styles/colors'
+import {phone, smallPhone} from '../constants/styles/media'
 
 const Content = styled.div`
   position: absolute;
@@ -30,6 +31,16 @@ const Logo = styled.img`
   filter: drop-shadow(2px 2px ${backgroundColor});
   width: 64px;
   height: 64px;
+
+  @media (max-width: ${phone}) {
+    width: 48px;
+    height: 48px;
+  }
+
+  @media (max-width: ${smallPhone}) {
+    width: 32px;
+    height: 32px;
+  }
 `
 
 const links = [
