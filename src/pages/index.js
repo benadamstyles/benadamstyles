@@ -7,6 +7,7 @@ import {MouseMapProvider, MouseMap} from '../components/context/mouse-map'
 import {Canvas} from '../components/graphics/canvas'
 import {MouseTracker} from '../components/functionality/mouse-tracker'
 import {ClearMouseMap} from '../components/buttons/clear-map'
+import {ScreenSize} from '../components/functionality/screen-size'
 
 const Content = styled.div`
   position: absolute;
@@ -26,21 +27,29 @@ const content = (
 )
 
 const Home = () => (
-  <MouseMapProvider>
-    <MouseMap>
-      {({addPoint, points, prevSessions, clearAll}) => (
-        <MouseTracker addPoint={addPoint}>
-          {({onMouseMove, onTouchMove}) => (
-            <div onMouseMove={onMouseMove} onTouchMove={onTouchMove}>
-              <Canvas points={points} prevSessions={prevSessions} />
-              {content}
-              <ClearMouseMap clearAll={clearAll} />
-            </div>
+  <ScreenSize>
+    {dimensions => (
+      <MouseMapProvider screenWidth={dimensions.width}>
+        <MouseMap>
+          {({addPoint, points, prevSessions, clearAll}) => (
+            <MouseTracker addPoint={addPoint}>
+              {handlers => (
+                <div {...handlers}>
+                  <Canvas
+                    points={points}
+                    prevSessions={prevSessions}
+                    {...dimensions}
+                  />
+                  {content}
+                  <ClearMouseMap clearAll={clearAll} />
+                </div>
+              )}
+            </MouseTracker>
           )}
-        </MouseTracker>
-      )}
-    </MouseMap>
-  </MouseMapProvider>
+        </MouseMap>
+      </MouseMapProvider>
+    )}
+  </ScreenSize>
 )
 
 export default Home

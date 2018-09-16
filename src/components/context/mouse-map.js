@@ -94,6 +94,7 @@ const {Consumer, Provider} = createContext({
 export const MouseMap = Consumer
 
 type Props = $ReadOnly<{|
+  screenWidth: number,
   children: Node,
 |}>
 
@@ -107,7 +108,6 @@ type State = {|
 export class MouseMapProvider extends Component<Props, State> {
   latestPointsIndex: number | null = null
   hsl: HSLRotation | void
-  maxPointRadius = 50
 
   /* eslint-disable react/no-unused-state */
   state = {
@@ -116,11 +116,11 @@ export class MouseMapProvider extends Component<Props, State> {
     addPoint: (pageX: number, pageY: number) => {
       const {hsl} = this
       if (hsl) {
-        this.setState(({points}) => ({
+        this.setState(({points}, {screenWidth}) => ({
           points: points.push({
             x: pageX,
             y: pageY,
-            r: Math.random() * this.maxPointRadius,
+            r: Math.random() * Math.min(50, screenWidth / 12),
             c: hsl.next(),
           }),
         }))
@@ -148,8 +148,6 @@ export class MouseMapProvider extends Component<Props, State> {
     } else {
       this.hsl = new HSLRotation(DEFAULT_HUE)
     }
-
-    this.maxPointRadius = Math.min(50, window.innerWidth / 12)
   }
   /* eslint-enable react/no-unused-state */
 

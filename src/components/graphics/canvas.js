@@ -86,29 +86,14 @@ const pointMapper = cachePointMapper((point, i) => (
 type Props = $ReadOnly<{|
   points: Points,
   prevSessions: List<Session>,
-|}>
-
-type State = {|
   width: number,
   height: number,
-|}
+|}>
 
-export class Canvas extends PureComponent<Props, State> {
-  state = {
-    width: 1024,
-    height: 768,
-  }
-
-  componentDidMount() {
-    this.setState({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    })
-  }
-
+export class Canvas extends PureComponent<Props> {
   render() {
     return (
-      <Stage width={this.state.width} height={this.state.height}>
+      <Stage width={this.props.width} height={this.props.height}>
         <PrevSessions prevSessions={this.props.prevSessions} />
         <FastLayer>{this.props.points.map(pointMapper)}</FastLayer>
       </Stage>
