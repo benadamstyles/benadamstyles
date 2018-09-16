@@ -8,6 +8,7 @@ import {Canvas} from '../components/graphics/canvas'
 import {MouseTracker} from '../components/functionality/mouse-tracker'
 import {ClearMouseMap} from '../components/buttons/clear-map'
 import {ScreenSize} from '../components/functionality/screen-size'
+import {backgroundColor} from '../constants/styles/colors'
 
 const Content = styled.div`
   position: absolute;
@@ -19,8 +20,43 @@ const Content = styled.div`
   transform: translateY(-50%);
 `
 
+const LogoLink = styled.a`
+  &:nth-child(n + 2) {
+    margin-left: 12px;
+  }
+`
+
+const Logo = styled.img`
+  filter: drop-shadow(2px 2px ${backgroundColor});
+  width: 64px;
+  height: 64px;
+`
+
+const links = [
+  ['twitter', 'https://twitter.com/benadamstyles'],
+  ['github', 'https://github.com/benadamstyles'],
+  [
+    'appstore',
+    'https://itunes.apple.com/us/developer/benjamin-styles/id856831184',
+  ],
+  ['medium', 'https://medium.com/@benadamstyles'],
+  ['stackoverflow', 'https://stackoverflow.com/users/3098651/benadamstyles'],
+  ['flickr', 'https://www.flickr.com/photos/benstyles/'],
+]
+
 const content = (
   <Content>
+    <Headline>
+      {links.map(([image, url]) => (
+        <LogoLink
+          key={image}
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer">
+          <Logo src={`images/logos/${image}.png`} width={64} height={64} />
+        </LogoLink>
+      ))}
+    </Headline>
     <Headline>Ben Styles</Headline>
     <Headline invisible>freelance javascript developer</Headline>
   </Content>
