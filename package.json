@@ -4,9 +4,6 @@
   "main": "src/index.js",
   "license": "MIT",
   "author": "benadamstyles",
-  "installConfig": {
-    "pnp": true
-  },
   "scripts": {
     "lint": "eslint .",
     "start": "react-static start",
