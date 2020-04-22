@@ -1,31 +1,29 @@
-// @flow
+import React, { createContext, Component, ReactNode } from 'react'
+import { List } from 'immutable'
+import { debounce } from 'throttle-debounce'
+import { HSLRotation, getHSLColor, DEFAULT_HUE } from '../../util/hsl'
 
-import React, {createContext, Component, type Node} from 'react'
-import {List} from 'immutable'
-import {debounce} from 'throttle-debounce'
-import {HSLRotation, type HSL, getHSLColor, DEFAULT_HUE} from '../../util/hsl'
-
-export type Point = $ReadOnly<{|
-  x: number,
-  y: number,
-  r: number,
-  c: HSL,
-|}>
+export interface Point {
+  readonly x: number
+  readonly y: number
+  readonly r: number
+  readonly c: string
+}
 
 export type Points = List<Point>
 
-export type Session = $ReadOnly<{|
-  points: Points,
-  lastColor: HSL,
-|}>
+export interface Session {
+  readonly points: Points
+  readonly lastColor: string
+}
 
-type SessionSerialized = $ReadOnly<{|
-  points: $ReadOnlyArray<Point>,
-  lastColor: HSL,
-|}>
+interface SessionSerialized {
+  readonly points: ReadonlyArray<Point>
+  readonly lastColor: string
+}
 
 const retrieveSession = (index: number) =>
-  window.localStorage.getItem(`session-${index}`)
+  window.localStorage.getItem(`session-${index}`) ?? ''
 
 const storeSession = debounce(
   200,
@@ -34,7 +32,7 @@ const storeSession = debounce(
 )
 
 const findLatestPointsIndex = (): number => {
-  const loop = latestPointsIndex => {
+  const loop = (latestPointsIndex: number): number => {
     if (retrieveSession(latestPointsIndex + 1)) {
       return loop(latestPointsIndex + 1)
     } else {
@@ -73,9 +71,9 @@ const populatePrevPoints = (
   }
 }
 
-const getLastHue = (latestPointsIndex: number): HSL => {
+const getLastHue = (latestPointsIndex: number): string => {
   try {
-    return (JSON.parse(retrieveSession(latestPointsIndex)): SessionSerialized)
+    return (JSON.parse(retrieveSession(latestPointsIndex)) as SessionSerialized)
       .lastColor
   } catch (e) {
     console.error(e)
@@ -83,40 +81,40 @@ const getLastHue = (latestPointsIndex: number): HSL => {
   }
 }
 
-const {Consumer, Provider} = createContext({
+interface State {
+  readonly points: Points
+  readonly prevSessions: List<Session>
+  readonly addPoint: (x: number, y: number) => void
+  readonly clearAll: () => void
+}
+
+const { Consumer, Provider } = createContext<State>({
   points: List(),
   prevSessions: List(),
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   addPoint: (x: number, y: number) => void 0,
   clearAll: () => void 0,
 })
 
 export const MouseMap = Consumer
 
-type Props = $ReadOnly<{|
-  screenWidth: number,
-  children: Node,
-|}>
-
-type State = {|
-  points: Points,
-  prevSessions: List<Session>,
-  addPoint: (number, number) => void,
-  clearAll: () => void,
-|}
+interface Props {
+  readonly screenWidth: number
+  readonly children: ReactNode
+}
 
 export class MouseMapProvider extends Component<Props, State> {
   latestPointsIndex: number | null = null
-  hsl: HSLRotation | void
+  hsl?: HSLRotation
 
   /* eslint-disable react/no-unused-state */
   state = {
     points: List(),
     prevSessions: List(),
     addPoint: (pageX: number, pageY: number) => {
-      const {hsl} = this
+      const { hsl } = this
       if (hsl) {
-        this.setState(({points}, {screenWidth}) => ({
+        this.setState(({ points }, { screenWidth }) => ({
           points: points.push({
             x: pageX,
             y: pageY,

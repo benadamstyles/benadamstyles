@@ -1,15 +1,11 @@
-// @flow
-
 export const DEFAULT_HUE = 200
 
-export opaque type HSL: string = string
-
-export const getHSLColor = (hue: number = DEFAULT_HUE): HSL =>
+export const getHSLColor = (hue: number = DEFAULT_HUE): string =>
   `hsl(${hue}, 50%, 75%)`
 
 const hueRegex = /\d{1,3}(?=\s*,)/
 
-const getHSLHue = (color: HSL): number => {
+const getHSLHue = (color: string): number => {
   const results = hueRegex.exec(color)
   return results ? parseInt(results[0], 10) : DEFAULT_HUE
 }
@@ -21,7 +17,7 @@ export class HSLRotation {
   currentHue: number
   direction: 1 | -1 = 1
 
-  constructor(start: number | HSL) {
+  constructor(start: number | string) {
     this.currentHue = typeof start === 'number' ? start : getHSLHue(start)
   }
 

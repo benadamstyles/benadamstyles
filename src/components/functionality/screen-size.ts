@@ -1,16 +1,14 @@
-// @flow
+import { Component, ReactNode } from 'react'
+import { debounce } from 'throttle-debounce'
 
-import {Component, type Node} from 'react'
-import {debounce} from 'throttle-debounce'
+interface State {
+  readonly width: number
+  readonly height: number
+}
 
-type State = {|
-  width: number,
-  height: number,
-|}
-
-type Props = $ReadOnly<{|
-  children: State => Node,
-|}>
+interface Props {
+  readonly children: (state: State) => ReactNode
+}
 
 export class ScreenSize extends Component<Props, State> {
   state = {
