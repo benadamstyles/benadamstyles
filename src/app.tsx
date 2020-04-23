@@ -25,7 +25,7 @@ class App extends React.Component<{}, { error: Error | null }> {
 
           <nav>
             <a href="/">Home</a>
-            <a href="https://medium.com/@benadamstyles">Blog</a>
+            <a href="/blog">Blog</a>
           </nav>
 
           <div className="footer">

@@ -20,7 +20,7 @@ const Content = styled.div`
 `
 
 const LogoLink = styled.a`
-  &:nth-child(n + 2) {
+  :nth-of-type(n + 2) {
     margin-left: 12px;
   }
 `
