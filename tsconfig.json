@@ -1,0 +1,14 @@
+{
+  "include": ["src"],
+  "compilerOptions": {
+    "noEmit": true,
+    "moduleResolution": "node",
+    "target": "ES2019",
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  }
+}

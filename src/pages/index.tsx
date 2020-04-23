@@ -1,15 +1,13 @@
-// @flow
-
-import React from 'react'
-import styled from 'react-emotion'
-import {Headline} from '../components/headline'
-import {MouseMapProvider, MouseMap} from '../components/context/mouse-map'
-import {Canvas} from '../components/graphics/canvas'
-import {MouseTracker} from '../components/functionality/mouse-tracker'
-import {ClearMouseMap} from '../components/buttons/clear-map'
-import {ScreenSize} from '../components/functionality/screen-size'
-import {backgroundColor} from '../constants/styles/colors'
-import {phone, smallPhone} from '../constants/styles/media'
+import * as React from 'react'
+import styled from '@emotion/styled'
+import { Headline } from '../components/headline'
+import { MouseMapProvider, MouseMap } from '../components/context/mouse-map'
+import { Canvas } from '../components/graphics/canvas'
+import { MouseTracker } from '../components/functionality/mouse-tracker'
+import { ClearMouseMap } from '../components/buttons/clear-map'
+import { ScreenSize } from '../components/functionality/screen-size'
+import { backgroundColor } from '../constants/styles/colors'
+import { phone, smallPhone } from '../constants/styles/media'
 
 const Content = styled.div`
   position: absolute;
@@ -78,7 +76,7 @@ const Home = () => (
     {dimensions => (
       <MouseMapProvider screenWidth={dimensions.width}>
         <MouseMap>
-          {({addPoint, points, prevSessions, clearAll}) => (
+          {({ addPoint, points, prevSessions, clearAll }) => (
             <MouseTracker addPoint={addPoint}>
               {handlers => (
                 <div {...handlers}>

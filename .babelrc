@@ -1,4 +1,7 @@
 {
-  "presets": ["@babel/flow", "react-static/babel-preset.js"],
-  "plugins": ["babel-plugin-emotion"]
+  "presets": [
+    "@babel/typescript",
+    "react-static/babel-preset.js",
+    "@emotion/babel-preset-css-prop"
+  ]
 }

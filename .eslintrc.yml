@@ -1,4 +1,21 @@
-extends: mealsup
+extends:
+  - mealsup
+  - plugin:@typescript-eslint/eslint-recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:import/typescript
+
+plugins:
+  - '@typescript-eslint'
+
+parser: '@typescript-eslint/parser'
+
+settings:
+  react:
+    version: detect
+
+env:
+  browser: true
 
 rules:
-  react/display-name: 0
+  '@typescript-eslint/explicit-function-return-type': off
+  '@typescript-eslint/member-delimiter-style': off

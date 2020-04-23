@@ -1,11 +1,9 @@
-// @flow
-
-import React, {PureComponent, Component, Fragment} from 'react'
-import {Stage, FastLayer, Circle} from 'react-konva'
-import {Spring, animated} from 'react-spring/dist/konva'
-import type {List} from 'immutable'
-import type {Session, Points, Point} from '../context/mouse-map'
-import {cachePointMapper} from '../../util/memo'
+import * as React from 'react'
+import { Stage, FastLayer, Circle } from 'react-konva'
+import { Spring, animated } from 'react-spring/dist/konva'
+import { List } from 'immutable'
+import { Session, Points, Point } from '../context/mouse-map'
+import { cachePointMapper } from '../../util/memo'
 
 const endScale = 2
 const endOpacity = 0.4
@@ -20,7 +18,7 @@ const end = {
   opacity: endOpacity,
 }
 
-class AnimatedCircle extends Component<Point> {
+class AnimatedCircle extends React.Component<Point> {
   shouldComponentUpdate() {
     return false
   }
@@ -28,7 +26,7 @@ class AnimatedCircle extends Component<Point> {
   render() {
     return (
       <Spring native from={start} to={end}>
-        {({scale, opacity}) => (
+        {({ scale, opacity }: { scale: number; opacity: number }) => (
           <animated.Circle
             x={this.props.x}
             y={this.props.y}
@@ -44,11 +42,11 @@ class AnimatedCircle extends Component<Point> {
   }
 }
 
-type PrevSessionsProps = $ReadOnly<{|
-  prevSessions: List<Session>,
-|}>
+interface PrevSessionsProps {
+  readonly prevSessions: List<Session>
+}
 
-class PrevSessions extends Component<PrevSessionsProps> {
+class PrevSessions extends React.Component<PrevSessionsProps> {
   shouldComponentUpdate(nextProps: PrevSessionsProps) {
     return (
       this.props.prevSessions.size === 0 || nextProps.prevSessions.size === 0
@@ -57,10 +55,10 @@ class PrevSessions extends Component<PrevSessionsProps> {
 
   render() {
     return (
-      <Fragment>
+      <>
         {this.props.prevSessions.map((session, i) => (
           <FastLayer key={String(i)}>
-            {session.points.map(({x, y, r, c}, j) => (
+            {session?.points.map(({ x, y, r, c }, j) => (
               <Circle
                 key={String(j)}
                 x={x}
@@ -74,7 +72,7 @@ class PrevSessions extends Component<PrevSessionsProps> {
             ))}
           </FastLayer>
         ))}
-      </Fragment>
+      </>
     )
   }
 }
@@ -83,20 +81,16 @@ const pointMapper = cachePointMapper((point, i) => (
   <AnimatedCircle key={String(i)} {...point} />
 ))
 
-type Props = $ReadOnly<{|
-  points: Points,
-  prevSessions: List<Session>,
-  width: number,
-  height: number,
-|}>
-
-export class Canvas extends PureComponent<Props> {
-  render() {
-    return (
-      <Stage width={this.props.width} height={this.props.height}>
-        <PrevSessions prevSessions={this.props.prevSessions} />
-        <FastLayer>{this.props.points.map(pointMapper)}</FastLayer>
-      </Stage>
-    )
-  }
+interface Props {
+  readonly points: Points
+  readonly prevSessions: List<Session>
+  readonly width: number
+  readonly height: number
 }
+
+export const Canvas: React.FC<Props> = props => (
+  <Stage width={props.width} height={props.height}>
+    <PrevSessions prevSessions={props.prevSessions} />
+    <FastLayer>{props.points.map(pointMapper)}</FastLayer>
+  </Stage>
+)
