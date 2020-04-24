@@ -5468,10 +5468,10 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
-konva@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/konva/-/konva-5.0.1.tgz#2d6900e5aa7a960db8f2183c2ca85061f13330c5"
-  integrity sha512-FaxH1m2aA0poH6Z6BoCl+kTshtIBUjXrJ7ANbooRNGSxm5UtbN9OVUYXBTmRZAqKvk0/qoUGIw8+6pijC13kbA==
+konva@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/konva/-/konva-5.0.2.tgz#1b54228b40c92672fbfdfafdc6e4fb9c2da675cd"
+  integrity sha512-AvbPl+7QYX21JLCFw45OApPBqeVkuMQVrloMIpcgG8QFfMm24BtYMF0LO0sS43A3/90GL4iRMHKlkHlPBBDYtw==
 
 last-call-webpack-plugin@^3.0.0:
   version "3.0.0"
