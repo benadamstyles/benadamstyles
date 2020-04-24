@@ -17,7 +17,7 @@
     "immutable": "^4.0.0-rc.12",
     "konva": "^5.0.2",
     "react": "16.8.1",
-    "react-dom": "16.8.1",
+    "react-dom": "16.13.0",
     "react-konva": "^16.13.0-0",
     "react-spring": "^5.7.2",
     "react-static": "7.2.3",
