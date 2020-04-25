@@ -4,13 +4,6 @@
   "main": "src/index.js",
   "license": "MIT",
   "author": "benadamstyles",
-  "scripts": {
-    "lint": "eslint . --ext=.js,.ts,.tsx",
-    "start": "react-static start",
-    "stage": "react-static build --staging",
-    "build": "react-static build",
-    "serve": "serve dist -p 3000"
-  },
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
@@ -26,6 +19,7 @@
   "devDependencies": {
     "@babel/preset-typescript": "^7.9.0",
     "@emotion/babel-preset-css-prop": "^10.0.27",
+    "@types/prettier": "^2.0.0",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
     "@types/react-helmet": "^5.0.15",
@@ -48,6 +42,7 @@
     "eslint-plugin-react-native": "^3.2.1",
     "front-matter": "^3.1.0",
     "globby": "^11.0.0",
+    "maid": "^0.3.0",
     "prettier": "^2.0.5",
     "react-hot-loader": "^4.12.20",
     "react-static-plugin-emotion": "^7.2.2",
@@ -56,6 +51,7 @@
     "react-static-plugin-source-filesystem": "^7.2.3",
     "react-static-plugin-typescript": "^7.2.3",
     "serve": "^10.0.0",
+    "ts-node": "^8.9.0",
     "typescript": "^3.8.3"
   }
 }

@@ -1,7 +1,16 @@
+:root {
+  --linkColor: #108db8;
+  --textColor: black;
+  --backgroundColor: gainsboro;
+
+  --phone: 760px;
+  --smallPhone: 400px;
+}
+
 html {
   margin: 0;
   padding: 0;
-  background-color: gainsboro;
+  background-color: var(--background-color);
 }
 
 body {
@@ -13,7 +22,7 @@ body {
   padding: 0;
 }
 
-@media (max-width: 760px) {
+@media (max-width: var(--phone)) {
   body {
     font-size: 14px;
   }
@@ -26,7 +35,7 @@ p {
 
 a {
   text-decoration: none;
-  color: #108db8;
+  color: var(--link-color);
   font-weight: bold;
 }
 
@@ -41,7 +50,7 @@ nav {
 }
 
 nav a {
-  color: white;
+  color: var(--text-color);
   padding: 1rem;
   display: inline-block;
   pointer-events: auto;

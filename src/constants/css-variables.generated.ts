@@ -1,0 +1,5 @@
+export const linkColor = 'var(--linkColor)'
+export const textColor = 'var(--textColor)'
+export const backgroundColor = 'var(--backgroundColor)'
+export const phone = 'var(--phone)'
+export const smallPhone = 'var(--smallPhone)'

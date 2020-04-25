@@ -7,7 +7,7 @@ import fm from 'front-matter'
 /**
  * @param {...string} paths
  */
-const src = (...paths) => join(__dirname, 'src', ...paths)
+export const src = (...paths) => join(__dirname, 'src', ...paths)
 
 /**
  * @type {import('react-static').ReactStaticConfig}
