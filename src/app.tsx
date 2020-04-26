@@ -5,6 +5,7 @@ import { Sources } from './components/sources'
 import { highlightColor } from './css/colors'
 import { nodeSafe } from './util/node-safe'
 import CSS from './css'
+import Loading from './components/loading'
 
 const activeLinkStyle = css`
   color: ${highlightColor};
@@ -52,7 +53,7 @@ class App extends React.Component<{}, { error: Error | null }> {
         <CSS />
 
         <div className="content">
-          <React.Suspense fallback="loading...">
+          <React.Suspense fallback={<Loading />}>
             <Routes />
           </React.Suspense>
         </div>
