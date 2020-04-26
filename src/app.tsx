@@ -2,9 +2,9 @@ import * as React from 'react'
 import { Root, Routes } from 'react-static'
 import { css } from '@emotion/core'
 import { Sources } from './components/sources'
-import AppStyles from './styles/app.css'
-import { highlightColor } from './constants/styles/colors'
+import { highlightColor } from './css/colors'
 import { nodeSafe } from './util/node-safe'
+import CSS from './css'
 
 const activeLinkStyle = css`
   color: ${highlightColor};
@@ -49,7 +49,7 @@ class App extends React.Component<{}, { error: Error | null }> {
 
     return (
       <Root>
-        <AppStyles />
+        <CSS />
 
         <div className="content">
           <React.Suspense fallback="loading...">

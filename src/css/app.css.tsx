@@ -1,13 +1,8 @@
-import * as React from 'react'
-import { Global, css } from '@emotion/core'
-import {
-  backgroundColor,
-  textColor,
-  linkColor,
-} from '../constants/styles/colors'
-import { phone } from '../constants/styles/media'
+import { css } from '@emotion/core'
+import { backgroundColor, textColor, linkColor } from './colors'
+import { phone } from './media'
 
-const appStyles = css`
+export default css`
   html {
     margin: 0;
     padding: 0;
@@ -77,7 +72,3 @@ const appStyles = css`
     height: 100%;
   }
 `
-
-const AppStyles = () => <Global styles={appStyles} />
-
-export default AppStyles
