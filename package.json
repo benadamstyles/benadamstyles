@@ -1,9 +1,17 @@
 {
+  "private": true,
   "name": "benadamstyles",
   "version": "0.0.1",
   "main": "src/index.js",
   "license": "MIT",
   "author": "benadamstyles",
+  "browserslist": [
+    "last 2 chrome versions",
+    "last 2 firefox versions",
+    "last 2 safari versions",
+    "last 2 edge versions",
+    "edge 18"
+  ],
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
