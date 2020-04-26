@@ -10,9 +10,14 @@ const activeLinkStyle = css`
   color: ${highlightColor};
 `
 
+const trimSlashes = (pathname: string) =>
+  pathname.trim().replace(/^\//, '').replace(/\/$/, '')
+
 const linkIsActive = nodeSafe(
   (href: string) =>
-    typeof window !== 'undefined' && window.location.pathname === href
+    typeof window !== 'undefined' &&
+    trimSlashes(window.location.pathname) ===
+      trimSlashes(new URL(href, window.location.origin).pathname)
 )
 
 const Link: React.FC<Require<
