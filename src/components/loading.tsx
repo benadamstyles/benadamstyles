@@ -16,13 +16,13 @@ const style = css`
   height: 100px;
 
   border-top: 3px solid ${highlightColor};
-  filter: blur(0.1px);
+  filter: blur(0.2px);
 
   transform: translate(-50%, -50%);
-  animation: ${rotate} 2s linear infinite;
-  transition: transform 1s linear;
+  animation: ${rotate} 1.25s infinite;
+  transition: transform 0.5s linear;
 `
 
-const Loading = () => <div css={style} role="progressbar"></div>
+const Loading = () => <div css={style} role="progressbar" />
 
 export default Loading
