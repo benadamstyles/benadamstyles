@@ -7,6 +7,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
+    "date-fns": "^2.12.0",
     "immutable": "^4.0.0-rc.12",
     "konva": "^5.0.1",
     "react": "16.8.1",
@@ -14,6 +15,7 @@
     "react-konva": "^16.13.0-0",
     "react-spring": "^5.7.2",
     "react-static": "7.2.3",
+    "superstruct": "^0.8.3",
     "throttle-debounce": "^2.0.1"
   },
   "devDependencies": {

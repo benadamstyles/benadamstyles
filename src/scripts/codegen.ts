@@ -35,7 +35,9 @@ async function cssVariables() {
 }
 
 async function main() {
-  await Promise.all([cssVariables()])
+  await Promise.all([
+    // cssVariables()
+  ])
 }
 
 main().catch(err => {

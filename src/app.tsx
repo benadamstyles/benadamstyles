@@ -1,7 +1,28 @@
 import * as React from 'react'
 import { Root, Routes } from 'react-static'
+import { css } from '@emotion/core'
 import { Sources } from './components/sources'
-import './css/app.css'
+import AppStyles from './styles/app.css'
+import { highlightColor } from './constants/styles/colors'
+import { nodeSafe } from './util/node-safe'
+
+const activeLinkStyle = css`
+  color: ${highlightColor};
+`
+
+const linkIsActive = nodeSafe(
+  (href: string) =>
+    typeof window !== 'undefined' && window.location.pathname === href
+)
+
+const Link: React.FC<Require<
+  React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  'href'
+>> = ({ href, children }) => (
+  <a css={linkIsActive(href) && activeLinkStyle} href={href}>
+    {children}
+  </a>
+)
 
 class App extends React.Component<{}, { error: Error | null }> {
   state = { error: null }
@@ -13,26 +34,33 @@ class App extends React.Component<{}, { error: Error | null }> {
 
   render() {
     if (this.state.error) {
-      return <p>... an error has occurred!</p>
+      return (
+        <>
+          <p>... an error has occurred!</p>
+          <p>{String(this.state.error)}</p>
+        </>
+      )
     }
 
     return (
-      <React.Suspense fallback="loading...">
-        <Root>
-          <div className="content">
+      <Root>
+        <AppStyles />
+
+        <div className="content">
+          <React.Suspense fallback="loading...">
             <Routes />
-          </div>
+          </React.Suspense>
+        </div>
 
-          <nav>
-            <a href="/">Home</a>
-            <a href="/blog">Blog</a>
-          </nav>
+        <nav>
+          <Link href="/">Home</Link>
+          <Link href="/blog">Blog</Link>
+        </nav>
 
-          <div className="footer">
-            <Sources />
-          </div>
-        </Root>
-      </React.Suspense>
+        <div className="footer">
+          <Sources />
+        </div>
+      </Root>
     )
   }
 }

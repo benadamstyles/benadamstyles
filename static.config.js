@@ -1,5 +1,6 @@
 import { join } from 'path'
 import { promises } from 'fs'
+import { struct } from 'superstruct'
 // eslint-disable-next-line import/default
 import globby from 'globby'
 import fm from 'front-matter'
@@ -8,6 +9,12 @@ import fm from 'front-matter'
  * @param {...string} paths
  */
 export const src = (...paths) => join(__dirname, 'src', ...paths)
+
+const BlogPostFrontMatter = struct({
+  title: 'string',
+  createdDate: 'date',
+  publishedDate: 'date?',
+})
 
 /**
  * @type {import('react-static').ReactStaticConfig}
@@ -36,17 +43,20 @@ const config = {
         template: src('pages', 'blog', 'index.tsx'),
 
         /**
-         * @returns {Promise<import('./src/types/blog').BlogPostData>}
+         * @returns {Promise<import('./src/pages/blog').BlogPostData>}
          */
         async getData() {
           const files = await globby(src('pages', 'blog', '!(index.tsx)'))
+
           const contents = await Promise.all(
             files.map(path => promises.readFile(path, 'utf-8'))
           )
 
-          return {
-            posts: contents.map(content => fm(content).attributes),
-          }
+          const posts = contents.map(content =>
+            BlogPostFrontMatter(fm(content).attributes)
+          )
+
+          return { posts }
         },
       },
     ]),
