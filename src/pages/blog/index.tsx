@@ -5,14 +5,17 @@ import { format } from 'date-fns'
 import { getHSLColor } from '../../util/hsl'
 import { phone, smallPhone } from '../../css/media'
 
-interface BlogPost {
+export interface BlogPost {
   readonly title: string
-  readonly createdDate: string
-  readonly publishedDate?: string
+  readonly createdDate?: Date
+  readonly publishedDate?: Date
+  readonly updatedDate?: Date
 }
 
+type SerializedBlogPost = Serialized<BlogPost, Date | undefined>
+
 export interface BlogPostData {
-  readonly posts: readonly BlogPost[]
+  readonly posts: readonly SerializedBlogPost[]
 }
 
 const useBlogPosts = () => useRouteData<BlogPostData>().posts
@@ -54,8 +57,8 @@ const DateText = styled.p``
 const formatDate = (date: string) => format(new Date(date), 'yyyy, MMM do')
 
 const publishedOnly = (
-  post: BlogPost
-): post is Require<BlogPost, 'publishedDate'> =>
+  post: SerializedBlogPost
+): post is Require<SerializedBlogPost, 'publishedDate'> =>
   (post.publishedDate && new Date(post.publishedDate) < new Date()) || false
 
 const BlogIndex = () => {
