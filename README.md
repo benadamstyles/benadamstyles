@@ -12,15 +12,7 @@ The following tasks can be triggered by running `yarn maid <command>`, where `co
 eslint . --ext=.js,.ts,.tsx
 ```
 
-### codegen
-
-```sh
-ts-node --files ./src/scripts/codegen.ts
-```
-
 ### start
-
-Runs task `codegen`
 
 ```sh
 react-static start
@@ -28,15 +20,11 @@ react-static start
 
 ### stage
 
-Runs task `codegen`
-
 ```sh
 react-static build --staging
 ```
 
 ### build
-
-Runs task `codegen`
 
 ```sh
 react-static build
