@@ -7,6 +7,13 @@ export default css`
     margin: 0;
     padding: 0;
     background-color: ${backgroundColor};
+    box-sizing: border-box;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
   }
 
   body {
@@ -66,6 +73,7 @@ export default css`
     pointer-events: auto;
   }
 
+  main,
   .content {
     position: fixed;
     width: 100%;

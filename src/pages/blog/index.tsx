@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 import { format } from 'date-fns'
 import { getHSLColor } from '../../util/hsl'
 import { phone, smallPhone } from '../../css/media'
+import { textColor } from '../../css/colors'
 
 export interface BlogPost {
   readonly slug: string
@@ -24,36 +25,54 @@ const useBlogPosts = () => useRouteData<BlogPostData>().posts
 const List = styled.ol`
   list-style: none;
 
-  padding: 10rem;
+  li {
+    a {
+      display: block;
+      position: relative;
+      padding: 5rem 0;
 
-  li::before {
-    position: absolute;
-    border-radius: 50%;
-    z-index: -1;
-    transform: translate(-35%, -25%);
-    content: '';
-    width: 10rem;
-    height: 10rem;
-    background-color: ${getHSLColor()};
-    opacity: 0.4;
+      ::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 1rem;
+        z-index: -1;
+        width: 10rem;
+        height: 10rem;
+        border-radius: 50%;
+
+        opacity: 0.4;
+        background-color: ${getHSLColor()};
+
+        transition: transform 0.1s ease-in-out;
+        transform: translate(-50%, -50%);
+      }
+
+      :hover::before,
+      :focus::before {
+        transform: translate(-50%, -50%) scale(1.2);
+      }
+    }
   }
 
-  li + li {
-    margin-top: 7rem;
-  }
+  padding: 5rem 10rem;
 
   @media (max-width: ${phone}) {
-    padding: 7rem;
+    padding: 3rem 7rem;
   }
 
   @media (max-width: ${smallPhone}) {
-    padding: 4rem;
+    padding: 3rem 4rem;
   }
 `
 
-const Title = styled.h2``
+const Title = styled.h2`
+  margin: 0;
+`
 
-const DateText = styled.p``
+const DateText = styled.p`
+  color: ${textColor};
+`
 
 const formatDate = (date: string) => format(new Date(date), 'yyyy, MMM do')
 

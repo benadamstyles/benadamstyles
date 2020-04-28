@@ -1,11 +1,13 @@
 import * as React from 'react'
 import { Root, Routes } from 'react-static'
 import { css } from '@emotion/core'
+import { MDXProvider } from '@mdx-js/react'
 import { Sources } from './components/sources'
 import { highlightColor } from './css/colors'
 import { nodeSafe } from './util/node-safe'
 import CSS from './css'
 import Loading from './components/loading'
+import wrapper from './components/mdx/wrapper'
 
 const activeLinkStyle = css`
   color: ${highlightColor};
@@ -30,6 +32,8 @@ const Link: React.FC<Require<
   </a>
 )
 
+const components = { wrapper }
+
 class App extends React.Component<{}, { error: Error | null }> {
   state = { error: null }
 
@@ -49,24 +53,26 @@ class App extends React.Component<{}, { error: Error | null }> {
     }
 
     return (
-      <Root>
-        <CSS />
+      <MDXProvider components={components}>
+        <Root>
+          <CSS />
 
-        <div className="content">
-          <React.Suspense fallback={<Loading />}>
-            <Routes />
-          </React.Suspense>
-        </div>
+          <div className="content">
+            <React.Suspense fallback={<Loading />}>
+              <Routes />
+            </React.Suspense>
+          </div>
 
-        <nav>
-          <Link href="/">Home</Link>
-          <Link href="/blog">Blog</Link>
-        </nav>
+          <nav>
+            <Link href="/">Home</Link>
+            <Link href="/blog">Blog</Link>
+          </nav>
 
-        <div className="footer">
-          <Sources />
-        </div>
-      </Root>
+          <div className="footer">
+            <Sources />
+          </div>
+        </Root>
+      </MDXProvider>
     )
   }
 }

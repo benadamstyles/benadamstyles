@@ -3,6 +3,7 @@ import { promises } from 'fs'
 // eslint-disable-next-line import/default
 import globby from 'globby'
 import fm from 'front-matter'
+import remarkFrontMatter from 'remark-frontmatter'
 import { ValidateBlogPostFrontMatter } from './src/util/blog'
 
 /**
@@ -19,7 +20,14 @@ const config = {
   plugins: [
     'react-static-plugin-typescript',
     ['react-static-plugin-source-filesystem', { location: src('pages') }],
-    'react-static-plugin-mdx',
+    [
+      'react-static-plugin-mdx',
+      {
+        mdxOptions: {
+          remarkPlugins: [remarkFrontMatter],
+        },
+      },
+    ],
     'react-static-plugin-emotion',
     'react-static-plugin-sitemap',
   ],
