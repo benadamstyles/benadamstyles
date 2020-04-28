@@ -17,5 +17,7 @@ env:
   browser: true
 
 rules:
-  '@typescript-eslint/explicit-function-return-type': off
-  '@typescript-eslint/member-delimiter-style': off
+  '@typescript-eslint/explicit-function-return-type': 0
+  '@typescript-eslint/member-delimiter-style': 0
+  valid-jsdoc: 0
+  no-undefined: 0

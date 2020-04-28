@@ -1,6 +1,6 @@
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
-import { backgroundColor } from '../constants/styles/colors'
+import { backgroundColor } from '../css/colors'
 
 interface Props {
   readonly invisible?: boolean

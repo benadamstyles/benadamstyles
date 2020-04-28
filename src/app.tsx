@@ -1,7 +1,38 @@
 import * as React from 'react'
 import { Root, Routes } from 'react-static'
+import { css } from '@emotion/core'
+import { MDXProvider } from '@mdx-js/react'
 import { Sources } from './components/sources'
-import './css/app.css'
+import { highlightColor } from './css/colors'
+import { nodeSafe } from './util/node-safe'
+import CSS from './css'
+import Loading from './components/loading'
+import wrapper from './components/mdx/wrapper'
+
+const activeLinkStyle = css`
+  color: ${highlightColor};
+`
+
+const trimSlashes = (pathname: string) =>
+  pathname.trim().replace(/^\//, '').replace(/\/$/, '')
+
+const linkIsActive = nodeSafe(
+  (href: string) =>
+    typeof window !== 'undefined' &&
+    trimSlashes(window.location.pathname) ===
+      trimSlashes(new URL(href, window.location.origin).pathname)
+)
+
+const Link: React.FC<Require<
+  React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  'href'
+>> = ({ href, children }) => (
+  <a css={linkIsActive(href) && activeLinkStyle} href={href}>
+    {children}
+  </a>
+)
+
+const components = { wrapper }
 
 class App extends React.Component<{}, { error: Error | null }> {
   state = { error: null }
@@ -13,26 +44,35 @@ class App extends React.Component<{}, { error: Error | null }> {
 
   render() {
     if (this.state.error) {
-      return <p>... an error has occurred!</p>
+      return (
+        <>
+          <p>... an error has occurred!</p>
+          <p>{String(this.state.error)}</p>
+        </>
+      )
     }
 
     return (
-      <React.Suspense fallback="loading...">
+      <MDXProvider components={components}>
         <Root>
+          <CSS />
+
           <div className="content">
-            <Routes />
+            <React.Suspense fallback={<Loading />}>
+              <Routes />
+            </React.Suspense>
           </div>
 
           <nav>
-            <a href="/">Home</a>
-            <a href="https://medium.com/@benadamstyles">Blog</a>
+            <Link href="/">Home</Link>
+            <Link href="/blog">Blog</Link>
           </nav>
 
           <div className="footer">
             <Sources />
           </div>
         </Root>
-      </React.Suspense>
+      </MDXProvider>
     )
   }
 }

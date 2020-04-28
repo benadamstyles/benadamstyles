@@ -8,13 +8,10 @@ export const cachePointMapper = <Obj extends Point, Arg, Return>(
   return (key: Obj, arg: Arg) => {
     const cached = cache.get(key)
 
-    // flowlint-next-line sketchy-null-mixed:off
-    if (cached) {
-      return cached
-    } else {
-      const val = fn(key, arg)
-      cache.set(key, val)
-      return val
-    }
+    if (cached) return cached
+
+    const val = fn(key, arg)
+    cache.set(key, val)
+    return val
   }
 }
