@@ -8,6 +8,7 @@ import { struct } from 'superstruct'
  * @type {{ [Key in keyof Required<BlogPost>]: string }}
  */
 const blogPostStructure = {
+  slug: 'string',
   title: 'string',
   createdDate: 'date?',
   publishedDate: 'date?',

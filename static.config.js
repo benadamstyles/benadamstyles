@@ -1,4 +1,4 @@
-import { join } from 'path'
+import { join, basename, extname } from 'path'
 import { promises } from 'fs'
 // eslint-disable-next-line import/default
 import globby from 'globby'
@@ -43,11 +43,17 @@ const config = {
           const files = await globby(src('pages', 'blog', '!(index.tsx)'))
 
           const contents = await Promise.all(
-            files.map(path => promises.readFile(path, 'utf-8'))
+            files.map(async path => ({
+              path,
+              content: await promises.readFile(path, 'utf-8'),
+            }))
           )
 
           const posts = contents
-            .map(content => fm(content).attributes)
+            .map(({ path, content }) => ({
+              ...fm(content).attributes,
+              slug: basename(path, extname(path)),
+            }))
             .map(ValidateBlogPostFrontMatter)
 
           return { posts }

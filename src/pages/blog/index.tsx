@@ -6,6 +6,7 @@ import { getHSLColor } from '../../util/hsl'
 import { phone, smallPhone } from '../../css/media'
 
 export interface BlogPost {
+  readonly slug: string
   readonly title: string
   readonly createdDate?: Date
   readonly publishedDate?: Date
@@ -68,8 +69,10 @@ const BlogIndex = () => {
     <List>
       {publishedPosts.map(post => (
         <li key={post.publishedDate}>
-          <Title>{post.title}</Title>
-          <DateText>{formatDate(post.publishedDate)}</DateText>
+          <a href={`/blog/${post.slug}`}>
+            <Title>{post.title}</Title>
+            <DateText>{formatDate(post.publishedDate)}</DateText>
+          </a>
         </li>
       ))}
     </List>
