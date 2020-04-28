@@ -48,9 +48,11 @@ const List = styled.ol`
         transform: translate(-50%, -50%);
       }
 
-      :hover::before,
-      :focus::before {
-        transform: translate(-50%, -50%) scale(1.2);
+      :hover,
+      :focus {
+        ::before {
+          transform: translate(-50%, -50%) scale(1.2);
+        }
       }
     }
   }

@@ -40,6 +40,13 @@ export default css`
     text-decoration: none;
     color: ${linkColor};
     font-weight: bold;
+
+    transition: opacity 0.1s ease-out;
+
+    :hover,
+    :focus {
+      opacity: 0.6;
+    }
   }
 
   img {
