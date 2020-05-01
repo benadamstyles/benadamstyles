@@ -19,6 +19,12 @@ const trimSlashes = (pathname: string) =>
 const linkIsActive = nodeSafe((href: string) => {
   const currentPath = trimSlashes(window.location.pathname)
   const linkPath = trimSlashes(new URL(href, window.location.origin).pathname)
+
+  console.log({
+    currentPath,
+    linkPath,
+  })
+
   return currentPath === linkPath || currentPath.startsWith(`${linkPath}/`)
 })
 
