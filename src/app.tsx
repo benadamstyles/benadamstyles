@@ -1,36 +1,26 @@
 import * as React from 'react'
 import { Root, Routes } from 'react-static'
-import { css } from '@emotion/core'
+import styled from '@emotion/styled'
 import { MDXProvider } from '@mdx-js/react'
-import { Sources } from './components/sources'
 import { highlightColor } from './css/colors'
 import { nodeSafe } from './util/node-safe'
 import CSS from './css'
 import Loading from './components/loading'
 import wrapper from './components/mdx/wrapper'
 
-const activeLinkStyle = css`
-  color: ${highlightColor};
-`
-
 const trimSlashes = (pathname: string) =>
   pathname.trim().replace(/^\//, '').replace(/\/$/, '')
 
-const linkIsActive = nodeSafe(
-  (href: string) =>
-    typeof window !== 'undefined' &&
-    trimSlashes(window.location.pathname) ===
-      trimSlashes(new URL(href, window.location.origin).pathname)
-)
+const linkIsActive = nodeSafe((href: string) => {
+  const currentPath = trimSlashes(window.location.pathname)
+  const linkPath = trimSlashes(new URL(href, window.location.origin).pathname)
+  return currentPath === linkPath || currentPath.startsWith(`${linkPath}/`)
+})
 
-const Link: React.FC<Require<
-  React.AnchorHTMLAttributes<HTMLAnchorElement>,
-  'href'
->> = ({ href, children }) => (
-  <a css={linkIsActive(href) && activeLinkStyle} href={href}>
-    {children}
-  </a>
-)
+const Link = styled.a`
+  color: ${({ href }) =>
+    href && linkIsActive(href) ? highlightColor : 'inherit'};
+`
 
 const components = { wrapper }
 
@@ -67,10 +57,6 @@ class App extends React.Component<{}, { error: Error | null }> {
             <Link href="/">Home</Link>
             <Link href="/blog">Blog</Link>
           </nav>
-
-          <div className="footer">
-            <Sources />
-          </div>
         </Root>
       </MDXProvider>
     )

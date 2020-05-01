@@ -4,6 +4,7 @@ import { promises } from 'fs'
 import globby from 'globby'
 import fm from 'front-matter'
 import remarkFrontMatter from 'remark-frontmatter'
+import remarkSmartypants from '@silvenon/remark-smartypants'
 import { ValidateBlogPostFrontMatter } from './src/util/blog'
 
 /**
@@ -24,7 +25,10 @@ const config = {
       'react-static-plugin-mdx',
       {
         mdxOptions: {
-          remarkPlugins: [remarkFrontMatter],
+          remarkPlugins: [
+            remarkFrontMatter,
+            [remarkSmartypants, { dashes: 'oldschool' }],
+          ],
         },
       },
     ],
