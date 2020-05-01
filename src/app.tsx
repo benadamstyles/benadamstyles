@@ -18,9 +18,8 @@ const trimSlashes = (pathname: string) =>
 
 const linkIsActive = nodeSafe(
   (href: string) =>
-    typeof window !== 'undefined' &&
     trimSlashes(window.location.pathname) ===
-      trimSlashes(new URL(href, window.location.origin).pathname)
+    trimSlashes(new URL(href, window.location.origin).pathname)
 )
 
 const Link: React.FC<Require<
