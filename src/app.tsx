@@ -16,11 +16,11 @@ const activeLinkStyle = css`
 const trimSlashes = (pathname: string) =>
   pathname.trim().replace(/^\//, '').replace(/\/$/, '')
 
-const linkIsActive = nodeSafe(
-  (href: string) =>
-    trimSlashes(window.location.pathname) ===
-    trimSlashes(new URL(href, window.location.origin).pathname)
-)
+const linkIsActive = nodeSafe((href: string) => {
+  const currentPath = trimSlashes(window.location.pathname)
+  const linkPath = trimSlashes(new URL(href, window.location.origin).pathname)
+  return currentPath === linkPath || currentPath.startsWith(`${linkPath}/`)
+})
 
 const Link: React.FC<Require<
   React.AnchorHTMLAttributes<HTMLAnchorElement>,
