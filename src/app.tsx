@@ -2,7 +2,6 @@ import * as React from 'react'
 import { Root, Routes } from 'react-static'
 import { css } from '@emotion/core'
 import { MDXProvider } from '@mdx-js/react'
-import { Sources } from './components/sources'
 import { highlightColor } from './css/colors'
 import { nodeSafe } from './util/node-safe'
 import CSS from './css'
@@ -72,10 +71,6 @@ class App extends React.Component<{}, { error: Error | null }> {
             <Link href="/">Home</Link>
             <Link href="/blog">Blog</Link>
           </nav>
-
-          <div className="footer">
-            <Sources />
-          </div>
         </Root>
       </MDXProvider>
     )

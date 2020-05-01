@@ -66,7 +66,7 @@ export default css`
     pointer-events: auto;
   }
 
-  .footer {
+  footer {
     box-sizing: border-box;
     position: fixed;
     top: auto;
@@ -76,11 +76,10 @@ export default css`
     pointer-events: none;
   }
 
-  .footer a {
+  footer a {
     pointer-events: auto;
   }
 
-  main,
   .content {
     position: fixed;
     width: 100%;
