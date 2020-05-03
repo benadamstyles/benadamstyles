@@ -1,26 +1,23 @@
 import * as React from 'react'
 import { Root, Routes } from 'react-static'
-import styled from '@emotion/styled'
 import { MDXProvider } from '@mdx-js/react'
 import { highlightColor } from './css/colors'
-import { nodeSafe } from './util/node-safe'
 import CSS from './css'
 import Loading from './components/loading'
 import wrapper from './components/mdx/wrapper'
+import { useOnHydrate } from './util/hooks'
+import { linkIsActive } from './util/path'
 
-const trimSlashes = (pathname: string) =>
-  pathname.trim().replace(/^\//, '').replace(/\/$/, '')
+const Link: React.FC<Require<
+  React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  'href'
+>> = props => {
+  const color = useOnHydrate(() =>
+    linkIsActive(props.href) ? highlightColor : 'currentColor'
+  )
 
-const linkIsActive = nodeSafe((href: string) => {
-  const currentPath = trimSlashes(window.location.pathname)
-  const linkPath = trimSlashes(new URL(href, window.location.origin).pathname)
-  return currentPath === linkPath || currentPath.startsWith(`${linkPath}/`)
-})
-
-const Link = styled.a`
-  color: ${({ href }) =>
-    href && linkIsActive(href) ? highlightColor : 'inherit'};
-`
+  return <a {...props} style={{ color }} />
+}
 
 const components = { wrapper }
 

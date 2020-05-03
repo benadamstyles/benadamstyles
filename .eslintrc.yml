@@ -21,3 +21,6 @@ rules:
   '@typescript-eslint/member-delimiter-style': 0
   valid-jsdoc: 0
   no-undefined: 0
+  lines-around-comment:
+    - 1
+    - allowObjectStart: true
