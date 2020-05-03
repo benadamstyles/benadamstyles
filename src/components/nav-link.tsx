@@ -12,11 +12,9 @@ const NavLink: React.FC<Require<
   React.AnchorHTMLAttributes<HTMLAnchorElement>,
   'href'
 >> = props => {
-  const currentPath = useStaticInfo()?.path
-
   const isActive = linkIsActive({
     href: props.href,
-    currentPath,
+    currentPath: useStaticInfo()?.path,
   })
 
   return <a {...props} css={isActive && activeStyle} />
