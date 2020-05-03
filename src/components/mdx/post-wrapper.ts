@@ -11,7 +11,7 @@ const PostWrapper = styled.main`
   }
 
   @media (max-width: ${smallPhone}) {
-    padding: 1rem;
+    padding: 2rem 1rem;
   }
 
   /* NOTE: typography */

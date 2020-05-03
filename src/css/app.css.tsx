@@ -1,5 +1,5 @@
 import { css } from '@emotion/core'
-import { backgroundColor, linkColor } from './colors'
+import { backgroundColor, linkColor, textColor, heavyTextColor } from './colors'
 import { phone } from './media'
 
 export default css`
@@ -23,12 +23,23 @@ export default css`
     font-size: 16px;
     margin: 0;
     padding: 0;
+
+    color: ${textColor};
   }
 
   @media (max-width: ${phone}) {
     body {
       font-size: 14px;
     }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: ${heavyTextColor};
   }
 
   p {

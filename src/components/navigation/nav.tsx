@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import NavLink from './nav-link'
 
 const Nav = styled.nav`
-  position: fixed;
+  position: absolute;
   top: 0;
   pointer-events: none;
 
