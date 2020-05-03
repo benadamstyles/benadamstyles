@@ -1,14 +1,10 @@
 import styled from '@emotion/styled'
 import { phone, smallPhone } from '../../css/media'
 
-const MDXWrapper = styled.main`
+const PostWrapper = styled.main`
   padding: 5rem;
   margin: 0 auto;
   max-width: calc(70ch + 10rem);
-
-  max-height: 100%;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
 
   @media (max-width: ${phone}) {
     padding: 2rem;
@@ -28,4 +24,4 @@ const MDXWrapper = styled.main`
   }
 `
 
-export default MDXWrapper
+export default PostWrapper

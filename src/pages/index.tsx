@@ -8,7 +8,13 @@ import { ClearMouseMap } from '../components/buttons/clear-map'
 import { ScreenSize } from '../components/functionality/screen-size'
 import { backgroundColor } from '../css/colors'
 import { phone, smallPhone } from '../css/media'
-import { Sources } from '../components/sources'
+import HomeFooter from '../components/footers/footer'
+
+const Container = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+`
 
 const Content = styled.div`
   position: absolute;
@@ -80,21 +86,21 @@ const Home = () => (
           {({ addPoint, points, prevSessions, clearAll }) => (
             <MouseTracker addPoint={addPoint}>
               {handlers => (
-                <>
+                <Container>
                   <div {...handlers}>
                     <Canvas
                       points={points}
                       prevSessions={prevSessions}
                       {...dimensions}
                     />
+
                     {content}
+
                     <ClearMouseMap clearAll={clearAll} />
                   </div>
 
-                  <footer>
-                    <Sources />
-                  </footer>
-                </>
+                  <HomeFooter />
+                </Container>
               )}
             </MouseTracker>
           )}
