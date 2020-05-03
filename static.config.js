@@ -32,7 +32,6 @@ const config = {
         },
       },
     ],
-    'react-static-plugin-emotion',
     'react-static-plugin-sitemap',
   ],
 
