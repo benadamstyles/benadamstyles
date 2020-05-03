@@ -33,5 +33,5 @@ react-static build
 ### serve
 
 ```sh
-serve dist -p 3000
+serve dist -p 3001
 ```

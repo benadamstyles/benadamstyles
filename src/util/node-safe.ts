@@ -1,5 +1,3 @@
-export const nodeSafe = <Args extends unknown[], T>(
-  fallback: T,
-  fn: (...args: Args) => T
-) => (...args: Args): T =>
-  typeof window === 'undefined' ? fallback : fn(...args)
+export const nodeSafe = <T>(fallback: T, fn: (...args: unknown[]) => T) => (
+  ...args: Parameters<typeof fn>
+): T => (typeof window === 'undefined' ? fallback : fn(...args))
