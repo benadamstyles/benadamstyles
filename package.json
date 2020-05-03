@@ -24,7 +24,6 @@
     "react-konva": "16.9.0-1",
     "react-spring": "^5.7.2",
     "react-static": "7.2.3",
-    "superstruct": "^0.8.3",
     "throttle-debounce": "^2.0.1"
   },
   "devDependencies": {
@@ -65,6 +64,7 @@
     "react-static-plugin-typescript": "^7.2.3",
     "remark-frontmatter": "^2.0.0",
     "serve": "^10.0.0",
+    "superstruct": "^0.8.3",
     "typescript": "^3.8.3"
   }
 }
