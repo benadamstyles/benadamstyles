@@ -14,7 +14,7 @@ const NavLink: React.FC<Require<
 >> = props => {
   const isActive = linkIsActive({
     href: props.href,
-    currentPath: useStaticInfo()?.path,
+    currentPath: useStaticInfo()?.path ?? window.location.pathname,
   })
 
   return <a {...props} css={isActive && activeStyle} />
