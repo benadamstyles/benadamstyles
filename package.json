@@ -58,7 +58,7 @@
     "globby": "^11.0.0",
     "maid": "^0.3.0",
     "prettier": "^2.0.5",
-    "react-hot-loader": "^4.12.20",
+    "react-hot-loader": "^4.12.21",
     "react-static-plugin-mdx": "^7.2.2",
     "react-static-plugin-sitemap": "^7.2.3",
     "react-static-plugin-source-filesystem": "^7.2.3",
