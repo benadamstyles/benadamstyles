@@ -1,10 +1,25 @@
-import { nodeSafe } from './node-safe'
-
 const trimSlashes = (pathname: string) =>
   pathname.trim().replace(/^\//, '').replace(/\/$/, '')
 
-export const linkIsActive = nodeSafe(false, (href: string) => {
-  const currentPath = trimSlashes(window.location.pathname)
-  const linkPath = trimSlashes(new URL(href, window.location.origin).pathname)
-  return currentPath === linkPath || currentPath.startsWith(`${linkPath}/`)
-})
+interface LinkParams {
+  href: string
+  currentPath: string
+}
+
+// NOTE: In a server-side build, I think the hrefs get prefixed with the
+// basepath *after* React runs. Therefore, the hrefs will only start with 'http'
+// in the browser, so it's safe to reference window.
+const removeBasepath = (href: string) =>
+  href.startsWith('http')
+    ? new URL(href, window.location.origin).pathname
+    : href
+
+export const linkIsActive = ({ href, currentPath }: LinkParams) => {
+  const currentPathTrimmed = trimSlashes(currentPath)
+  const linkPathTrimmed = trimSlashes(removeBasepath(href))
+
+  return (
+    currentPathTrimmed === linkPathTrimmed ||
+    currentPathTrimmed.startsWith(`${linkPathTrimmed}/`)
+  )
+}
