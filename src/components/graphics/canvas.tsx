@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Stage, FastLayer, Circle } from 'react-konva'
 import { Spring, animated } from 'react-spring/dist/konva'
 import { List } from 'immutable'
-import { Session, Points, Point } from '../context/mouse-map'
+import { Session, Points, Point } from '../context/mouse-flow'
 import { cachePointMapper } from '../../util/memo'
 
 const endScale = 2

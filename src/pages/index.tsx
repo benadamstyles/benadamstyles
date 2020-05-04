@@ -1,10 +1,12 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
 import { Headline } from '../components/headline'
-import { MouseMapProvider, MouseMap } from '../components/context/mouse-map'
+import {
+  MouseFlowProvider,
+  useMouseFlow,
+} from '../components/context/mouse-flow'
 import { Canvas } from '../components/graphics/canvas'
-import { MouseTracker } from '../components/functionality/mouse-tracker'
-import { ClearMouseMap } from '../components/buttons/clear-map'
+import { ClearMouseFlow } from '../components/buttons/clear-mouse-flow'
 import { useScreenSize } from '../util/hooks'
 import { backgroundColor } from '../css/colors'
 import { phone, smallPhone } from '../css/media'
@@ -76,40 +78,44 @@ const content = (
   </Content>
 )
 
-const Home = () => {
-  const dimensions = useScreenSize()
+const Home: React.FC<{ dimensions: { width: number; height: number } }> = ({
+  dimensions,
+}) => {
+  const { addPoint, points, prevSessions, clearAll } = useMouseFlow()
+
+  const onMouseMove: React.MouseEventHandler = e =>
+    addPoint(e.clientX, e.clientY)
+
+  const onTouchMove: React.TouchEventHandler = e =>
+    e.changedTouches &&
+    Array.from(e.changedTouches).forEach(touch =>
+      addPoint(touch.clientX, touch.clientY)
+    )
 
   return (
-    <>
-      <CSSOverrides.NavFixed />
+    <Container>
+      <div onMouseMove={onMouseMove} onTouchMove={onTouchMove}>
+        <Canvas points={points} prevSessions={prevSessions} {...dimensions} />
 
-      <MouseMapProvider screenWidth={dimensions.width}>
-        <MouseMap>
-          {({ addPoint, points, prevSessions, clearAll }) => (
-            <MouseTracker addPoint={addPoint}>
-              {handlers => (
-                <Container>
-                  <div {...handlers}>
-                    <Canvas
-                      points={points}
-                      prevSessions={prevSessions}
-                      {...dimensions}
-                    />
+        {content}
 
-                    {content}
+        <ClearMouseFlow clearAll={clearAll} />
+      </div>
 
-                    <ClearMouseMap clearAll={clearAll} />
-                  </div>
-
-                  <HomeFooter />
-                </Container>
-              )}
-            </MouseTracker>
-          )}
-        </MouseMap>
-      </MouseMapProvider>
-    </>
+      <HomeFooter />
+    </Container>
   )
 }
 
-export default Home
+const HomeWrapper = () => {
+  const dimensions = useScreenSize()
+
+  return (
+    <MouseFlowProvider screenWidth={dimensions.width}>
+      <CSSOverrides.NavFixed />
+      <Home dimensions={dimensions} />
+    </MouseFlowProvider>
+  )
+}
+
+export default HomeWrapper

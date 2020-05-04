@@ -1,4 +1,4 @@
-import React, { createContext, Component, ReactNode } from 'react'
+import React, { createContext, Component, ReactNode, useContext } from 'react'
 import { List } from 'immutable'
 import { debounce } from 'throttle-debounce'
 import { HSLRotation, getHSLColor, DEFAULT_HUE } from '../../util/hsl'
@@ -88,7 +88,7 @@ interface State {
   readonly clearAll: () => void
 }
 
-const { Consumer, Provider } = createContext<State>({
+const Context = createContext<State>({
   points: List(),
   prevSessions: List(),
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -96,14 +96,14 @@ const { Consumer, Provider } = createContext<State>({
   clearAll: () => void 0,
 })
 
-export const MouseMap = Consumer
+export const useMouseFlow = () => useContext(Context)
 
 interface Props {
   readonly screenWidth: number
   readonly children: ReactNode
 }
 
-export class MouseMapProvider extends Component<Props, State> {
+export class MouseFlowProvider extends Component<Props, State> {
   latestPointsIndex: number | null = null
   hsl?: HSLRotation
 
@@ -163,6 +163,10 @@ export class MouseMapProvider extends Component<Props, State> {
   }
 
   render() {
-    return <Provider value={this.state}>{this.props.children}</Provider>
+    return (
+      <Context.Provider value={this.state}>
+        {this.props.children}
+      </Context.Provider>
+    )
   }
 }
