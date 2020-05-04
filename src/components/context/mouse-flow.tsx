@@ -104,9 +104,9 @@ interface Props {
 
 /* eslint-disable fp/no-mutation */
 export const MouseFlowProvider: React.FC<Props> = props => {
-  const latestPointsIndex = useRef<number>()
   const hsl = useRef<HSLRotation>()
 
+  const [latestIndex, setLatestIndex] = useState(findLatestPointsIndex)
   const [points, setPoints] = useState(List())
   const [prevSessions, setPrevSessions] = useState(List())
 
@@ -129,33 +129,28 @@ export const MouseFlowProvider: React.FC<Props> = props => {
 
   const clearAll = useCallback(() => {
     window.localStorage.clear()
-    latestPointsIndex.current = findLatestPointsIndex()
+    setLatestIndex(findLatestPointsIndex())
     setPoints(List())
     setPrevSessions(List())
   }, [])
 
   useEffect(() => {
-    latestPointsIndex.current = findLatestPointsIndex()
-
-    if (
-      typeof latestPointsIndex.current === 'number' &&
-      latestPointsIndex.current > -1
-    ) {
-      hsl.current = new HSLRotation(getLastHue(latestPointsIndex.current))
-      setPrevSessions(populatePrevPoints(latestPointsIndex.current, List(), 0))
-    } else {
+    if (latestIndex > -1) {
+      hsl.current = new HSLRotation(getLastHue(latestIndex))
+      setPrevSessions(populatePrevPoints(latestIndex, List(), 0))
+    } else if (!hsl.current) {
       hsl.current = new HSLRotation(DEFAULT_HUE)
     }
-  }, [])
+  }, [latestIndex])
 
   useEffect(() => {
-    if (typeof latestPointsIndex.current === 'number' && points.size > 0) {
-      storeSession(latestPointsIndex.current + 1, {
+    if (points.size > 0) {
+      storeSession(latestIndex + 1, {
         points: points.toArray(),
         lastColor: points.last().c,
       })
     }
-  }, [points])
+  }, [latestIndex, points])
 
   const contextValue = useMemo(
     () => ({ addPoint, clearAll, points, prevSessions }),
