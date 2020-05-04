@@ -68,13 +68,9 @@ const List = styled.ol`
   }
 `
 
-const Title = styled.h2`
-  margin: 0;
-`
+const Title = styled.h2({ margin: 0 })
 
-const DateText = styled.p`
-  color: ${textColor};
-`
+const DateText = styled.p({ color: textColor })
 
 const formatDate = (date: string) => format(new Date(date), 'yyyy, MMM do')
 

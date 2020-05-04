@@ -2,17 +2,17 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 import NavLink from './nav-link'
 
-const Nav = styled.nav`
-  position: absolute;
-  top: 0;
-  pointer-events: none;
+const Nav = styled.nav({
+  position: 'absolute',
+  top: 0,
+  pointerEvents: 'none',
 
-  a {
-    padding: 1rem;
-    display: inline-block;
-    pointer-events: auto;
-  }
-`
+  a: {
+    padding: '1rem',
+    display: 'inline-block',
+    pointerEvents: 'auto',
+  },
+})
 
 const NavMenu = () => (
   <Nav>
