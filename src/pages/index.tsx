@@ -49,22 +49,19 @@ const Logo = styled.img`
   }
 `
 
-const links = [
-  ['twitter', 'https://twitter.com/benadamstyles'],
-  ['github', 'https://github.com/benadamstyles'],
-  [
-    'appstore',
-    'https://itunes.apple.com/us/developer/benjamin-styles/id856831184',
-  ],
-  ['medium', 'https://medium.com/@benadamstyles'],
-  ['stackoverflow', 'https://stackoverflow.com/users/3098651/benadamstyles'],
-  ['flickr', 'https://www.flickr.com/photos/benstyles/'],
-]
+const links = {
+  twitter: 'https://twitter.com/benadamstyles',
+  github: 'https://github.com/benadamstyles',
+  appstore: 'https://itunes.apple.com/us/developer/benjamin-styles/id856831184',
+  medium: 'https://medium.com/@benadamstyles',
+  stackoverflow: 'https://stackoverflow.com/users/3098651/benadamstyles',
+  flickr: 'https://www.flickr.com/photos/benstyles/',
+}
 
 const content = (
   <Content>
     <Headline>
-      {links.map(([image, url]) => (
+      {Object.entries(links).map(([image, url]) => (
         <LogoLink
           key={image}
           href={url}
