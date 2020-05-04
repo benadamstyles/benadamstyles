@@ -1,4 +1,13 @@
-import React, { createContext, Component, ReactNode, useContext } from 'react'
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useRef,
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+} from 'react'
 import { List } from 'immutable'
 import { debounce } from 'throttle-debounce'
 import { HSLRotation, getHSLColor, DEFAULT_HUE } from '../../util/hsl'
@@ -32,12 +41,11 @@ const storeSession = debounce(
 )
 
 const findLatestPointsIndex = (): number => {
-  const loop = (latestPointsIndex: number): number => {
-    if (retrieveSession(latestPointsIndex + 1)) {
-      return loop(latestPointsIndex + 1)
-    } else {
-      return latestPointsIndex
+  const loop = (latestIndex: number): number => {
+    if (retrieveSession(latestIndex + 1)) {
+      return loop(latestIndex + 1)
     }
+    return latestIndex
   }
 
   return loop(-1)
@@ -56,18 +64,12 @@ const populatePrevPoints = (
       points: List(parsedSession.points),
     })
 
-    if (index === latestPointsIndex) {
-      return nextSessions
-    } else {
-      return populatePrevPoints(latestPointsIndex, nextSessions, index + 1)
-    }
+    if (index === latestPointsIndex) return nextSessions
+    return populatePrevPoints(latestPointsIndex, nextSessions, index + 1)
   } catch (e) {
     console.error(e)
-    if (index === latestPointsIndex) {
-      return prevSessions
-    } else {
-      return populatePrevPoints(latestPointsIndex, prevSessions, index + 1)
-    }
+    if (index === latestPointsIndex) return prevSessions
+    return populatePrevPoints(latestPointsIndex, prevSessions, index + 1)
   }
 }
 
@@ -81,19 +83,16 @@ const getLastHue = (latestPointsIndex: number): string => {
   }
 }
 
-interface State {
-  readonly points: Points
-  readonly prevSessions: List<Session>
-  readonly addPoint: (x: number, y: number) => void
-  readonly clearAll: () => void
-}
-
-const Context = createContext<State>({
+const Context = createContext({
   points: List(),
   prevSessions: List(),
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  addPoint: (x: number, y: number) => void 0,
-  clearAll: () => void 0,
+  addPoint: (pageX: number, pageY: number) => {
+    // no-op
+  },
+  clearAll: () => {
+    // no-op
+  },
 })
 
 export const useMouseFlow = () => useContext(Context)
@@ -103,70 +102,68 @@ interface Props {
   readonly children: ReactNode
 }
 
-export class MouseFlowProvider extends Component<Props, State> {
-  latestPointsIndex: number | null = null
-  hsl?: HSLRotation
+/* eslint-disable fp/no-mutation */
+export const MouseFlowProvider: React.FC<Props> = props => {
+  const latestPointsIndex = useRef<number>()
+  const hsl = useRef<HSLRotation>()
 
-  /* eslint-disable react/no-unused-state */
-  state = {
-    points: List(),
-    prevSessions: List(),
-    addPoint: (pageX: number, pageY: number) => {
-      const { hsl } = this
-      if (hsl) {
-        this.setState(({ points }, { screenWidth }) => ({
-          points: points.push({
+  const [points, setPoints] = useState(List())
+  const [prevSessions, setPrevSessions] = useState(List())
+
+  const addPoint = useCallback(
+    (pageX: number, pageY: number) => {
+      if (hsl.current) {
+        const nextColor = hsl.current.next()
+        setPoints(prevPoints =>
+          prevPoints.push({
             x: pageX,
             y: pageY,
-            r: Math.random() * Math.min(50, screenWidth / 12),
-            c: hsl.next(),
-          }),
-        }))
+            r: Math.random() * Math.min(50, props.screenWidth / 12),
+            c: nextColor,
+          })
+        )
       }
     },
-    clearAll: () => {
-      window.localStorage.clear()
-      this.latestPointsIndex = findLatestPointsIndex()
-      this.setState({
-        points: List(),
-        prevSessions: List(),
-      })
-    },
-  }
+    [props.screenWidth]
+  )
 
-  componentDidMount() {
-    const latestPointsIndex = findLatestPointsIndex()
-    this.latestPointsIndex = latestPointsIndex
+  const clearAll = useCallback(() => {
+    window.localStorage.clear()
+    latestPointsIndex.current = findLatestPointsIndex()
+    setPoints(List())
+    setPrevSessions(List())
+  }, [])
 
-    if (latestPointsIndex > -1) {
-      this.hsl = new HSLRotation(getLastHue(latestPointsIndex))
-      this.setState({
-        prevSessions: populatePrevPoints(latestPointsIndex, List(), 0),
-      })
-    } else {
-      this.hsl = new HSLRotation(DEFAULT_HUE)
-    }
-  }
-  /* eslint-enable react/no-unused-state */
+  useEffect(() => {
+    latestPointsIndex.current = findLatestPointsIndex()
 
-  componentDidUpdate(p: Props, prevState: State) {
     if (
-      typeof this.latestPointsIndex === 'number' &&
-      this.state.points.size > 0 &&
-      prevState.points !== this.state.points
+      typeof latestPointsIndex.current === 'number' &&
+      latestPointsIndex.current > -1
     ) {
-      storeSession(this.latestPointsIndex + 1, {
-        points: this.state.points.toArray(),
-        lastColor: this.state.points.last().c,
+      hsl.current = new HSLRotation(getLastHue(latestPointsIndex.current))
+      setPrevSessions(populatePrevPoints(latestPointsIndex.current, List(), 0))
+    } else {
+      hsl.current = new HSLRotation(DEFAULT_HUE)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (typeof latestPointsIndex.current === 'number' && points.size > 0) {
+      storeSession(latestPointsIndex.current + 1, {
+        points: points.toArray(),
+        lastColor: points.last().c,
       })
     }
-  }
+  }, [points])
 
-  render() {
-    return (
-      <Context.Provider value={this.state}>
-        {this.props.children}
-      </Context.Provider>
-    )
-  }
+  const contextValue = useMemo(
+    () => ({ addPoint, clearAll, points, prevSessions }),
+    [addPoint, clearAll, points, prevSessions]
+  )
+
+  return (
+    <Context.Provider value={contextValue}>{props.children}</Context.Provider>
+  )
 }
+/* eslint-enable fp/no-mutation */

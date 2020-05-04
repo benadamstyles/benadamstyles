@@ -11,6 +11,8 @@ export const useScreenSize = () => {
       setHeight(window.innerHeight)
     })
 
+    update()
+
     window.addEventListener('resize', update)
     window.addEventListener('orientationchange', update)
 
