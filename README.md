@@ -12,6 +12,12 @@ The following tasks can be triggered by running `yarn maid <command>`, where `co
 eslint . --ext=.js,.ts,.tsx
 ```
 
+### typecheck
+
+```sh
+tsc
+```
+
 ### start
 
 ```sh
