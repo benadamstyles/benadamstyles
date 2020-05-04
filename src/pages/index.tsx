@@ -11,21 +11,21 @@ import { phone, smallPhone } from '../css/media'
 import * as CSSOverrides from '../css/overrides'
 import HomeFooter from '../components/footers/footer'
 
-const Container = styled.div`
-  position: fixed;
-  width: 100%;
-  height: 100%;
-`
+const Container = styled.div({
+  position: 'fixed',
+  width: '100%',
+  height: '100%',
+})
 
-const Content = styled.div`
-  position: absolute;
-  left: 0;
-  padding: 0;
-  text-align: center;
-  width: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-`
+const Content = styled.div({
+  position: 'absolute',
+  left: 0,
+  padding: 0,
+  textAlign: 'center',
+  width: '100%',
+  top: '50%',
+  transform: 'translateY(-50%)',
+})
 
 const LogoLink = styled.a`
   :nth-of-type(n + 2) {

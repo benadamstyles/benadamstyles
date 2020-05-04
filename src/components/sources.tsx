@@ -1,11 +1,10 @@
 import * as React from 'react'
 import { Seq } from 'immutable'
-import { css } from '@emotion/core'
 import pkg from '../../package.json'
 
-const center = css`
-  text-align: center;
-`
+const center = {
+  textAlign: 'center',
+} as const
 
 const html = {
   __html: Seq(pkg.dependencies)
