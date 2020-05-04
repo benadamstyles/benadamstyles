@@ -16,7 +16,7 @@ const html = {
     ),
 }
 
-export const Sources = () => (
+export const sources = (
   <div>
     <p css={center}>Brought to you with</p>
     <p css={center} dangerouslySetInnerHTML={html} />

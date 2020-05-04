@@ -11,7 +11,7 @@ import { useScreenSize } from '../util/hooks'
 import { backgroundColor } from '../css/colors'
 import { phone, smallPhone } from '../css/media'
 import * as CSSOverrides from '../css/overrides'
-import HomeFooter from '../components/footers/footer'
+import { homeFooter } from '../components/footers/footer'
 
 const Container = styled.div({
   position: 'fixed',
@@ -102,7 +102,7 @@ const Home: React.FC<{ dimensions: { width: number; height: number } }> = ({
         <ClearMouseFlow clearAll={clearAll} />
       </div>
 
-      <HomeFooter />
+      {homeFooter}
     </Container>
   )
 }

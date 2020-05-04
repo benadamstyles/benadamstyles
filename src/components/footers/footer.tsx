@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
-import { Sources } from '../sources'
+import { sources } from '../sources'
 
 const Footer = styled.footer({
   boxSizing: 'border-box',
@@ -16,10 +16,4 @@ const Footer = styled.footer({
   },
 })
 
-const HomeFooter = () => (
-  <Footer>
-    <Sources />
-  </Footer>
-)
-
-export default HomeFooter
+export const homeFooter = <Footer>{sources}</Footer>
