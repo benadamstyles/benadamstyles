@@ -8,6 +8,7 @@ import { ClearMouseMap } from '../components/buttons/clear-map'
 import { ScreenSize } from '../components/functionality/screen-size'
 import { backgroundColor } from '../css/colors'
 import { phone, smallPhone } from '../css/media'
+import * as CSSOverrides from '../css/overrides'
 import HomeFooter from '../components/footers/footer'
 
 const Container = styled.div`
@@ -79,35 +80,39 @@ const content = (
 )
 
 const Home = () => (
-  <ScreenSize>
-    {dimensions => (
-      <MouseMapProvider screenWidth={dimensions.width}>
-        <MouseMap>
-          {({ addPoint, points, prevSessions, clearAll }) => (
-            <MouseTracker addPoint={addPoint}>
-              {handlers => (
-                <Container>
-                  <div {...handlers}>
-                    <Canvas
-                      points={points}
-                      prevSessions={prevSessions}
-                      {...dimensions}
-                    />
+  <>
+    <CSSOverrides.NavFixed />
 
-                    {content}
+    <ScreenSize>
+      {dimensions => (
+        <MouseMapProvider screenWidth={dimensions.width}>
+          <MouseMap>
+            {({ addPoint, points, prevSessions, clearAll }) => (
+              <MouseTracker addPoint={addPoint}>
+                {handlers => (
+                  <Container>
+                    <div {...handlers}>
+                      <Canvas
+                        points={points}
+                        prevSessions={prevSessions}
+                        {...dimensions}
+                      />
 
-                    <ClearMouseMap clearAll={clearAll} />
-                  </div>
+                      {content}
 
-                  <HomeFooter />
-                </Container>
-              )}
-            </MouseTracker>
-          )}
-        </MouseMap>
-      </MouseMapProvider>
-    )}
-  </ScreenSize>
+                      <ClearMouseMap clearAll={clearAll} />
+                    </div>
+
+                    <HomeFooter />
+                  </Container>
+                )}
+              </MouseTracker>
+            )}
+          </MouseMap>
+        </MouseMapProvider>
+      )}
+    </ScreenSize>
+  </>
 )
 
 export default Home
