@@ -27,8 +27,6 @@ jobs:
 
       - run: yarn maid lint
 
-      - run: yarn prettier . --check
-
   typecheck:
     runs-on: ubuntu-latest
     steps:
