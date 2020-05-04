@@ -1,15 +1,17 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
 import { Headline } from '../components/headline'
-import { MouseMapProvider, MouseMap } from '../components/context/mouse-map'
+import {
+  MouseFlowProvider,
+  useMouseFlow,
+} from '../components/context/mouse-flow'
 import { Canvas } from '../components/graphics/canvas'
-import { MouseTracker } from '../components/functionality/mouse-tracker'
-import { ClearMouseMap } from '../components/buttons/clear-map'
-import { ScreenSize } from '../components/functionality/screen-size'
+import { ClearMouseFlow } from '../components/buttons/clear-mouse-flow'
+import { useScreenSize } from '../util/hooks'
 import { backgroundColor } from '../css/colors'
 import { phone, smallPhone } from '../css/media'
 import * as CSSOverrides from '../css/overrides'
-import HomeFooter from '../components/footers/footer'
+import { homeFooter } from '../components/footers/footer'
 
 const Container = styled.div({
   position: 'fixed',
@@ -49,22 +51,19 @@ const Logo = styled.img`
   }
 `
 
-const links = [
-  ['twitter', 'https://twitter.com/benadamstyles'],
-  ['github', 'https://github.com/benadamstyles'],
-  [
-    'appstore',
-    'https://itunes.apple.com/us/developer/benjamin-styles/id856831184',
-  ],
-  ['medium', 'https://medium.com/@benadamstyles'],
-  ['stackoverflow', 'https://stackoverflow.com/users/3098651/benadamstyles'],
-  ['flickr', 'https://www.flickr.com/photos/benstyles/'],
-]
+const links = {
+  twitter: 'https://twitter.com/benadamstyles',
+  github: 'https://github.com/benadamstyles',
+  appstore: 'https://itunes.apple.com/us/developer/benjamin-styles/id856831184',
+  medium: 'https://medium.com/@benadamstyles',
+  stackoverflow: 'https://stackoverflow.com/users/3098651/benadamstyles',
+  flickr: 'https://www.flickr.com/photos/benstyles/',
+}
 
 const content = (
   <Content>
     <Headline>
-      {links.map(([image, url]) => (
+      {Object.entries(links).map(([image, url]) => (
         <LogoLink
           key={image}
           href={url}
@@ -79,40 +78,44 @@ const content = (
   </Content>
 )
 
-const Home = () => (
-  <>
-    <CSSOverrides.NavFixed />
+const Home: React.FC<{ dimensions: { width: number; height: number } }> = ({
+  dimensions,
+}) => {
+  const { addPoint, points, prevSessions, clearAll } = useMouseFlow()
 
-    <ScreenSize>
-      {dimensions => (
-        <MouseMapProvider screenWidth={dimensions.width}>
-          <MouseMap>
-            {({ addPoint, points, prevSessions, clearAll }) => (
-              <MouseTracker addPoint={addPoint}>
-                {handlers => (
-                  <Container>
-                    <div {...handlers}>
-                      <Canvas
-                        points={points}
-                        prevSessions={prevSessions}
-                        {...dimensions}
-                      />
+  const onMouseMove: React.MouseEventHandler = e =>
+    addPoint(e.clientX, e.clientY)
 
-                      {content}
+  const onTouchMove: React.TouchEventHandler = e =>
+    e.changedTouches &&
+    Array.from(e.changedTouches).forEach(touch =>
+      addPoint(touch.clientX, touch.clientY)
+    )
 
-                      <ClearMouseMap clearAll={clearAll} />
-                    </div>
+  return (
+    <Container>
+      <div onMouseMove={onMouseMove} onTouchMove={onTouchMove}>
+        <Canvas points={points} prevSessions={prevSessions} {...dimensions} />
 
-                    <HomeFooter />
-                  </Container>
-                )}
-              </MouseTracker>
-            )}
-          </MouseMap>
-        </MouseMapProvider>
-      )}
-    </ScreenSize>
-  </>
-)
+        {content}
 
-export default Home
+        <ClearMouseFlow clearAll={clearAll} />
+      </div>
+
+      {homeFooter}
+    </Container>
+  )
+}
+
+const HomeWrapper = () => {
+  const dimensions = useScreenSize()
+
+  return (
+    <MouseFlowProvider screenWidth={dimensions.width}>
+      <CSSOverrides.NavFixed />
+      <Home dimensions={dimensions} />
+    </MouseFlowProvider>
+  )
+}
+
+export default HomeWrapper

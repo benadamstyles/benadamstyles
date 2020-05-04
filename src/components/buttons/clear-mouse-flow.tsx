@@ -19,7 +19,7 @@ interface Props {
   readonly clearAll: () => void
 }
 
-export const ClearMouseMap: React.FC<Props> = ({ clearAll }) => (
+export const ClearMouseFlow: React.FC<Props> = ({ clearAll }) => (
   <Button type="button" onClick={clearAll}>
     clear
   </Button>

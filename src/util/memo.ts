@@ -1,4 +1,4 @@
-import { Point } from '../components/context/mouse-map'
+import { Point } from '../components/context/mouse-flow'
 
 export const cachePointMapper = <Obj extends Point, Arg, Return>(
   fn: (obj: Obj, arg: Arg) => Return

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Stage, FastLayer, Circle } from 'react-konva'
 import { Spring, animated } from 'react-spring/dist/konva'
 import { List } from 'immutable'
-import { Session, Points, Point } from '../context/mouse-map'
+import { Session, Points, Point } from '../context/mouse-flow'
 import { cachePointMapper } from '../../util/memo'
 
 const endScale = 2
@@ -14,68 +14,59 @@ const start = {
 }
 
 const end = {
-  scale: endScale,
+  scale: 2,
   opacity: endOpacity,
 }
 
-class AnimatedCircle extends React.Component<Point> {
-  shouldComponentUpdate() {
-    return false
-  }
+const AnimatedCircleDeOpt: React.FC<Point> = props => (
+  <Spring native from={start} to={end}>
+    {({ scale, opacity }: { scale: number; opacity: number }) => (
+      <animated.Circle
+        x={props.x}
+        y={props.y}
+        radius={props.r}
+        fill={props.c}
+        opacity={opacity}
+        scaleX={scale}
+        scaleY={scale}
+      />
+    )}
+  </Spring>
+)
 
-  render() {
-    return (
-      <Spring native from={start} to={end}>
-        {({ scale, opacity }: { scale: number; opacity: number }) => (
-          <animated.Circle
-            x={this.props.x}
-            y={this.props.y}
-            radius={this.props.r}
-            fill={this.props.c}
-            opacity={opacity}
-            scaleX={scale}
-            scaleY={scale}
-          />
-        )}
-      </Spring>
-    )
-  }
-}
+const AnimatedCircle = React.memo(AnimatedCircleDeOpt, () => true)
 
 interface PrevSessionsProps {
   readonly prevSessions: List<Session>
 }
 
-class PrevSessions extends React.Component<PrevSessionsProps> {
-  shouldComponentUpdate(nextProps: PrevSessionsProps) {
-    return (
-      this.props.prevSessions.size === 0 || nextProps.prevSessions.size === 0
-    )
-  }
-
-  render() {
-    return (
-      <>
-        {this.props.prevSessions.map((session, i) => (
-          <FastLayer key={String(i)}>
-            {session?.points.map(({ x, y, r, c }, j) => (
-              <Circle
-                key={String(j)}
-                x={x}
-                y={y}
-                radius={r}
-                fill={c}
-                opacity={endOpacity}
-                scaleX={endScale}
-                scaleY={endScale}
-              />
-            ))}
-          </FastLayer>
+const PrevSessionsDeOpt: React.FC<PrevSessionsProps> = props => (
+  <>
+    {props.prevSessions.map((session, i) => (
+      <FastLayer key={String(i)}>
+        {session.points.map(({ x, y, r, c }, j) => (
+          <Circle
+            key={String(j)}
+            x={x}
+            y={y}
+            radius={r}
+            fill={c}
+            opacity={endOpacity}
+            scaleX={endScale}
+            scaleY={endScale}
+          />
         ))}
-      </>
-    )
-  }
-}
+      </FastLayer>
+    ))}
+  </>
+)
+
+const PrevSessions = React.memo(
+  PrevSessionsDeOpt,
+  // NOTE: if both prev/next props.prevSessions are populated, don't rerender,
+  // because we only want to rerender when initialising or clearing prevSessions
+  (prev, next) => prev.prevSessions.size > 0 && next.prevSessions.size > 0
+)
 
 const pointMapper = cachePointMapper((point, i) => (
   <AnimatedCircle key={String(i)} {...point} />

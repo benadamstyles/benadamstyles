@@ -17,7 +17,7 @@ const PostWrapper = styled.main`
   /* NOTE: typography */
   line-height: 1.5;
   font-kerning: normal;
-  letter-spacing: 0.02rem;
+  letter-spacing: 0.03rem;
 
   p + p {
     margin-top: 1rem;
