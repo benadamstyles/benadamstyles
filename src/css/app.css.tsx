@@ -1,5 +1,5 @@
 import { css } from '@emotion/core'
-import { backgroundColor, textColor, linkColor } from './colors'
+import { backgroundColor, linkColor, textColor, heavyTextColor } from './colors'
 import { phone } from './media'
 
 export default css`
@@ -23,12 +23,23 @@ export default css`
     font-size: 16px;
     margin: 0;
     padding: 0;
+
+    color: ${textColor};
   }
 
   @media (max-width: ${phone}) {
     body {
       font-size: 14px;
     }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: ${heavyTextColor};
   }
 
   p {
@@ -51,38 +62,5 @@ export default css`
 
   img {
     max-width: 100%;
-  }
-
-  nav {
-    position: fixed;
-    top: 0;
-    pointer-events: none;
-  }
-
-  nav a {
-    color: ${textColor};
-    padding: 1rem;
-    display: inline-block;
-    pointer-events: auto;
-  }
-
-  footer {
-    box-sizing: border-box;
-    position: fixed;
-    top: auto;
-    bottom: 0;
-    width: 100%;
-    padding: 1rem;
-    pointer-events: none;
-  }
-
-  footer a {
-    pointer-events: auto;
-  }
-
-  .content {
-    position: fixed;
-    width: 100%;
-    height: 100%;
   }
 `

@@ -12,7 +12,7 @@ const html = {
     .keySeq()
     .filterNot(dep => dep.includes('plugin'))
     .map(dep => `<a href="https://www.npmjs.com/package/${dep}">${dep}</a>`)
-    .reduce((out, dep, i, seq) =>
+    .reduce((out: string, dep, i, seq) =>
       i === seq.count() - 1 ? `${out} & ${dep}` : `${out}, ${dep}`
     ),
 }
