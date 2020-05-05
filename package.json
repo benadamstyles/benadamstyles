@@ -25,7 +25,7 @@
     "react-konva": "16.9.0-1",
     "react-spring": "^5.7.2",
     "react-static": "7.2.3",
-    "throttle-debounce": "^2.0.1"
+    "throttle-debounce": "^2.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
