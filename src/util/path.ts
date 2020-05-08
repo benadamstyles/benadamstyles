@@ -1,5 +1,5 @@
 const trimSlashes = (pathname: string) =>
-  pathname.trim().replace(/^\//, '').replace(/\/$/, '')
+  pathname.trim().replace(/^\//u, '').replace(/\/$/u, '')
 
 interface LinkParams {
   href: string

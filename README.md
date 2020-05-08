@@ -10,7 +10,6 @@ The following tasks can be triggered by running `yarn maid <command>`, where `co
 
 ```sh
 eslint . --ext=.js,.ts,.tsx
-prettier . --check
 ```
 
 ### typecheck

@@ -41,6 +41,7 @@ interface PrevSessionsProps {
 }
 
 const PrevSessionsDeOpt: React.FC<PrevSessionsProps> = props => (
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   <>
     {props.prevSessions.map((session, i) => (
       <FastLayer key={String(i)}>
