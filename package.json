@@ -68,7 +68,7 @@
     "react-static-plugin-source-filesystem": "^7.2.3",
     "react-static-plugin-typescript": "^7.2.3",
     "remark-frontmatter": "^2.0.0",
-    "serve": "^10.0.0",
+    "serve": "^11.3.0",
     "superstruct": "^0.8.3",
     "typescript": "^3.8.3"
   }
