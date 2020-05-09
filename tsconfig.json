@@ -1,5 +1,5 @@
 {
-  "include": ["src", "./static.config.js"],
+  "include": ["src", "*.js"],
   "compilerOptions": {
     "noEmit": true,
     "moduleResolution": "node",

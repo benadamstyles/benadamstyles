@@ -11,8 +11,7 @@ The following tasks can be triggered by running `yarn maid <command>`, where `co
 ### lint
 
 ```sh
-eslint . --ext=.js,.ts,.tsx
-prettier . --check
+eslint . --ext=.js,.ts,.tsx --report-unused-disable-directives
 ```
 
 ### typecheck

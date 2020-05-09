@@ -1,11 +1,9 @@
 import * as React from 'react'
 import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
+import App from './app'
 
 type ModuleWithHot = NodeModule & { hot?: { accept: Function } }
-
-// Your top level component
-import App from './app'
 
 // Export your top level component as JSX (for static rendering)
 export default App
@@ -32,7 +30,5 @@ if (typeof document !== 'undefined') {
 
   // Hot Module Replacement
   const mod = module as ModuleWithHot
-  if (mod.hot) {
-    mod.hot.accept('./app', () => render(require('./app').default))
-  }
+  if (mod.hot) mod.hot.accept('./app')
 }

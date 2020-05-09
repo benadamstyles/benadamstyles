@@ -3,7 +3,7 @@ export const DEFAULT_HUE = 200
 export const getHSLColor = (hue: number = DEFAULT_HUE): string =>
   `hsl(${hue}, 50%, 75%)`
 
-const hueRegex = /\d{1,3}(?=\s*,)/
+const hueRegex = /\d{1,3}(?=\s*,)/u
 
 const getHSLHue = (color: string): number => {
   const results = hueRegex.exec(color)

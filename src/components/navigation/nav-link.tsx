@@ -20,7 +20,11 @@ const NavLink: React.FC<Require<
     currentPath: useStaticInfo()?.path ?? window.location.pathname,
   })
 
-  return <a {...props} css={[style, isActive && activeStyle]} />
+  return (
+    <a {...props} css={[style, isActive && activeStyle]}>
+      {props.children}
+    </a>
+  )
 }
 
 export default NavLink
