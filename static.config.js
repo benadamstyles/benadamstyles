@@ -5,7 +5,7 @@ import globby from 'globby'
 import fm from 'front-matter'
 import remarkFrontMatter from 'remark-frontmatter'
 import remarkSmartypants from '@silvenon/remark-smartypants'
-import { ValidateBlogPostFrontMatter } from './src/util/blog'
+import { validateBlogPostFrontMatter } from './src/util/blog'
 
 /**
  * @param {...string} paths
@@ -62,10 +62,10 @@ const config = {
 
           const posts = contents
             .map(({ path, content }) => ({
-              ...fm(content).attributes,
+              .../** @type {object} */ (fm(content).attributes),
               slug: basename(path, extname(path)),
             }))
-            .map(ValidateBlogPostFrontMatter)
+            .map(validateBlogPostFrontMatter)
 
           return { posts }
         },

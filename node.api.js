@@ -4,7 +4,7 @@ export default () => ({
    * @returns {import('webpack').Configuration}
    */
   webpack: webpackConfig => {
-    if (process.env.DEBUG === 'true') {
+    if (process.env.DEBUG === 'true' && webpackConfig.optimization) {
       // eslint-disable-next-line fp/no-mutation
       webpackConfig.optimization.minimize = false
     }

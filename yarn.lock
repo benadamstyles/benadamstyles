@@ -959,10 +959,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@benadamstyles/eslint-config@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@benadamstyles/eslint-config/-/eslint-config-1.2.0.tgz#fc2f0d6efa37ebeffa0d8143267fb8a532cfdbb2"
-  integrity sha512-f6pczA1l9Nn9LwdhxDWg5QjdlPFvFzKPcA98wkqO3bBp2gFMUVRTujwmTFHJOlxvZ+v/kL46zvnQmB1A3n9qbA==
+"@benadamstyles/eslint-config@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@benadamstyles/eslint-config/-/eslint-config-1.2.1.tgz#59210bf7b8064c63662a68ee75081f66bf43981b"
+  integrity sha512-v7EeJgn6tSitxDqghu9xzj0eB1u9FdUZKeTM+f2nfaGAXJY5/UAm1eDtxXGI7RGBdsNcX3rYtViBmGSMkuEFHw==
 
 "@emotion/babel-plugin-jsx-pragmatic@^0.1.5":
   version "0.1.5"

@@ -10,6 +10,7 @@ import React, {
 } from 'react'
 import { List } from 'immutable'
 import { debounce } from 'throttle-debounce'
+import { struct } from 'superstruct'
 import { HSLRotation, getHSLColor, DEFAULT_HUE } from '../../util/hsl'
 
 export interface Point {
@@ -30,6 +31,18 @@ interface SessionSerialized {
   readonly points: ReadonlyArray<Point>
   readonly lastColor: string
 }
+
+const validateSessionSerialized = struct({
+  points: [
+    {
+      x: 'number',
+      y: 'number',
+      r: 'number',
+      c: 'string',
+    },
+  ],
+  lastColor: 'string',
+}) as (data: unknown) => SessionSerialized
 
 const retrieveSession = (index: number) =>
   window.localStorage.getItem(`session-${index}`) ?? ''
@@ -57,7 +70,9 @@ const populatePrevPoints = (
   index: number
 ): List<Session> => {
   try {
-    const parsedSession: SessionSerialized = JSON.parse(retrieveSession(index))
+    const parsedSession = validateSessionSerialized(
+      JSON.parse(retrieveSession(index))
+    )
 
     const nextSessions = prevSessions.push({
       lastColor: parsedSession.lastColor,
@@ -107,7 +122,7 @@ export const MouseFlowProvider: React.FC<Props> = props => {
   const hsl = useRef<HSLRotation>()
 
   const [latestIndex, setLatestIndex] = useState(findLatestPointsIndex)
-  const [points, setPoints] = useState(List())
+  const [points, setPoints] = useState<List<Point>>(List())
   const [prevSessions, setPrevSessions] = useState(List())
 
   const addPoint = useCallback(
@@ -144,10 +159,11 @@ export const MouseFlowProvider: React.FC<Props> = props => {
   }, [latestIndex])
 
   useEffect(() => {
-    if (points.size > 0) {
+    const lastPoint = points.last(undefined)
+    if (lastPoint) {
       storeSession(latestIndex + 1, {
         points: points.toArray(),
-        lastColor: points.last().c,
+        lastColor: lastPoint.c,
       })
     }
   }, [latestIndex, points])

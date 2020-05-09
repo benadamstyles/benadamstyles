@@ -30,7 +30,5 @@ if (typeof document !== 'undefined') {
 
   // Hot Module Replacement
   const mod = module as ModuleWithHot
-  if (mod.hot) {
-    mod.hot.accept('./app', () => render(require('./app').default))
-  }
+  if (mod.hot) mod.hot.accept('./app')
 }
