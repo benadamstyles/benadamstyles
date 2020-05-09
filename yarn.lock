@@ -985,10 +985,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@benadamstyles/eslint-config@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@benadamstyles/eslint-config/-/eslint-config-1.2.1.tgz#59210bf7b8064c63662a68ee75081f66bf43981b"
-  integrity sha512-v7EeJgn6tSitxDqghu9xzj0eB1u9FdUZKeTM+f2nfaGAXJY5/UAm1eDtxXGI7RGBdsNcX3rYtViBmGSMkuEFHw==
+"@benadamstyles/eslint-config@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@benadamstyles/eslint-config/-/eslint-config-1.2.2.tgz#464316c7cc9b1a5d9a4ab3505117026ae05347ce"
+  integrity sha512-/MP9UHxz/HrfqqNp2QJ0v4rotlDrGNlYqH2KkS6TU4yDYDseV1k421lyXbrnNkLjdUP1iRvXGTxec3qvEY1URg==
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"

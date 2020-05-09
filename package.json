@@ -30,7 +30,7 @@
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/preset-typescript": "^7.9.0",
-    "@benadamstyles/eslint-config": "^1.2.1",
+    "@benadamstyles/eslint-config": "^1.2.2",
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@silvenon/remark-smartypants": "^1.0.0",
     "@types/mdx-js__react": "^1.5.1",
