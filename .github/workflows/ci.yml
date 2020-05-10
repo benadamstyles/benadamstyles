@@ -1,4 +1,4 @@
-name: Checks
+name: CI
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  checks:
+  CI:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
