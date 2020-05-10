@@ -9,9 +9,11 @@ jobs:
   checks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      - uses: actions/setup-node@v1
+      - name: Set up environment
+        uses: actions/setup-node@v1
         with:
           node-version: 12.x
 
@@ -23,7 +25,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - run: yarn install --pure-lockfile
+      - name: Install dependencies
+        run: yarn install --pure-lockfile
 
-      - run: yarn maid lint
-      - run: yarn maid typecheck
+      - name: Lint
+        run: yarn maid lint
+
+      - name: Typecheck
+        run: yarn maid typecheck
