@@ -1,0 +1,17 @@
+---
+createdDate: 2020-05-13 16:32:00+01
+# publishedDate: 2020-05-01 22:34:00+01
+title: In Defence of Large Snapshots
+---
+
+# Received Wisdom
+
+Ever since Jest became the defacto standard for Javascript testing, it has become increasingly fashionable to bash snapshot testing.
+
+> List of examples of complaints – posts, tweets etc
+
+> Important caveat to get in early – this does not apply to large organizations. You will never convince most people that
+> Caveat – this argument only really applies when you have dependencies which create UI for you, and they only work if you are snapshotting the end result, **not** using shallow mocking on e.g. third-party components
+> Caveat – they should only be used for mature parts of your codebase. They will become painful if there is a lot of churn. The point is protecting you from changes in parts of your codebase you weren't watching.
+> Large snapshots are valuable in their silence
+> Every time a test run finishes with you seeing nothing about those snapshots, they have saved you from an unexpected change to the end user experience or a possible bug
