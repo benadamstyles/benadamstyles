@@ -64,7 +64,7 @@
     "prettier": "^2.0.5",
     "react-hot-loader": "^4.12.21",
     "react-static-plugin-mdx": "^7.2.2",
-    "react-static-plugin-sitemap": "^7.2.3",
+    "react-static-plugin-sitemap": "^7.3.0",
     "react-static-plugin-source-filesystem": "^7.2.3",
     "react-static-plugin-typescript": "^7.2.3",
     "remark-frontmatter": "^2.0.0",
