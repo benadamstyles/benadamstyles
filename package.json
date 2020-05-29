@@ -15,7 +15,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "@mdx-js/react": "^1.6.4",
+    "@mdx-js/react": "^1.6.5",
     "date-fns": "^2.14.0",
     "immutable": "^4.0.0-rc.12",
     "konva": "^4.0.3",
