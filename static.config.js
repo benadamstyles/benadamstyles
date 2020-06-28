@@ -1,6 +1,5 @@
 import { join, basename, extname } from 'path'
 import { promises } from 'fs'
-// eslint-disable-next-line import/default
 import globby from 'globby'
 import fm from 'front-matter'
 import remarkFrontMatter from 'remark-frontmatter'
