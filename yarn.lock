@@ -9618,10 +9618,10 @@ react-static-plugin-mdx@^7.2.2:
   dependencies:
     "@mdx-js/loader" "^1.3.0"
 
-react-static-plugin-sitemap@^7.3.0:
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/react-static-plugin-sitemap/-/react-static-plugin-sitemap-7.3.0.tgz#162083b4ca1043dd129fcf02e389f07b95fec3e0"
-  integrity sha512-vGX5hsQFzG0ysklE8Hf74vaqGsWKPj0WIcxsmolwg4inQFjOsT+t6w6K5RFAuzZ863H8Ogd08xeeSEtYUxxGeQ==
+react-static-plugin-sitemap@^7.4.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/react-static-plugin-sitemap/-/react-static-plugin-sitemap-7.4.0.tgz#22062b278a6d1bee44cc6b595281b609122f7d25"
+  integrity sha512-XyKAJLa4DQOHB5mwitTRpJe7nPCdcAZFgguzcR0pNV3dL/zkBGeIBZl+19bEnZWBleSqDAwsvcqFhDWo0PmM+g==
   dependencies:
     chalk "^2.4.2"
     fs-extra "^8.1.0"
