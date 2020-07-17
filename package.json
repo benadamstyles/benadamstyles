@@ -70,6 +70,6 @@
     "remark-frontmatter": "^2.0.0",
     "serve": "^11.3.2",
     "superstruct": "^0.8.3",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.7"
   }
 }
