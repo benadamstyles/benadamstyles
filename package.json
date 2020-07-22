@@ -18,7 +18,7 @@
     "@mdx-js/react": "^1.6.7",
     "date-fns": "^2.15.0",
     "immutable": "^4.0.0-rc.12",
-    "konva": "^4.0.3",
+    "konva": "^7.0.3",
     "polished": "^3.6.5",
     "react": "16.9.0",
     "react-dom": "16.9.0",
