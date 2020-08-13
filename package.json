@@ -59,7 +59,7 @@
     "eslint-plugin-react-native": "^3.2.1",
     "front-matter": "^4.0.2",
     "globby": "^11.0.1",
-    "jest": "^26.3.0",
+    "jest": "^26.4.0",
     "maid": "^0.3.0",
     "prettier": "^2.0.5",
     "react-hot-loader": "^4.12.21",
