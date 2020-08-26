@@ -61,7 +61,7 @@
     "globby": "^11.0.1",
     "jest": "^26.3.0",
     "maid": "^0.3.0",
-    "prettier": "^2.0.5",
+    "prettier": "^2.1.1",
     "react-hot-loader": "^4.12.21",
     "react-static-plugin-mdx": "^7.2.2",
     "react-static-plugin-sitemap": "^7.4.2",
