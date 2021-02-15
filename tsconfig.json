@@ -1,7 +1,15 @@
 {
-  "include": ["src", "*.js"],
+  // Use import resolution to find all used files.
+  // This avoids typechecking *.bs.js files, as they are not well typed.
+  "files": ["./src/index.tsx", "./src/typings.d.ts"],
+
+  // Include config JS files for typechecking
+  "include": ["./*.js"],
+
   "compilerOptions": {
+    // Babel does the transpiling
     "noEmit": true,
+
     "moduleResolution": "node",
     "target": "ES2020",
     "allowJs": true,

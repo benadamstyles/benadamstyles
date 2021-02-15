@@ -9,7 +9,7 @@ import { Canvas } from '../components/graphics/canvas'
 import { ClearMouseFlow } from '../components/buttons/clear-mouse-flow'
 import { useScreenSize } from '../util/hooks'
 import { backgroundColor } from '../css/colors'
-import { phone, smallPhone } from '../css/media'
+import { phone, smallPhone } from '../css/Breakpoints.gen'
 import * as CSSOverrides from '../css/overrides'
 import { homeFooter } from '../components/footers/footer'
 
