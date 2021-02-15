@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Root, Routes } from 'react-static'
 import { MDXProvider } from '@mdx-js/react'
-import CSS from './css'
+import CSS from './css/CSS.gen'
 import Catch from './components/catch'
 import Loading from './components/loading'
 import wrapper from './components/mdx/post-wrapper'
