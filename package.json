@@ -24,7 +24,7 @@
     "react-dom": "16.9.0",
     "react-konva": "16.9.0-1",
     "react-spring": "^5.7.2",
-    "react-static": "7.4.2",
+    "react-static": "7.5.1",
     "throttle-debounce": "^2.3.0"
   },
   "devDependencies": {
@@ -63,10 +63,10 @@
     "maid": "^0.3.0",
     "prettier": "^2.2.1",
     "react-hot-loader": "^4.13.0",
-    "react-static-plugin-mdx": "^7.2.2",
-    "react-static-plugin-sitemap": "^7.4.2",
-    "react-static-plugin-source-filesystem": "^7.4.2",
-    "react-static-plugin-typescript": "^7.4.2",
+    "react-static-plugin-mdx": "^7.5.0",
+    "react-static-plugin-sitemap": "^7.5.1",
+    "react-static-plugin-source-filesystem": "^7.5.1",
+    "react-static-plugin-typescript": "^7.5.1",
     "remark-frontmatter": "^2.0.0",
     "serve": "^11.3.2",
     "superstruct": "^0.8.3",
