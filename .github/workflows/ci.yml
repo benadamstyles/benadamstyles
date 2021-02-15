@@ -32,6 +32,9 @@ jobs:
       - name: Install dependencies
         run: yarn install --pure-lockfile
 
+      - name: Compile
+        run: yarn maid compile
+
       - name: Lint
         run: yarn maid lint
 

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { phone, smallPhone } from '../../css/media'
+import { phone, smallPhone } from '../../css/Breakpoints.gen'
 
 const PostWrapper = styled.main`
   padding: 5rem;

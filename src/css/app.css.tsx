@@ -1,6 +1,6 @@
 import { css } from '@emotion/core'
 import { backgroundColor, linkColor, textColor, heavyTextColor } from './colors'
-import { phone } from './media'
+import { phone } from './Breakpoints.gen'
 
 export default css`
   html {

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/rescript-lang/rescript-compiler/master/docs/docson/build-schema.json",
+
+  "name": "benadamstyles",
+
+  "namespace": true,
+
+  "sources": [{ "dir": "src", "subdirs": true }],
+
+  "gentypeconfig": {
+    "language": "typescript"
+  },
+
+  "package-specs": [{ "module": "es6", "in-source": true }],
+
+  "suffix": ".bs.js",
+
+  "reason": { "react-jsx": 3 },
+
+  "bs-dependencies": ["@rescript/react"],
+
+  "ppx-flags": [],
+
+  "refmt": 3
+}

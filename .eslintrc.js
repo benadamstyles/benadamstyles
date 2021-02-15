@@ -25,6 +25,14 @@ const config = {
         node: false,
       },
     },
+
+    {
+      files: '*.bs.js',
+      rules: {
+        'no-var': 'off',
+        'import/no-mutable-exports': 'off',
+      },
+    },
   ],
 }
 

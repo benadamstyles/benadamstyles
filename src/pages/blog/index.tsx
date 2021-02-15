@@ -3,7 +3,7 @@ import { useRouteData } from 'react-static'
 import styled from '@emotion/styled'
 import { format } from 'date-fns'
 import { getHSLColor } from '../../util/hsl'
-import { phone, smallPhone } from '../../css/media'
+import { phone, smallPhone } from '../../css/Breakpoints.gen'
 import { textColor } from '../../css/colors'
 
 export interface BlogPost {

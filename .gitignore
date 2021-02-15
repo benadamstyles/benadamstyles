@@ -19,3 +19,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# rescript
+.merlin
+.bsb.lock
+/lib/
+*.bs.js
+*.gen.tsx
