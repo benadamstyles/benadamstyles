@@ -9,7 +9,7 @@ const config = {
 
   parserOptions: {
     tsconfigRootDir: __dirname,
-    project: './tsconfig.json',
+    project: ['./tsconfig.json', './tsconfig.eslint.json'],
   },
 
   env: {
@@ -34,6 +34,7 @@ const config = {
         'prefer-destructuring': 'off',
         'import/no-mutable-exports': 'off',
         '@typescript-eslint/no-unsafe-assignment': 'off',
+        'typescript-eslint/no-unused-vars': 'off',
       },
     },
   ],

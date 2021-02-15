@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+
+  // We include all files here because @typescript-eslint doesn't use the `files`
+  // option to perform import resolution – we have to tell it about all our files.
+  "include": ["./src"]
+}
