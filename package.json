@@ -2,7 +2,7 @@
   "private": true,
   "name": "benadamstyles",
   "version": "0.0.1",
-  "main": "src/index.js",
+  "main": "src/index.tsx",
   "license": "MIT",
   "author": "benadamstyles",
   "browserslist": [

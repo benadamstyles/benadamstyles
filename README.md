@@ -1,6 +1,8 @@
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/benadamstyles/benadamstyles)
 
-# Ben Styles
+# Personal Website
+
+[benadamstyles.com](https://www.benadamstyles.com)
 
 ## Development tasks and scripts
 
