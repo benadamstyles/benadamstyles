@@ -35,17 +35,21 @@ However, if all of the following are true:
 - you have set up typed imports as explained in this post
 - you have a CI build which runs on PRs and includes a type check
 
-then the build will fail and you will know autonatically that you should not be merging this PR without updating your bindings.
+then the build will fail and you will know immediately that you should not be merging this PR without updating your bindings.
 
 ## Step-by-step guide
 
-### Setting up TypeScript
+Here's a [real example](https://github.com/benadamstyles/rescript-example-project/compare/blog/post/typed-imports), showing a full diff of all the changes below in a basic ReScript project.
+
+If you prefer step-by-step instructions, read on.
+
+### Set up TypeScript
 
 ```sh
-npm install typescript
+npm install --save-dev typescript
 ```
 
-Create your `tsconfig.json`:
+Create your `tsconfig.json` at the root of your project:
 
 ```json
 {
@@ -68,13 +72,13 @@ Create your `tsconfig.json`:
 }
 ```
 
-### Setting up GenType
+### Set up GenType
 
 ```sh
 npm install --save-dev gentype
 ```
 
-Add the gentype config to your `bsconfig.json`:
+Add the gentype config fields to your `bsconfig.json`:
 
 ```json
 {
@@ -84,7 +88,7 @@ Add the gentype config to your `bsconfig.json`:
 }
 ```
 
-### Installing type definitions
+### Install type definitions
 
 You can search to check whether any of your dependencies, which _don't_ supply their own type definitions, have a matching DefinitelyTyped package:
 
@@ -92,12 +96,18 @@ You can search to check whether any of your dependencies, which _don't_ supply t
 npm search @types/package-name
 ```
 
-### Importing the package
+Alternatively, to find out if a given package supplies its own type definitions, head to https://www.npmjs.com/package/package-name and look for the TS symbol next to the package name title, for example: [polished](https://www.npmjs.com/package/polished).
+
+### Import the package
 
 Finally, you can update your `external`s to use GenType instead:
 
 ```diff
-- @module("package-name")
-+ @genType.import("package-name")
-external functionName: string => string = "functionName"
+- @module("polished")
++ @genType.import("polished")
+external lighten: (float, string) => string = "lighten"
 ```
+
+This import will now be type-checked by TypeScript – if the package types change, and your bindings are no longer correct, you'll find out next time you run [`tsc`](https://github.com/benadamstyles/rescript-example-project/blob/blog/post/typed-imports/package.json#L5)!
+
+> If you want to try it out, [clone the example project](https://github.com/benadamstyles/rescript-example-project), check out the `blog/post/typed-imports` branch and try changing the type signature of the `lighten` function in `Demo.res`. Run `npm run typecheck` and you should see type errors.
