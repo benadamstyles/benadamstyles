@@ -1,15 +1,41 @@
 ---
 createdDate: 2021-02-15 20:00:00+01
+publishedDate: 2021-02-15 20:00:00+01
 title: Typed Imports in ReScript
 ---
 
-# Typed Imports in ReScript
+# Typed imports in ReScript
 
-<!-- TODO: intro to the topic -->
+Although the ReScript docs rightly recommend you [keep third party dependencies to a minimum](https://rescript-lang.org/docs/manual/latest/project-structure#third-party-dependencies), sometimes it makes perfect sense to import something from npm. These days, JavaScript and TypeScript developers alike are used to getting the benefits of IDE ["intellisense"](https://code.visualstudio.com/docs/editor/intellisense) and a certain degree of type safety from the [DefinitelyTyped project](https://github.com/DefinitelyTyped/DefinitelyTyped), which provides type definitions for untyped JavaScript packages that are generally high-quality and correct.
+
+While there have been [discussions](https://forum.rescript-lang.org/t/rfc-universal-monorepo-for-rescript-bindings/811) around building something similar for ReScript, it seems clear that there is not currently a huge appetite for going down this route within the community. This means that automatically obtaining the former of these two benefits – intellisense – when writing ReScript code is off the table.
+
+However, we _can_ achieve the latter – mostly-type-safe imports – by leveraging the TypeScript ecosystem. In this blog post I'll show how you can set this up fairly simply.
 
 > ReScript is a new programming language which compiles to JavaScript. It has a completely sound static type system based on decades of academic research, and it looks set to compete with TypeScript due to its safety and elegance. To find out more, visit [the documentation](https://rescript-lang.org/docs/manual/latest/introduction) – for the rest of this blog post I will assume a basic understanding of how the language works.
 
-## Importing third party packages
+## How it works
 
-<!-- TODO: importing without type safety -->
-<!-- TODO: importing with type safety -->
+The basic steps to achieve typed imports in ReScript are as follows:
+
+1. Set up TypeScript support in your project.
+1. Set up [GenType](https://rescript-lang.org/docs/gentype/latest/introduction), using its TypeScript flavour.
+1. Install a package from npm which either includes its own type definitions or has matching type definitions in DefinitelyTyped.
+1. Import the package into ReScript using `@genType.import` instead of `@module`.
+
+Arguably, the first of these steps is the hardest, as it will involve enabling all your tooling (linter, bundler etc) to understand TypeScript files. Once that is set up, the rest is straightforward and is explained quite comprehensively below.
+
+## The alternative
+
+<!-- TODO: example of importing without type safety -->
+<!-- TODO: example of importing with type safety -->
+
+## Step-by-step guide
+
+### Setting up TypeScript
+
+### Setting up GenType
+
+### Installing type definitions
+
+### Importing the package
