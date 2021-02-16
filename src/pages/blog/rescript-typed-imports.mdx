@@ -8,7 +8,7 @@ title: Typed Imports in ReScript
 
 Although the ReScript docs rightly recommend you [keep third party dependencies to a minimum](https://rescript-lang.org/docs/manual/latest/project-structure#third-party-dependencies), sometimes it makes perfect sense to import something from npm. These days, JavaScript and TypeScript developers alike are used to getting the benefits of IDE ["intellisense"](https://code.visualstudio.com/docs/editor/intellisense) and a certain degree of type safety from the [DefinitelyTyped project](https://github.com/DefinitelyTyped/DefinitelyTyped), which provides type definitions for untyped JavaScript packages that are generally high-quality and correct.
 
-While there have been [discussions](https://forum.rescript-lang.org/t/rfc-universal-monorepo-for-rescript-bindings/811) around building something similar for ReScript, it seems clear that there is not currently a huge appetite for going down this route within the community. This means that automatically obtaining the former of these two benefits – intellisense – when writing ReScript code is off the table.
+While there have been [discussions](https://forum.rescript-lang.org/t/rfc-universal-monorepo-for-rescript-bindings/811) around building something similar for ReScript, it seems clear that there is not currently a huge appetite for going down this route within the community. This means that automatically obtaining the former of these two benefits – intellisense – when working in a **pure ReScript project** is off the table.
 
 However, we _can_ achieve the latter – mostly-type-safe imports – by leveraging the TypeScript ecosystem. In this blog post I'll show how you can set this up fairly simply.
 
@@ -20,15 +20,22 @@ The basic steps to achieve typed imports in ReScript are as follows:
 
 1. Set up TypeScript support in your project.
 1. Set up [GenType](https://rescript-lang.org/docs/gentype/latest/introduction), using its TypeScript flavour.
-1. Install a package from npm which either includes its own type definitions or has matching type definitions in DefinitelyTyped.
+1. Install a package from npm which either includes its own type definitions or (less useful but may still provide some safety) has matching type definitions in DefinitelyTyped).
 1. Import the package into ReScript using `@genType.import` instead of `@module`.
 
 Arguably, the first of these steps is the hardest, as it will involve enabling all your tooling (linter, bundler etc) to understand TypeScript files. Once that is set up, the rest is straightforward and is explained quite comprehensively below.
 
-## The alternative
+## Why?
 
-<!-- TODO: example of importing without type safety -->
-<!-- TODO: example of importing with type safety -->
+One of the great benefits of this setup comes with leveraging automatic dependency update services like [Dependabot](https://dependabot.com), [Greenkeeper](https://greenkeeper.io) or [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate/). When you receive a PR from one of these with an updated version of a package, your tests might cover any happy-path functionality changes that might have broken your app, but there is no automatic way to know whether your `external` bindings to this package are still correct.
+
+However, if all of the following are true:
+
+- the package is written in TypeScript, or includes its own type definitions
+- you have set up typed imports as explained in this post
+- you have a CI build which runs on PRs and includes a type check
+
+then the build will fail and you will know autonatically that you should not be merging this PR without updating your bindings.
 
 ## Step-by-step guide
 
