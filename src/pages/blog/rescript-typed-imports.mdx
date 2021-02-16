@@ -12,7 +12,7 @@ While there have been [discussions](https://forum.rescript-lang.org/t/rfc-univer
 
 However, we _can_ achieve the latter – mostly-type-safe imports – by leveraging the TypeScript ecosystem. In this blog post I'll show how you can set this up fairly simply.
 
-> ReScript is a new programming language which compiles to JavaScript. It has a completely sound static type system based on decades of academic research, and it looks set to compete with TypeScript due to its safety and elegance. To find out more, visit [the documentation](https://rescript-lang.org/docs/manual/latest/introduction) – for the rest of this blog post I will assume a basic understanding of how the language works.
+> ReScript is a new programming language which compiles to JavaScript. It has a completely sound static type system based on decades of academic research, and it looks set to compete with TypeScript due to its safety and elegance. To find out more, visit [the documentation](https://rescript-lang.org/docs/manual/latest/introduction) – for the rest of this blog post I will assume a basic understanding of the language.
 
 ## How it works
 
@@ -23,11 +23,11 @@ The basic steps to achieve typed imports in ReScript are as follows:
 1. Install a package from npm which either includes its own type definitions or (less useful but may still provide some safety) has matching type definitions in DefinitelyTyped).
 1. Import the package into ReScript using `@genType.import` instead of `@module`.
 
-Arguably, the first of these steps is the hardest, as it will involve enabling all your tooling (linter, bundler etc) to understand TypeScript files. Once that is set up, the rest is straightforward and is explained quite comprehensively below.
+Arguably, the first of these steps is the hardest in a mature project, as it will involve enabling all your tooling (linter, bundler etc) to understand TypeScript files. Once that is set up, the rest is straightforward and is explained quite comprehensively below.
 
 ## Why?
 
-One of the great benefits of this setup comes with leveraging automatic dependency update services like [Dependabot](https://dependabot.com), [Greenkeeper](https://greenkeeper.io) or [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate/). When you receive a PR from one of these with an updated version of a package, your tests might cover any happy-path functionality changes that might have broken your app, but there is no automatic way to know whether your `external` bindings to this package are still correct.
+One of the great benefits of this setup comes when you are leveraging automatic dependency update services like [Dependabot](https://dependabot.com), [Greenkeeper](https://greenkeeper.io) or [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate/), but it applies just the same if you are manually updating your dependencies. When you receive a PR from one of these with an updated version of a package, your tests might cover any happy-path functionality changes in the package that might have broken your app, but there is no automatic way to know whether your `external` bindings to this package are still correct.
 
 However, if all of the following are true:
 
@@ -39,7 +39,7 @@ then the build will fail and you will know immediately that you should not be me
 
 ## Step-by-step guide
 
-Here's a [real example](https://github.com/benadamstyles/rescript-example-project/compare/blog/post/typed-imports), showing a full diff of all the changes below in a basic ReScript project.
+Here's a [real example](https://github.com/benadamstyles/rescript-example-project/compare/blog/post/typed-imports), showing a full diff of all the changes required in a basic ReScript project.
 
 If you prefer step-by-step instructions, read on.
 
@@ -90,17 +90,17 @@ Add the gentype config fields to your `bsconfig.json`:
 
 ### Install type definitions
 
-You can search to check whether any of your dependencies, which _don't_ supply their own type definitions, have a matching DefinitelyTyped package:
+To find out if a given package supplies its own type definitions, head to https://www.npmjs.com/package/package-name and look for the TS symbol next to the package name title, for example: [polished](https://www.npmjs.com/package/polished).
+
+Alternatively, for any of your dependencies which _don't_ supply their own type definitions, you can search for a matching DefinitelyTyped package:
 
 ```sh
 npm search @types/package-name
 ```
 
-Alternatively, to find out if a given package supplies its own type definitions, head to https://www.npmjs.com/package/package-name and look for the TS symbol next to the package name title, for example: [polished](https://www.npmjs.com/package/polished).
-
 ### Import the package
 
-Finally, you can update your `external`s to use GenType instead:
+Finally, you can update your `external`s to use GenType instead of the `@module` annotation:
 
 ```diff
 - @module("polished")
