@@ -2,7 +2,7 @@
 type serializedStyles
 
 module Global = {
-  @genType.import(("@emotion/core", "Global")) @react.component
+  @genType.import("@emotion/core") @react.component
   external make: (~styles: array<serializedStyles>) => React.element = "Global"
 }
 
