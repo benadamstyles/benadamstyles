@@ -1,5 +1,4 @@
 module Language = {
-  @deriving(jsConverter)
   type t = [#rescript | #sh | #json | #diff]
 
   type def
@@ -49,11 +48,15 @@ module SyntaxHighlighter = {
 )
 
 @react.component
-let make = (~lang, ~children) => {
-  Js.log(lang->Language.tToJs)
-  <SyntaxHighlighter language={lang->Language.tToJs} style={SyntaxHighlighter.defaultStyle}>
-    children
-  </SyntaxHighlighter>
+let make = (~className, ~children) => {
+  let language = switch className |> String.split_on_char('-') {
+  | list{_, language, ..._} => Some(language)
+  | list{_}
+  | list{} =>
+    None
+  }
+
+  <SyntaxHighlighter ?language style={SyntaxHighlighter.defaultStyle}> children </SyntaxHighlighter>
 }
 
 export default = make
