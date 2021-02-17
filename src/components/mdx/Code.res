@@ -1,5 +1,6 @@
 module SyntaxHighlighter = {
   type langDef
+  type providedStyle
 
   type langs = [#rescript]
 
@@ -8,7 +9,12 @@ module SyntaxHighlighter = {
   type node = React.element
 
   @genType.import("react-syntax-highlighter") @react.component
-  external make: (~children: node=?) => React.element = "Light"
+  external make: (
+    ~language: langs,
+    ~wrapLongLines: bool,
+    ~style: providedStyle,
+    ~children: node=?,
+  ) => React.element = "Light"
 
   @genType.import(("react-syntax-highlighter", "Light.registerLanguage"))
   external registerLanguage: (langs, langDef) => unit = "registerLanguage"
