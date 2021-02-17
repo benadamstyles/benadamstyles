@@ -6,11 +6,11 @@ module Language = {
   // No genType as we don't want TS to check this vendored file
   @module("../../plugins/rescript-lang") external rescript: def = "default"
 
-  @genType.import(("react-syntax-highlighter/dist/esm/languages/hljs/bash", "default"))
+  @genType.import(("react-syntax-highlighter/dist/cjs/languages/hljs/bash", "default"))
   external bash: def = "bash"
-  @genType.import(("react-syntax-highlighter/dist/esm/languages/hljs/json", "default"))
+  @genType.import(("react-syntax-highlighter/dist/cjs/languages/hljs/json", "default"))
   external json: def = "json"
-  @genType.import(("react-syntax-highlighter/dist/esm/languages/hljs/diff", "default"))
+  @genType.import(("react-syntax-highlighter/dist/cjs/languages/hljs/diff", "default"))
   external diff: def = "diff"
 
   let langToDef = (lang: t) =>
@@ -39,7 +39,7 @@ module SyntaxHighlighter = {
   @genType.import(("react-syntax-highlighter", "Light.registerLanguage"))
   external registerLanguage: (Language.t, Language.def) => unit = "registerLanguage"
 
-  @genType.import("react-syntax-highlighter/dist/esm/styles/hljs")
+  @genType.import("react-syntax-highlighter/dist/cjs/styles/hljs")
   external defaultStyle: providedStyle = "nightOwl"
 }
 

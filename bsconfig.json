@@ -11,7 +11,7 @@
     "language": "typescript"
   },
 
-  "package-specs": [{ "module": "es6", "in-source": true }],
+  "package-specs": [{ "module": "commonjs", "in-source": true }],
 
   "suffix": ".bs.js",
 
