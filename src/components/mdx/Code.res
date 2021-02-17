@@ -4,7 +4,7 @@ module Language = {
   type def
 
   // No genType as we don't want TS to check this vendored file
-  @module("../../plugins/rescript-lang") external rescript: def = "default"
+  @module external rescript: def = "../../plugins/rescript-lang"
 
   @genType.import(("react-syntax-highlighter/dist/cjs/languages/hljs/bash", "default"))
   external bash: def = "bash"
