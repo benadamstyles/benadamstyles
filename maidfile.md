@@ -24,9 +24,9 @@ tsc
 
 ```sh
 yarn concurrently \
-  -n lint,types,build \
-  -c white.bgMagenta,white.bgBlue,white.bgCyan \
-  "yarn maid lint" "yarn maid typecheck" "react-static build"
+  -n lint,types \
+  -c white.bgMagenta,white.bgBlue \
+  "yarn maid lint" "yarn maid typecheck"
 ```
 
 ## compile
