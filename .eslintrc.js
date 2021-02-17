@@ -25,22 +25,6 @@ const config = {
         node: false,
       },
     },
-
-    {
-      files: '*.bs.js',
-      rules: {
-        'no-var': 'off',
-        'object-shorthand': 'off',
-        'prefer-destructuring': 'off',
-        'import/no-mutable-exports': 'off',
-        'import/order': 'off',
-        'react/no-children-prop': 'off',
-        '@typescript-eslint/no-unsafe-assignment': 'off',
-        '@typescript-eslint/no-unsafe-member-access': 'off',
-        '@typescript-eslint/no-unsafe-return': 'off',
-        '@typescript-eslint/no-unused-vars': 'off',
-      },
-    },
   ],
 }
 

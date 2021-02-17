@@ -2,9 +2,8 @@ tmp
 dist
 artifacts
 
-# NOTE: we don't ignore *.bs.js files
-# because some rules are still useful e.g. react-hooks
 *.gen.tsx
+*.bs.js
 
 # Ignore vendored plugins
 src/plugins

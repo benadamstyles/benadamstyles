@@ -2,6 +2,12 @@
 
 The following tasks can be triggered by running `yarn maid <command>`, where `command` is the title below.
 
+## format
+
+```sh
+prettier --write .
+```
+
 ## lint
 
 ```sh
