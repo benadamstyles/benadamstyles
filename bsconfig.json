@@ -19,6 +19,8 @@
 
   "bs-dependencies": ["@rescript/react"],
 
+  "bsc-flags": ["-open Belt"],
+
   "ppx-flags": [],
 
   "refmt": 3

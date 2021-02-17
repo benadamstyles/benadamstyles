@@ -20,7 +20,7 @@ The basic steps to achieve typed imports in ReScript are as follows:
 
 1. Set up TypeScript support in your project.
 1. Set up [GenType](https://rescript-lang.org/docs/gentype/latest/introduction), using its TypeScript flavour.
-1. Install a package from npm which either includes its own type definitions or (less useful but may still provide some safety) has matching type definitions in DefinitelyTyped).
+1. Install a package from npm which either includes its own type definitions or (less useful but may still provide some safety) has matching type definitions in DefinitelyTyped.
 1. Import the package into ReScript using `@genType.import` instead of `@module`.
 
 Arguably, the first of these steps is the hardest in a mature project, as it will involve enabling all your tooling (linter, bundler etc) to understand TypeScript files. Once that is set up, the rest is straightforward and is explained quite comprehensively below.
@@ -53,7 +53,8 @@ Create your `tsconfig.json` at the root of your project:
 
 ```json
 {
-  // Avoid typechecking *.bs.js files, as they are not well typed
+  // Avoid typechecking *.bs.js files,
+  // as they are not well typed
   "include": ["**/*.gen.tsx"],
 
   "compilerOptions": {
