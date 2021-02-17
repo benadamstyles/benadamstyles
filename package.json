@@ -13,10 +13,11 @@
     "edge 18"
   ],
   "dependencies": {
+    "@ahrefs/bs-emotion": "^2.0.0",
+    "@davesnx/styled-ppx": "^0.20.0",
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
     "@mdx-js/react": "^1.6.7",
-    "@rescript/react": "^0.10.1",
     "date-fns": "^2.17.0",
     "immutable": "^4.0.0-rc.12",
     "konva": "^4.0.3",
@@ -27,6 +28,7 @@
     "react-spring": "^5.7.2",
     "react-static": "7.4.2",
     "react-syntax-highlighter": "^15.4.3",
+    "reason-react": "^0.9.1",
     "throttle-debounce": "^2.3.0"
   },
   "devDependencies": {

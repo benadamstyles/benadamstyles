@@ -34,6 +34,7 @@ module SyntaxHighlighter = {
     ~language: string=?,
     ~style: providedStyle=?,
     ~children: node=?,
+    ~className: string=?,
   ) => React.element = "Light"
 
   @genType.import(("react-syntax-highlighter", "Light.registerLanguage"))
@@ -56,7 +57,14 @@ let make = (~className, ~children) => {
     None
   }
 
-  <SyntaxHighlighter ?language style={SyntaxHighlighter.defaultStyle}> children </SyntaxHighlighter>
+  <SyntaxHighlighter
+    className={%css(`
+      border-radius: 5px;
+    `)}
+    ?language
+    style={SyntaxHighlighter.defaultStyle}>
+    children
+  </SyntaxHighlighter>
 }
 
 export default = make
