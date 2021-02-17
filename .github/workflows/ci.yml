@@ -35,8 +35,5 @@ jobs:
       - name: Compile
         run: yarn maid compile
 
-      - name: Lint
-        run: yarn maid lint
-
-      - name: Typecheck
-        run: yarn maid typecheck
+      - name: Checks
+        run: yarn maid checks

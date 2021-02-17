@@ -20,6 +20,15 @@ eslint . --ext=.js,.ts,.tsx --report-unused-disable-directives
 tsc
 ```
 
+## checks
+
+```sh
+yarn concurrently \
+  -n lint,types,build \
+  -c white.bgMagenta,white.bgBlue,white.bgCyan \
+  "yarn maid lint" "yarn maid typecheck" "react-static build"
+```
+
 ## compile
 
 ```sh
