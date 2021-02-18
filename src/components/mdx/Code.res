@@ -74,7 +74,11 @@ let make = (~className, ~children) => {
 export default = make
 
 module Inline = {
-  module StyledCode = %styled.code("background-color: black;")
+  module StyledCode = %styled.code(`
+    background-color: rgb(214, 222, 235);
+    padding: 0.2rem;
+    border-radius: 5px;
+  `)
 
   @react.component
   export make = (~children) => <StyledCode> children </StyledCode>
