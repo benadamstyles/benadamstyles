@@ -1,0 +1,114 @@
+---
+createdDate: 2021-02-15 20:00:00+01
+publishedDate: 2021-02-18 10:00:00+01
+title: Type-safe bindings in ReScript
+---
+
+# Type-safe bindings in ReScript
+
+Although the ReScript docs rightly recommend you [keep third-party dependencies to a minimum](https://rescript-lang.org/docs/manual/latest/project-structure#third-party-dependencies), sometimes it makes perfect sense to import something from npm. These days, TypeScript developers are used to getting the benefits of type safety on their package imports, either because the package is written in TypeScript and supplies its own type definitions, or from the [DefinitelyTyped project](https://github.com/DefinitelyTyped/DefinitelyTyped), which provides type definitions for untyped JavaScript packages that are generally high-quality and correct.
+
+While there have been [discussions](https://forum.rescript-lang.org/t/rfc-universal-monorepo-for-rescript-bindings/811) around building something similar to DefinitelyTyped for ReScript, it seems clear that there is not currently a huge appetite for going down this route within the community. This means that we need to write our own bindings to third-party packages, with no type-level guarantees that these bindings are, or will remain, correct.
+
+However, we _can_ achieve "mostly-type-safe" bindings by leveraging the TypeScript ecosystem. In this blog post I'll show how you can set this up fairly simply.
+
+> ReScript is a new programming language which compiles to JavaScript. It has a completely sound static type system based on decades of academic research, and it looks set to compete with TypeScript due to its safety and elegance. To find out more, visit [the documentation](https://rescript-lang.org/docs/manual/latest/introduction) – for the rest of this blog post I will assume a basic understanding of the language.
+
+## How it works
+
+The basic steps to achieve type-safe bindings in ReScript are as follows:
+
+1. Set up TypeScript in your project.
+1. Set up [GenType](https://rescript-lang.org/docs/gentype/latest/introduction), using its TypeScript flavour.
+1. Install a package from npm which either includes its own type definitions or (less useful but may still provide some safety) has matching type definitions in DefinitelyTyped.
+1. Import the package into ReScript using `@genType.import` instead of `@module`.
+
+Arguably, the first of these steps is the hardest in a mature project, as it will involve enabling all your tooling (linter, bundler etc) to understand TypeScript files. Once that is set up, the rest is straightforward and is explained quite comprehensively below.
+
+## Why?
+
+One of the great benefits of this setup comes when you are leveraging automatic dependency update services like [Dependabot](https://dependabot.com), [Greenkeeper](https://greenkeeper.io) or [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate/), but it applies just the same if you are manually updating your dependencies. When you receive a PR from one of these services with an updated version of a package, your tests might cover any happy-path functionality changes in the package that might have broken your app, but there is no automatic way to know whether your `external` bindings to this package are still correct.
+
+However, if all of the following are true:
+
+- you have set up type-safe bindings as explained in this post
+- the package is written in TypeScript, or includes its own type definitions, or you also have the matching DefinitelyTyped package installed
+- you have a CI build which runs on PRs and includes a type check
+
+then the build will fail and you will know immediately that the signature of the package has changed and you should not be merging this PR without updating your bindings.
+
+## Step-by-step guide
+
+Here's a [real example](https://github.com/benadamstyles/rescript-example-project/compare/blog/post/type-safe-bindings), showing a full diff of all the changes required in a basic ReScript project.
+
+If you prefer step-by-step instructions, read on.
+
+### Set up TypeScript
+
+```sh
+npm install --save-dev typescript
+```
+
+Create a [`tsconfig.json`](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) at the root of your project:
+
+```json
+{
+  // Avoid typechecking *.bs.js files,
+  // as they are not well typed
+  "include": ["**/*.gen.tsx"],
+
+  "compilerOptions": {
+    // We are only type-checking
+    "noEmit": true,
+
+    // These settings likely match your environment,
+    // although they may need changing
+    "moduleResolution": "node",
+    "target": "ES2020",
+    "strict": true,
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  }
+}
+```
+
+### Set up GenType
+
+```sh
+npm install --save-dev gentype
+```
+
+Add the gentype config fields to your `bsconfig.json`:
+
+```json
+{
+  "gentypeconfig": {
+    "language": "typescript"
+  }
+}
+```
+
+### Install type definitions
+
+To find out if a given package supplies its own type definitions, head to https://www.npmjs.com/package/package-name and look for the TS symbol next to the package name title, for example: [polished](https://www.npmjs.com/package/polished).
+
+Alternatively, for any of your dependencies which _don't_ supply their own type definitions, you can search for a matching DefinitelyTyped package:
+
+```sh
+npm search @types/package-name
+```
+
+### Import the package
+
+Finally, you can update your `external`s to use GenType instead of the `@module` annotation:
+
+```diff
+- @module("polished")
++ @genType.import("polished")
+external lighten: (float, string) => string = "lighten"
+```
+
+On the next ReScript build, GenType will generate a TypeScript file importing the package with the type signature you have defined, and this signature will now be type-checked by TypeScript. If the package types change, and your bindings are no longer correct, you'll find out next time you run [`tsc`](https://github.com/benadamstyles/rescript-example-project/blob/blog/post/typed-imports/package.json#L5)!
+
+> If you want to try it out, [clone the example project](https://github.com/benadamstyles/rescript-example-project), check out the `blog/post/typed-imports` branch and try changing the type signature of the `lighten` function in `Demo.res`. Run `npm run typecheck` and you should see type errors.

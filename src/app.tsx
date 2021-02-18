@@ -7,10 +7,10 @@ import Catch from './components/catch'
 import Loading from './components/loading'
 import wrapper from './components/mdx/post-wrapper'
 import blockquote from './components/mdx/blockquote'
-import code from './components/mdx/Code.gen'
+import code, { Inline } from './components/mdx/Code.gen'
 import Nav from './components/navigation/nav'
 
-const components = { wrapper, blockquote, code }
+const components = { wrapper, blockquote, code, inlineCode: Inline.make }
 
 const loading = <Loading />
 

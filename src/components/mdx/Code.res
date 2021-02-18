@@ -57,14 +57,25 @@ let make = (~className, ~children) => {
     None
   }
 
+  // Remove trailing line breaks or spaces to avoid
+  // the gap at the bottom of every code block.
+  let code = children->Js.String2.replaceByRe(%re("/\s+$/"), "")
+
   <SyntaxHighlighter
     className={%css(`
       border-radius: 5px;
     `)}
     ?language
     style={SyntaxHighlighter.defaultStyle}>
-    children
+    {code->React.string}
   </SyntaxHighlighter>
 }
 
 export default = make
+
+module Inline = {
+  module StyledCode = %styled.code("background-color: black;")
+
+  @react.component
+  export make = (~children) => <StyledCode> children </StyledCode>
+}
