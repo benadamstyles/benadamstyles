@@ -76,6 +76,8 @@
     "react-static-plugin-sitemap": "^7.5.1",
     "react-static-plugin-source-filesystem": "^7.5.1",
     "react-static-plugin-typescript": "^7.5.1",
+    "rehype-slug": "^4.0.1",
+    "rehype-toc": "^3.0.2",
     "remark-frontmatter": "^2.0.0",
     "serve": "^11.3.2",
     "superstruct": "^0.8.3",

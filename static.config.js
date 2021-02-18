@@ -5,6 +5,8 @@ import globby from 'globby'
 import fm from 'front-matter'
 import remarkFrontMatter from 'remark-frontmatter'
 import remarkSmartypants from '@silvenon/remark-smartypants'
+import rehypeSlug from 'rehype-slug'
+import rehypeToc from 'rehype-toc'
 
 import { validateBlogPostFrontMatter } from './src/util/blog'
 
@@ -30,6 +32,10 @@ const config = {
             remarkFrontMatter,
             [remarkSmartypants, { dashes: 'oldschool' }],
           ],
+          rehypePlugins: [
+            rehypeSlug,
+            rehypeToc
+          ]
         },
       },
     ],
