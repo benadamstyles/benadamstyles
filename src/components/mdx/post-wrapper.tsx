@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
+import type { BlogPost } from '../../pages/blog'
 import { phone, smallPhone } from '../../css/Breakpoints.gen'
 import { hintColor } from '../../css/colors'
 
@@ -37,8 +38,7 @@ const Main = styled.main`
   }
 `
 
-interface PostProps {
-  title: string
+interface PostProps extends Omit<BlogPost, 'slug'> {
   is404: boolean
   children: React.ReactNode
 }
