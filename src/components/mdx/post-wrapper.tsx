@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import { phone, smallPhone } from '../../css/Breakpoints.gen'
+import { hintColor } from '../../css/colors'
 
 const Main = styled.main`
   padding: 5rem;
@@ -23,6 +24,16 @@ const Main = styled.main`
 
   p + p {
     margin-top: 1rem;
+  }
+
+  nav {
+    background-color: ${hintColor};
+    padding: 0.2rem;
+    margin: 2rem 0;
+
+    ol {
+      list-style-type: '–  ';
+    }
   }
 `
 
