@@ -1,6 +1,11 @@
 declare module 'react-spring/dist/konva'
 declare module '@silvenon/remark-smartypants'
 
+declare module '@mdx-js/mdx' {
+  function mdx(input: string): Promise<string>
+  export default mdx
+}
+
 declare type Require<T, Keys extends keyof T> = Omit<T, Keys> &
   Required<Pick<T, Keys>>
 

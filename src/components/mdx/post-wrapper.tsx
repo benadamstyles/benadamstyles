@@ -1,7 +1,9 @@
+import React from 'react'
 import styled from '@emotion/styled'
+
 import { phone, smallPhone } from '../../css/Breakpoints.gen'
 
-const PostWrapper = styled.main`
+const Main = styled.main`
   padding: 5rem;
   margin: 0 auto;
   max-width: calc(70ch + 10rem);
@@ -23,5 +25,18 @@ const PostWrapper = styled.main`
     margin-top: 1rem;
   }
 `
+
+interface PostProps {
+  title: string
+  is404: boolean
+  children: React.ReactNode
+}
+
+const PostWrapper: React.FC<PostProps> = props => (
+  <Main>
+    <h1>{props.title}</h1>
+    {props.children}
+  </Main>
+)
 
 export default PostWrapper
