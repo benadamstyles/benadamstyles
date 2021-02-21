@@ -18,4 +18,4 @@ const blogPostStructure = {
 /**
  * @type {(data: unknown) => BlogPost}
  */
-export const validateBlogPostFrontMatter = struct(blogPostStructure)
+export const validateBlogPostExports = struct(blogPostStructure)
