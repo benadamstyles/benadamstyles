@@ -11,10 +11,9 @@ const activeStyle = {
   color: highlightColor,
 }
 
-const NavLink: React.FC<Require<
-  React.AnchorHTMLAttributes<HTMLAnchorElement>,
-  'href'
->> = props => {
+const NavLink: React.FC<
+  Require<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>
+> = props => {
   const isActive = linkIsActive({
     href: props.href,
     currentPath: useStaticInfo()?.path ?? window.location.pathname,

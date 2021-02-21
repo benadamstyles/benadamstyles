@@ -11,15 +11,22 @@
     "language": "typescript"
   },
 
-  "package-specs": [{ "module": "es6", "in-source": true }],
+  "package-specs": [{ "module": "commonjs", "in-source": true }],
 
   "suffix": ".bs.js",
 
   "reason": { "react-jsx": 3 },
 
-  "bs-dependencies": ["@rescript/react"],
+  "bsc-flags": ["-open Belt"],
 
-  "ppx-flags": [],
+  "bs-dependencies": [
+    // Can't use @rescript/react yet because styled-ppx doesn't support it yet.
+    // See https://github.com/davesnx/styled-ppx/issues/164
+    "reason-react",
+    "@ahrefs/bs-emotion"
+  ],
+
+  "ppx-flags": ["@davesnx/styled-ppx/styled-ppx"],
 
   "refmt": 3
 }

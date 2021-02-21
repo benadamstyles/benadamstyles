@@ -1,12 +1,14 @@
 import { join, basename, extname } from 'path'
-import { promises } from 'fs'
+import { readFile } from 'fs/promises'
+import { runInNewContext } from 'vm'
 
 import globby from 'globby'
-import fm from 'front-matter'
-import remarkFrontMatter from 'remark-frontmatter'
+import mdx from '@mdx-js/mdx'
 import remarkSmartypants from '@silvenon/remark-smartypants'
+import rehypeSlug from 'rehype-slug'
+import rehypeToc from 'rehype-toc'
 
-import { validateBlogPostFrontMatter } from './src/util/blog'
+import { validateBlogPostExports } from './src/util/blog'
 
 /**
  * @param {...string} paths
@@ -26,10 +28,8 @@ const config = {
       'react-static-plugin-mdx',
       {
         mdxOptions: {
-          remarkPlugins: [
-            remarkFrontMatter,
-            [remarkSmartypants, { dashes: 'oldschool' }],
-          ],
+          remarkPlugins: [[remarkSmartypants, { dashes: 'oldschool' }]],
+          rehypePlugins: [rehypeSlug, rehypeToc],
         },
       },
     ],
@@ -54,19 +54,23 @@ const config = {
         async getData() {
           const files = await globby(src('pages', 'blog', '!(index.tsx)'))
 
-          const contents = await Promise.all(
-            files.map(async path => ({
-              path,
-              content: await promises.readFile(path, 'utf-8'),
-            }))
-          )
+          const posts = await Promise.all(
+            files.map(async path => {
+              const rawMdx = await readFile(path, 'utf-8')
+              const mdxModule = await mdx(rawMdx)
 
-          const posts = contents
-            .map(({ path, content }) => ({
-              .../** @type {object} */ (fm(content).attributes),
-              slug: basename(path, extname(path)),
-            }))
-            .map(validateBlogPostFrontMatter)
+              const exports = Object.fromEntries(
+                Array.from(
+                  mdxModule.matchAll(/^export const (\w+) = ([^\n;]+)/gmu)
+                ).map(([, name, value]) => [name, runInNewContext(value)])
+              )
+
+              return validateBlogPostExports({
+                slug: basename(path, extname(path)),
+                ...exports,
+              })
+            })
+          )
 
           return { posts }
         },

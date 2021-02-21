@@ -1,6 +1,7 @@
 tmp
 dist
 artifacts
+lib
 
 *.bs.js
 *.gen.tsx

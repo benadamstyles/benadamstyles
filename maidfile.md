@@ -2,6 +2,12 @@
 
 The following tasks can be triggered by running `yarn maid <command>`, where `command` is the title below.
 
+## format
+
+```sh
+prettier --write .
+```
+
 ## lint
 
 ```sh
@@ -12,6 +18,15 @@ eslint . --ext=.js,.ts,.tsx --report-unused-disable-directives
 
 ```sh
 tsc
+```
+
+## checks
+
+```sh
+yarn concurrently \
+  -n lint,types \
+  -c white.bgMagenta,white.bgBlue \
+  "yarn maid lint" "yarn maid typecheck"
 ```
 
 ## compile

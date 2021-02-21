@@ -20,6 +20,6 @@ export const sources = (
   <div>
     <p css={center}>Brought to you with</p>
     <p css={center} dangerouslySetInnerHTML={html} />
-    <p css={center}>from Leeds, Yorkshire, UK</p>
+    <p css={center}>from Barcelona, España</p>
   </div>
 )
