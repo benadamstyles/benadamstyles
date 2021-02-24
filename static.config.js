@@ -1,6 +1,6 @@
 import { join, basename, extname } from 'path'
 import { readFile } from 'fs/promises'
-import { runInNewContext } from 'vm'
+import { runInThisContext } from 'vm'
 
 import globby from 'globby'
 import mdx from '@mdx-js/mdx'
@@ -62,7 +62,7 @@ const config = {
               const exports = Object.fromEntries(
                 Array.from(
                   mdxModule.matchAll(/^export const (\w+) = ([^\n;]+)/gmu)
-                ).map(([, name, value]) => [name, runInNewContext(value)])
+                ).map(([, name, value]) => [name, runInThisContext(value)])
               )
 
               return validateBlogPostExports({

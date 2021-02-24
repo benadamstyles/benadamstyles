@@ -9,6 +9,7 @@ import { textColor } from '../../css/colors'
 export interface BlogPost {
   readonly slug: string
   readonly title: string
+  readonly tags: string[]
   readonly createdDate?: Date
   readonly publishedDate?: Date
   readonly updatedDate?: Date
@@ -74,26 +75,32 @@ const DateText = styled.p({ color: textColor })
 
 const formatDate = (date: string) => format(new Date(date), 'yyyy, MMM do')
 
+type PublishedSerializedBlogPost = Require<SerializedBlogPost, 'publishedDate'>
+
 const publishedOnly = (
   post: SerializedBlogPost
-): post is Require<SerializedBlogPost, 'publishedDate'> =>
+): post is PublishedSerializedBlogPost =>
   (post.publishedDate && new Date(post.publishedDate) < new Date()) || false
 
-const BlogIndex = () => {
-  const publishedPosts = useBlogPosts().filter(publishedOnly)
+const sortByDateDescending = (
+  a: PublishedSerializedBlogPost,
+  b: PublishedSerializedBlogPost
+) => new Date(b.publishedDate).valueOf() - new Date(a.publishedDate).valueOf()
 
-  return (
-    <List>
-      {publishedPosts.map(post => (
-        <li key={post.publishedDate}>
+const BlogIndex = () => (
+  <List>
+    {useBlogPosts()
+      .filter(publishedOnly)
+      .sort(sortByDateDescending)
+      .map(post => (
+        <li key={post.slug}>
           <a href={`/blog/${post.slug}`}>
             <Title>{post.title}</Title>
             <DateText>{formatDate(post.publishedDate)}</DateText>
           </a>
         </li>
       ))}
-    </List>
-  )
-}
+  </List>
+)
 
 export default BlogIndex
