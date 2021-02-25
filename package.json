@@ -15,7 +15,7 @@
   "dependencies": {
     "@ahrefs/bs-emotion": "^2.0.0",
     "@davesnx/styled-ppx": "^0.20.0",
-    "@emotion/core": "^10.0.35",
+    "@emotion/core": "^10.1.1",
     "@emotion/styled": "^10.0.27",
     "@mdx-js/react": "^1.6.22",
     "date-fns": "^2.17.0",
