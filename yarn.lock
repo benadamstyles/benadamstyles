@@ -1578,15 +1578,10 @@
     unist-builder "2.0.3"
     unist-util-visit "2.0.3"
 
-"@mdx-js/react@1.6.22":
+"@mdx-js/react@1.6.22", "@mdx-js/react@^1.6.22":
   version "1.6.22"
   resolved "https://registry.yarnpkg.com/@mdx-js/react/-/react-1.6.22.tgz#ae09b4744fddc74714ee9f9d6f17a66e77c43573"
   integrity sha512-TDoPum4SHdfPiGSAaRBw7ECyI8VaHpK8GJugbJIJuqyh6kzw9ZLJZW3HGL3NNrJGxcAixUvqROm+YuQOo5eXtg==
-
-"@mdx-js/react@^1.6.7":
-  version "1.6.7"
-  resolved "https://registry.yarnpkg.com/@mdx-js/react/-/react-1.6.7.tgz#c6c02677c525300d2ccc4c221c943f8b6ca1a422"
-  integrity sha512-pBxCfBWOHk/i/AnHdpexKvRDbdSOx5s3ZLHvl6DQJkn2zqA5+KtRrwuW2MxEu8MqKOos3hIgVOKD6kbIz0r8Og==
 
 "@mdx-js/util@1.6.22":
   version "1.6.22"
@@ -1929,10 +1924,10 @@
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.3.tgz#7ee330ba7caafb98090bece86a5ee44115904c2c"
   integrity sha512-ewFXqrQHlFsgc09MK5jP5iR7vumV/BYayNC6PgJO2LPe8vrnNFyjQjSppfEngITi0qvfKtzFvgKymGheFM9UOA==
 
-"@types/react-dom@^17.0.0":
-  version "17.0.0"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.0.tgz#b3b691eb956c4b3401777ee67b900cb28415d95a"
-  integrity sha512-lUqY7OlkF/RbNtD5nIq7ot8NquXrdFrjSOR6+w9a9RFQevGi1oZO1dcJbXMeONAPKtZ2UrZOEJ5UOCVsxbLk/g==
+"@types/react-dom@^17.0.1":
+  version "17.0.1"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.1.tgz#d92d77d020bfb083e07cc8e0ac9f933599a4d56a"
+  integrity sha512-yIVyopxQb8IDZ7SOHeTovurFq+fXiPICa+GV3gp0Xedsl+MwQlMLKmvrnEjFbQxjliH5YVAEWFh975eVNmKj7Q==
   dependencies:
     "@types/react" "*"
 
@@ -1950,10 +1945,18 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^17.0.0":
+"@types/react@*":
   version "17.0.0"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.0.tgz#5af3eb7fad2807092f0046a1302b7823e27919b8"
   integrity sha512-aj/L7RIMsRlWML3YB6KZiXB3fV2t41+5RBGYF8z+tAKU43Px8C3cYUZsDvf1/+Bm4FK21QWBrDutu8ZJ/70qOw==
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^3.0.2"
+
+"@types/react@^17.0.2":
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.2.tgz#3de24c4efef902dd9795a49c75f760cbe4f7a5a8"
+  integrity sha512-Xt40xQsrkdvjn1EyWe1Bc0dJLcil/9x2vAuW7ya+PuQip4UYUaXyhzWmAbwRsdMgwOFHpfp7/FFZebDU6Y8VHA==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
@@ -3132,10 +3135,10 @@ browserslist@^4.0.0, browserslist@^4.12.0, browserslist@^4.8.5, browserslist@^4.
     node-releases "^1.1.53"
     pkg-up "^2.0.0"
 
-bs-platform@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-9.0.0.tgz#873e9edcfe49a89b082e71c604d73bdb8276e2fb"
-  integrity sha512-32gIXIUt1RO+OUWLrkhXFOuZKS5Cka6lEShXaVC/ohg5N8cUnoNZW9M/vW3CWnmgZkQ0Hp9g9vj5I5NfzHpy5A==
+bs-platform@^9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-9.0.1.tgz#069dae007aadb400963cec25c8349ea1f3f6cae0"
+  integrity sha512-RxUrwxVBCx9AiiyFIthZwfPn+tAn9noRHCb9xJK4Uw2deGxIytqyoWDepMbH35v7EpxX0OhfXL5RrjHTaXersA==
 
 bser@2.1.1:
   version "2.1.1"
@@ -10125,18 +10128,18 @@ react-static-plugin-sitemap@^7.5.3:
     chalk "^2.4.2"
     fs-extra "^8.1.0"
 
-react-static-plugin-source-filesystem@^7.5.1:
-  version "7.5.1"
-  resolved "https://registry.yarnpkg.com/react-static-plugin-source-filesystem/-/react-static-plugin-source-filesystem-7.5.1.tgz#e16143b6266a821efcb94321c1008685b5a601e2"
-  integrity sha512-3oOA0YqIK9LMesa/i/6+K3I/Fq9UjeY5UKihLuOlCveur9m6Lo6AWHD166hv/tifUley1Btd7ShKXEkBztPbxw==
+react-static-plugin-source-filesystem@^7.5.3:
+  version "7.5.3"
+  resolved "https://registry.yarnpkg.com/react-static-plugin-source-filesystem/-/react-static-plugin-source-filesystem-7.5.3.tgz#bcd5fda8db382883c9f760ee9ce8ef5c5ea27dde"
+  integrity sha512-ZRGrjWQgIsJekajr9dS92W3HFhNjM9A2qdnSmBiUYN7Npjmx7tbtB0RtOftQ/9p4kjua6cp23Wx2ijxmTVgRFg==
   dependencies:
     chokidar "^3.0.2"
     glob "^7.1.4"
 
-react-static-plugin-typescript@^7.5.1:
-  version "7.5.1"
-  resolved "https://registry.yarnpkg.com/react-static-plugin-typescript/-/react-static-plugin-typescript-7.5.1.tgz#6d507c31ea7027a2011e4cc6a2bfce61b707c75b"
-  integrity sha512-expb3miJ9uBV7BXIFprDkyc26ydH9jqOZlcVZuKTpQe0zZQbwtdn09DVnG2ZcIUjwOMQAk1TWd0824tP/4mmgw==
+react-static-plugin-typescript@^7.5.3:
+  version "7.5.3"
+  resolved "https://registry.yarnpkg.com/react-static-plugin-typescript/-/react-static-plugin-typescript-7.5.3.tgz#bf900be57de35ad7f038015c60942587391f9969"
+  integrity sha512-/IK9xNl/Pel5g3rHSHzbvVDw8vDqu3xt/4fCkajMOi09RmEHMtkOR+Iai0+GjNVNHhI0Oa3THnZluXUE+yabZg==
   dependencies:
     "@babel/preset-typescript" "^7.3.3"
     convert-tsconfig-paths-to-webpack-aliases "^0.9.2"
