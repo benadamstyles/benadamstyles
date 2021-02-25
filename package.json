@@ -21,7 +21,7 @@
     "date-fns": "^2.17.0",
     "immutable": "^4.0.0-rc.12",
     "konva": "^4.0.3",
-    "polished": "^4.0.5",
+    "polished": "^4.1.1",
     "react": "16.9.0",
     "react-dom": "16.9.0",
     "react-konva": "16.9.0-1",
