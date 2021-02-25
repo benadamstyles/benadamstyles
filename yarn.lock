@@ -3151,10 +3151,10 @@ browserslist@^4.0.0, browserslist@^4.12.0, browserslist@^4.8.5, browserslist@^4.
     node-releases "^1.1.53"
     pkg-up "^2.0.0"
 
-bs-platform@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-9.0.0.tgz#873e9edcfe49a89b082e71c604d73bdb8276e2fb"
-  integrity sha512-32gIXIUt1RO+OUWLrkhXFOuZKS5Cka6lEShXaVC/ohg5N8cUnoNZW9M/vW3CWnmgZkQ0Hp9g9vj5I5NfzHpy5A==
+bs-platform@^9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-9.0.1.tgz#069dae007aadb400963cec25c8349ea1f3f6cae0"
+  integrity sha512-RxUrwxVBCx9AiiyFIthZwfPn+tAn9noRHCb9xJK4Uw2deGxIytqyoWDepMbH35v7EpxX0OhfXL5RrjHTaXersA==
 
 bser@2.1.1:
   version "2.1.1"
@@ -11841,13 +11841,10 @@ stylis@^3.5.0:
   resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.5.4.tgz#f665f25f5e299cf3d64654ab949a57c768b73fbe"
   integrity sha512-8/3pSmthWM7lsPBKv7NXkzn2Uc9W7NotcwGNpJaa3k7WMM1XDCA4MgT5k/8BIexd5ydZdboXtU90XH9Ec4Bv/Q==
 
-superstruct@^0.8.3:
-  version "0.8.3"
-  resolved "https://registry.yarnpkg.com/superstruct/-/superstruct-0.8.3.tgz#fb4d8901aca3bf9f79afab1bbab7a7f335cc4ef2"
-  integrity sha512-LbtbFpktW1FcwxVIJlxdk7bCyBq/GzOx2FSFLRLTUhWIA1gHkYPIl3aXRG5mBdGZtnPNT6t+4eEcLDCMOuBHww==
-  dependencies:
-    kind-of "^6.0.2"
-    tiny-invariant "^1.0.6"
+superstruct@^0.14.2:
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/superstruct/-/superstruct-0.14.2.tgz#0dbcdf3d83676588828f1cf5ed35cda02f59025b"
+  integrity sha512-nPewA6m9mR3d6k7WkZ8N8zpTWfenFH3q9pA2PkuiZxINr9DKB2+40wEQf0ixn8VaGuJ78AB6iWOtStI+/4FKZQ==
 
 supports-color@^5.3.0:
   version "5.5.0"
@@ -12064,11 +12061,6 @@ tiny-emitter@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/tiny-emitter/-/tiny-emitter-2.1.0.tgz#1d1a56edfc51c43e863cbb5382a72330e3555423"
   integrity sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==
-
-tiny-invariant@^1.0.6:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.1.0.tgz#634c5f8efdc27714b7f386c35e6760991d230875"
-  integrity sha512-ytxQvrb1cPc9WBEI/HSeYYoGD0kWnGEOR8RY6KomWLBVhqz0RgTwVO9dLrGz7dC+nN9llyI7OKAgRq8Vq4ZBSw==
 
 tmp@^0.0.33:
   version "0.0.33"
