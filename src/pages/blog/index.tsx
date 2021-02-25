@@ -3,6 +3,7 @@ import { useRouteData } from 'react-static'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import { format } from 'date-fns'
+import { transparentize } from 'polished'
 
 import { getHSLColor } from '../../util/hsl'
 import { phone, smallPhone } from '../../css/Breakpoints.gen'
@@ -24,6 +25,8 @@ type SerializedBlogPost = Serialized<BlogPost, Date | undefined>
 export interface BlogPostData {
   readonly posts: readonly SerializedBlogPost[]
 }
+
+const TAG_COLOR = getHSLColor()
 
 const useBlogPosts = () => useRouteData<BlogPostData>().posts
 
@@ -48,7 +51,7 @@ const List = styled.ol`
         border-radius: 50%;
 
         opacity: 0.4;
-        background-color: ${getHSLColor()};
+        background-color: ${TAG_COLOR};
 
         transition: transform 0.1s ease-in-out;
         transform: translate(-50%, -50%);
@@ -88,11 +91,11 @@ const mainCssOverride = css`
   padding: 5rem 10rem;
 
   @media (max-width: ${phone}) {
-    padding: 3rem 7rem;
+    padding: 5rem 7rem;
   }
 
   @media (max-width: ${smallPhone}) {
-    padding: 3rem;
+    padding: 5rem 3rem;
   }
 `
 
@@ -116,12 +119,18 @@ const HiddenCheckbox = styled.input`
 `
 
 const Label = styled.label`
+  display: block;
   user-select: none;
-  border: 1px solid ${getHSLColor()};
-  padding: 0.2rem 0.4rem;
+  border: 1px solid ${TAG_COLOR};
+  padding: 0.2rem 0.6rem;
+
+  :hover,
+  input:focus-visible + & {
+    background-color: ${transparentize(0.8, TAG_COLOR)};
+  }
 
   input:checked + & {
-    background-color: ${getHSLColor()};
+    background-color: ${TAG_COLOR};
   }
 `
 
