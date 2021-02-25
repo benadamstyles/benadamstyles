@@ -1,14 +1,19 @@
 import * as React from 'react'
 import { useRouteData } from 'react-static'
 import styled from '@emotion/styled'
+import { css } from '@emotion/core'
 import { format } from 'date-fns'
+
 import { getHSLColor } from '../../util/hsl'
 import { phone, smallPhone } from '../../css/Breakpoints.gen'
 import { textColor } from '../../css/colors'
+import { tags } from '../../util/blog'
+import { Main } from '../../components/layout/main'
 
 export interface BlogPost {
   readonly slug: string
   readonly title: string
+  readonly tags: string[]
   readonly createdDate?: Date
   readonly publishedDate?: Date
   readonly updatedDate?: Date
@@ -24,6 +29,7 @@ const useBlogPosts = () => useRouteData<BlogPostData>().posts
 
 const List = styled.ol`
   list-style: none;
+  padding: 0;
 
   li {
     a {
@@ -56,16 +62,6 @@ const List = styled.ol`
       }
     }
   }
-
-  padding: 5rem 10rem;
-
-  @media (max-width: ${phone}) {
-    padding: 3rem 7rem;
-  }
-
-  @media (max-width: ${smallPhone}) {
-    padding: 3rem 4rem;
-  }
 `
 
 const Title = styled.h2({ margin: 0 })
@@ -74,25 +70,118 @@ const DateText = styled.p({ color: textColor })
 
 const formatDate = (date: string) => format(new Date(date), 'yyyy, MMM do')
 
+type PublishedSerializedBlogPost = Require<SerializedBlogPost, 'publishedDate'>
+
 const publishedOnly = (
   post: SerializedBlogPost
-): post is Require<SerializedBlogPost, 'publishedDate'> =>
+): post is PublishedSerializedBlogPost =>
   (post.publishedDate && new Date(post.publishedDate) < new Date()) || false
 
+const sortByDateDescending = (
+  a: PublishedSerializedBlogPost,
+  b: PublishedSerializedBlogPost
+) => new Date(b.publishedDate).valueOf() - new Date(a.publishedDate).valueOf()
+
+const mainCssOverride = css`
+  max-width: 100%;
+
+  padding: 5rem 10rem;
+
+  @media (max-width: ${phone}) {
+    padding: 3rem 7rem;
+  }
+
+  @media (max-width: ${smallPhone}) {
+    padding: 3rem;
+  }
+`
+
+const TagList = styled.ul`
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin: -0.3rem;
+`
+
+const TagListItem = styled.li`
+  list-style: none;
+  margin: 0.3rem;
+`
+
+const HiddenCheckbox = styled.input`
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  opacity: 0;
+`
+
+const Label = styled.label`
+  user-select: none;
+  border: 1px solid ${getHSLColor()};
+  padding: 0.2rem 0.4rem;
+
+  input:checked + & {
+    background-color: ${getHSLColor()};
+  }
+`
+
+const TagFilter: React.FC<{
+  selectedTags: typeof tags
+  setSelectedTags: (selectedTags: typeof tags) => void
+}> = ({ selectedTags, setSelectedTags }) => (
+  <TagList>
+    {Array.from(tags).map(tag => (
+      <TagListItem key={tag}>
+        <HiddenCheckbox
+          id={`tag-${tag}`}
+          type="checkbox"
+          checked={selectedTags.has(tag)}
+          onChange={({ currentTarget: { checked } }) => {
+            const clone = new Set(selectedTags)
+            clone[checked ? 'add' : 'delete'](tag)
+            setSelectedTags(clone)
+          }}
+        />
+
+        <Label htmlFor={`tag-${tag}`}>{tag}</Label>
+      </TagListItem>
+    ))}
+  </TagList>
+)
+
+const filterByTags = (selectedTags: typeof tags) => (
+  post: PublishedSerializedBlogPost
+) => post.tags.some(tag => selectedTags.has(tag))
+
+const keepAll = () => true
+
 const BlogIndex = () => {
-  const publishedPosts = useBlogPosts().filter(publishedOnly)
+  const [selectedTags, setSelectedTags] = React.useState(
+    (): Set<string> => new Set()
+  )
 
   return (
-    <List>
-      {publishedPosts.map(post => (
-        <li key={post.publishedDate}>
-          <a href={`/blog/${post.slug}`}>
-            <Title>{post.title}</Title>
-            <DateText>{formatDate(post.publishedDate)}</DateText>
-          </a>
-        </li>
-      ))}
-    </List>
+    <Main css={mainCssOverride}>
+      <TagFilter
+        selectedTags={selectedTags}
+        setSelectedTags={setSelectedTags}
+      />
+
+      <List>
+        {useBlogPosts()
+          .filter(publishedOnly)
+          .filter(selectedTags.size > 0 ? filterByTags(selectedTags) : keepAll)
+          .sort(sortByDateDescending)
+          .map(post => (
+            <li key={post.slug}>
+              <a href={`/blog/${post.slug}`}>
+                <Title>{post.title}</Title>
+                <DateText>{formatDate(post.publishedDate)}</DateText>
+              </a>
+            </li>
+          ))}
+      </List>
+    </Main>
   )
 }
 
