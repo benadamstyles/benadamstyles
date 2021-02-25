@@ -26,7 +26,7 @@
     "react-dom": "16.9.0",
     "react-konva": "16.9.0-1",
     "react-spring": "^5.7.2",
-    "react-static": "7.4.2",
+    "react-static": "7.5.3",
     "react-syntax-highlighter": "^15.4.3",
     "reason-react": "^0.9.1",
     "throttle-debounce": "^2.3.0"
