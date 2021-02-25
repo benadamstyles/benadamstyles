@@ -10113,10 +10113,10 @@ react-spring@^5.7.2:
   dependencies:
     "@babel/runtime" "^7.0.0"
 
-react-static-plugin-mdx@^7.5.0:
-  version "7.5.0"
-  resolved "https://registry.yarnpkg.com/react-static-plugin-mdx/-/react-static-plugin-mdx-7.5.0.tgz#5dab341ed3b177702b6097e3eb6432d71d229704"
-  integrity sha512-k/a/QwMlkbtABPp6lpTZDDtbAVVXydbhT1aCV0TgYBk2PDhLhabS/z1GplniqwUXfLXbaZUGSsqG7L7jkLDApw==
+react-static-plugin-mdx@^7.5.4:
+  version "7.5.4"
+  resolved "https://registry.yarnpkg.com/react-static-plugin-mdx/-/react-static-plugin-mdx-7.5.4.tgz#f701f95c00c023672548b9b97b53cfbe0c9dd09c"
+  integrity sha512-FgP2ljESLRw9R+qOVwcBJSdywdGqwvCfjtW3xuaeoGeoza5uYwspnG26ZiYsI7GdeUYnWvaKHX3884Ql/Rt5Aw==
   dependencies:
     "@mdx-js/loader" "^1.6.21"
     gray-matter "^4.0.2"
