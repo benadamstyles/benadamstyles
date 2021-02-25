@@ -10122,10 +10122,10 @@ react-static-plugin-mdx@^7.5.4:
     gray-matter "^4.0.2"
     stringify-object "^3.3.0"
 
-react-static-plugin-sitemap@^7.5.1:
-  version "7.5.1"
-  resolved "https://registry.yarnpkg.com/react-static-plugin-sitemap/-/react-static-plugin-sitemap-7.5.1.tgz#0122790c45d6df47565588534d804ea8ad5eb1ad"
-  integrity sha512-v01mzYt0rK3DpO7cGi3PPob4W0kDyABIYAGBoyOtdNj8a1jIRxBKA7UB/s7wjMqD7hZs4FRC9X+7reD2a3xSWQ==
+react-static-plugin-sitemap@^7.5.3:
+  version "7.5.3"
+  resolved "https://registry.yarnpkg.com/react-static-plugin-sitemap/-/react-static-plugin-sitemap-7.5.3.tgz#78a1c9d7de215353dd40a82dd704cf53420dad88"
+  integrity sha512-JGqpqhN9mhhPkIlrPYgaT/uaP5WYTBGQ6XZZjPn/512OIS2NcCDBmgQz5hmzPiXcvudUKG6J0H2yVsqAt683QQ==
   dependencies:
     chalk "^2.4.2"
     fs-extra "^8.1.0"
