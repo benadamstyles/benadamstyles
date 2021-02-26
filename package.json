@@ -31,8 +31,11 @@
     "reason-react": "^0.9.1",
     "throttle-debounce": "^3.0.1"
   },
+  "resolutions": {
+    "**/@babel/runtime": "7.12.13"
+  },
   "devDependencies": {
-    "@babel/core": "^7.13.1",
+    "@babel/core": "7.13.1",
     "@babel/preset-typescript": "^7.13.0",
     "@benadamstyles/eslint-config": "^3.0.1",
     "@emotion/babel-preset-css-prop": "^11.2.0",
