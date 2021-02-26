@@ -1,6 +1,5 @@
 import React, {
   createContext,
-  ReactNode,
   useContext,
   useRef,
   useState,
@@ -8,9 +7,12 @@ import React, {
   useMemo,
   useCallback,
 } from 'react'
+import type { ReactNode } from 'react'
 import { List } from 'immutable'
 import { debounce } from 'throttle-debounce'
-import { struct } from 'superstruct'
+import { array, create, number, object, string } from 'superstruct'
+import type { Describe } from 'superstruct'
+
 import { HSLRotation, getHSLColor, DEFAULT_HUE } from '../../util/hsl'
 
 export interface Point {
@@ -28,21 +30,21 @@ export interface Session {
 }
 
 interface SessionSerialized {
-  readonly points: ReadonlyArray<Point>
+  readonly points: Array<Point>
   readonly lastColor: string
 }
 
-const validateSessionSerialized = struct({
-  points: [
-    {
-      x: 'number',
-      y: 'number',
-      r: 'number',
-      c: 'string',
-    },
-  ],
-  lastColor: 'string',
-}) as (data: unknown) => SessionSerialized
+const validateSessionSerialized: Describe<SessionSerialized> = object({
+  points: array(
+    object({
+      x: number(),
+      y: number(),
+      r: number(),
+      c: string(),
+    })
+  ),
+  lastColor: string(),
+})
 
 const retrieveSession = (index: number) =>
   window.localStorage.getItem(`session-${index}`) ?? ''
@@ -70,8 +72,9 @@ const populatePrevPoints = (
   index: number
 ): List<Session> => {
   try {
-    const parsedSession = validateSessionSerialized(
-      JSON.parse(retrieveSession(index))
+    const parsedSession = create(
+      JSON.parse(retrieveSession(index)),
+      validateSessionSerialized
     )
 
     const nextSessions = prevSessions.push({
@@ -81,7 +84,7 @@ const populatePrevPoints = (
 
     if (index === latestPointsIndex) return nextSessions
     return populatePrevPoints(latestPointsIndex, nextSessions, index + 1)
-  } catch (e) {
+  } catch (e: unknown) {
     console.error(e)
     if (index === latestPointsIndex) return prevSessions
     return populatePrevPoints(latestPointsIndex, prevSessions, index + 1)
@@ -92,7 +95,7 @@ const getLastHue = (latestPointsIndex: number): string => {
   try {
     return (JSON.parse(retrieveSession(latestPointsIndex)) as SessionSerialized)
       .lastColor
-  } catch (e) {
+  } catch (e: unknown) {
     console.error(e)
     return getHSLColor()
   }
@@ -101,7 +104,7 @@ const getLastHue = (latestPointsIndex: number): string => {
 const Context = createContext({
   points: List(),
   prevSessions: List(),
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- useful for documentation
   addPoint: (pageX: number, pageY: number) => {
     // no-op
   },
@@ -117,7 +120,7 @@ interface Props {
   readonly children: ReactNode
 }
 
-/* eslint-disable fp/no-mutation */
+/* eslint-disable fp/no-mutation -- using refs requires mutation */
 export const MouseFlowProvider: React.FC<Props> = props => {
   const hsl = useRef<HSLRotation>()
 

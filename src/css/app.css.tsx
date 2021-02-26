@@ -1,4 +1,4 @@
-import { css } from '@emotion/core'
+import { css } from '@emotion/react'
 import { backgroundColor, linkColor, textColor, heavyTextColor } from './colors'
 import { phone } from './Breakpoints.gen'
 

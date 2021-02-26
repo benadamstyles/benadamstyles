@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { css, keyframes } from '@emotion/core'
+import { css, keyframes } from '@emotion/react'
 import { highlightColor } from '../css/colors'
 
 const rotate = keyframes`

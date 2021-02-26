@@ -1,9 +1,16 @@
+/// <reference types="@emotion/react/types/css-prop" />
+// ☝️ This will not be needed when I switch to the new automatic JSX transform
+
 import * as React from 'react'
 import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import App from './app'
 
-type ModuleWithHot = NodeModule & { hot?: { accept: Function } }
+type ModuleWithHot = NodeModule & {
+  hot?: {
+    accept: (path: string) => void
+  }
+}
 
 // Export your top level component as JSX (for static rendering)
 export default App
