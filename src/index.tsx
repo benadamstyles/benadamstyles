@@ -6,7 +6,11 @@ import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import App from './app'
 
-type ModuleWithHot = NodeModule & { hot?: { accept: Function } }
+type ModuleWithHot = NodeModule & {
+  hot?: {
+    accept: (path: string) => void
+  }
+}
 
 // Export your top level component as JSX (for static rendering)
 export default App

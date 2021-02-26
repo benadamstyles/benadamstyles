@@ -4,7 +4,7 @@
   "files": ["./src/index.tsx", "./src/typings.d.ts"],
 
   // Include config JS files for typechecking
-  "include": ["./*.js"],
+  "include": ["./*.js", "./.*.js"],
 
   "compilerOptions": {
     // Babel does the transpiling

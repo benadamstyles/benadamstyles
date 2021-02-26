@@ -27,7 +27,7 @@ export const useScreenSize = () => {
 
 export const useOnHydrate = <T>(fn: () => T) => {
   const [value, setValue] = useState<T>()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- we definitely only want to call it once
   useEffect(() => setValue(fn()), [])
   return value
 }

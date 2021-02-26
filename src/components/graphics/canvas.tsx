@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { Stage, FastLayer, Circle } from 'react-konva'
 import { Spring, animated } from 'react-spring/dist/konva'
-import { List } from 'immutable'
-import { Session, Points, Point } from '../context/mouse-flow'
+import type { List } from 'immutable'
+import type { Session, Points, Point } from '../context/mouse-flow'
 import { cachePointMapper } from '../../util/memo'
 
 const endScale = 2
@@ -18,14 +18,16 @@ const end = {
   opacity: endOpacity,
 }
 
-const AnimatedCircleDeOpt: React.FC<Point> = props => (
+const AnimatedCircleDeOpt: React.FC<Point> = (props: Point) => (
   <Spring native from={start} to={end}>
     {({ scale, opacity }: { scale: number; opacity: number }) => (
       <animated.Circle
+        /* eslint-disable react/prop-types -- bug with rule */
         x={props.x}
         y={props.y}
         radius={props.r}
         fill={props.c}
+        /* eslint-enable react/prop-types */
         opacity={opacity}
         scaleX={scale}
         scaleY={scale}
@@ -41,7 +43,6 @@ interface PrevSessionsProps {
 }
 
 const PrevSessionsDeOpt: React.FC<PrevSessionsProps> = props => (
-  // eslint-disable-next-line react/jsx-no-useless-fragment
   <>
     {props.prevSessions.map((session, i) => (
       <FastLayer key={String(i)}>
