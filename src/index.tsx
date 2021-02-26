@@ -1,3 +1,6 @@
+/// <reference types="@emotion/react/types/css-prop" />
+// ☝️ This will not be needed when I switch to the new automatic JSX transform
+
 import * as React from 'react'
 import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'

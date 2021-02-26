@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useRouteData } from 'react-static'
 import styled from '@emotion/styled'
-import { css } from '@emotion/core'
+import { css } from '@emotion/react'
 import { format } from 'date-fns'
 import { transparentize } from 'polished'
 
