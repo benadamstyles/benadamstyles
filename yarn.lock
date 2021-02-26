@@ -9835,7 +9835,7 @@ react-helmet@^6.1.0:
     react-fast-compare "^3.1.1"
     react-side-effect "^2.1.0"
 
-react-hot-loader@^4.13.0:
+react-hot-loader@^4.13.0, react-hot-loader@^4.3.6:
   version "4.13.0"
   resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.13.0.tgz#c27e9408581c2a678f5316e69c061b226dc6a202"
   integrity sha512-JrLlvUPqh6wIkrK2hZDfOyq/Uh/WeVEr8nc7hkn2/3Ul0sx1Kr5y4kOGNacNRoj7RhwLNcQ3Udf1KJXrqc0ZtA==
@@ -10022,13 +10022,14 @@ react-syntax-highlighter@^15.4.3:
     prismjs "^1.22.0"
     refractor "^3.2.0"
 
-react-universal-component@^4.0.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/react-universal-component/-/react-universal-component-4.5.0.tgz#8722db134e0297bca879321df9d76ce0b2d830b4"
-  integrity sha512-dBUC6afvSAQhDcE4oh1eTmfU29W0O2eZhcGXnfGUTulXkU8ejuWqlJWXXrSMx5iV1H6LNgj2NJMj3BtBMfBNhA==
+react-universal-component@4.0.1, react-universal-component@^4.0.0:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/react-universal-component/-/react-universal-component-4.0.1.tgz#01eec19dafda55ee7cf71f3aeb996c924718cc19"
+  integrity sha512-dm3HT1ITlony+8Mb7m8i6jTD2cpStRGErMdHxYTdIFw1aBiGbuFOwZ1U13bgGT4gssANLRz0KrmjgarBuy+QJQ==
   dependencies:
     hoist-non-react-statics "^3.3.0"
     prop-types "^15.7.2"
+    react-hot-loader "^4.3.6"
 
 react@17.0.1:
   version "17.0.1"

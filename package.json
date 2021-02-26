@@ -33,6 +33,7 @@
   },
   "resolutions": {
     "**/@babel/runtime": "7.12.13",
+    "**/react-universal-component": "4.0.1",
     "**/stylis": "4.0.7"
   },
   "devDependencies": {
