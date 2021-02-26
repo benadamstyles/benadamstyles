@@ -24,6 +24,10 @@ const config = {
   plugins: [
     'react-static-plugin-typescript',
     ['react-static-plugin-source-filesystem', { location: src('pages') }],
+
+    // TODO: Needs upgrade to use latest emotion package names
+    // 'react-static-plugin-emotion',
+
     [
       'react-static-plugin-mdx',
       {
