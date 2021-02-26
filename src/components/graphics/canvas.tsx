@@ -18,7 +18,7 @@ const end = {
   opacity: endOpacity,
 }
 
-const AnimatedCircleDeOpt: React.FC<Point> = (props: Point) => (
+const AnimatedCircleDeOpt: React.FC<Point> = props => (
   <Spring native from={start} to={end}>
     {({ scale, opacity }: { scale: number; opacity: number }) => (
       <animated.Circle
