@@ -1,6 +1,11 @@
 import { css } from '@emotion/react'
 
-import { backgroundColor, linkColor, textColor, heavyTextColor } from './Colors.gen'
+import {
+  backgroundColor,
+  linkColor,
+  textColor,
+  heavyTextColor,
+} from './Colors.gen'
 import { phone } from './Breakpoints.gen'
 
 export default css`

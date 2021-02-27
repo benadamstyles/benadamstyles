@@ -1,18 +1,25 @@
 import * as React from 'react'
 import { Seq } from 'immutable'
-import pkg from '../../package.json'
 
 const center = {
   textAlign: 'center',
 } as const
 
+const dependencies = {
+  ReScript: 'https://rescript-lang.org/',
+  React: 'https://reactjs.org/',
+  'React Static': 'https://github.com/react-static/react-static',
+  Emotion: 'https://emotion.sh/',
+  Konva: 'https://konvajs.org',
+  'React Spring': 'https://www.react-spring.io',
+} as const
+
 const html = {
-  __html: Seq(pkg.dependencies)
-    .keySeq()
-    .filterNot(dep => dep.includes('plugin'))
-    .map(dep => `<a href="https://www.npmjs.com/package/${dep}">${dep}</a>`)
-    .reduce((out: string, dep, i, seq) =>
-      i === seq.count() - 1 ? `${out} & ${dep}` : `${out}, ${dep}`
+  __html: Seq(dependencies)
+    .map((url, name) => `<a href="${url}">${name}</a>`)
+    .valueSeq()
+    .reduce((out: string, link, i, seq) =>
+      i === seq.count() - 1 ? `${out} & ${link}` : `${out}, ${link}`
     ),
 }
 
