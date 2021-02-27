@@ -124,8 +124,7 @@ const Label = styled.label`
   border: 1px solid ${TAG_COLOR};
   padding: 0.2rem 0.6rem;
 
-  :hover,
-  input:focus-visible + & {
+  :hover {
     background-color: ${transparentize(0.8, TAG_COLOR)};
   }
 
