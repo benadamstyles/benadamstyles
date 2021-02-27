@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Stage, FastLayer, Circle } from 'react-konva'
-import { Spring, animated } from 'react-spring/dist/konva'
+import { Spring, animated } from 'react-spring/renderprops-konva'
 import type { List } from 'immutable'
 import type { Session, Points, Point } from '../context/mouse-flow'
 import { cachePointMapper } from '../../util/memo'
