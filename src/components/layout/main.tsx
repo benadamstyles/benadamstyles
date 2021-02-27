@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 import { phone, smallPhone } from '../../css/Breakpoints.gen'
-import { hintColor } from '../../css/colors'
+import { hintColor } from '../../css/Colors.gen'
 
 export const Main = styled.main`
   padding: 5rem;

@@ -7,7 +7,7 @@ import { transparentize } from 'polished'
 
 import { getHSLColor } from '../../util/hsl'
 import { phone, smallPhone } from '../../css/Breakpoints.gen'
-import { textColor } from '../../css/colors'
+import { textColor } from '../../css/Colors.gen'
 import { tags } from '../../util/blog'
 import { Main } from '../../components/layout/main'
 

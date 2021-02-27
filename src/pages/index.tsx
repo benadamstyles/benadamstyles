@@ -1,5 +1,6 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
+
 import { Headline } from '../components/headline'
 import {
   MouseFlowProvider,
@@ -8,7 +9,7 @@ import {
 import { Canvas } from '../components/graphics/canvas'
 import { ClearMouseFlow } from '../components/buttons/clear-mouse-flow'
 import { useScreenSize } from '../util/hooks'
-import { backgroundColor } from '../css/colors'
+import { backgroundColor } from '../css/Colors.gen'
 import { phone, smallPhone } from '../css/Breakpoints.gen'
 import * as CSSOverrides from '../css/overrides'
 import { homeFooter } from '../components/footers/footer'

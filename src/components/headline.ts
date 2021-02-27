@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
-import { backgroundColor } from '../css/colors'
+
+import { backgroundColor } from '../css/Colors.gen'
 
 const invisibleStyle = {
   color: backgroundColor,

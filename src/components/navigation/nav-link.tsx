@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useStaticInfo } from 'react-static'
 
 import { linkIsActive } from '../../util/path'
-import { highlightColor, textColor } from '../../css/colors'
+import { highlightColor, textColor } from '../../css/Colors.gen'
 
 const style = {
   color: textColor,
