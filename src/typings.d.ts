@@ -1,4 +1,3 @@
-declare module 'react-spring/dist/konva'
 declare module '@silvenon/remark-smartypants'
 
 declare module '@mdx-js/mdx' {
