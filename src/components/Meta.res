@@ -52,7 +52,8 @@ let make = (~title, ~blogPostData) => {
   let {title: defaultTitle} = useSiteData()
 
   <Helmet
-    titleTemplate=?{title->map(_ => "%s | Ben Styles")} title={title->getWithDefault(defaultTitle)}>
+    titleTemplate=?{title->map(_ => `%s | ${defaultTitle}`)}
+    title={title->getWithDefault(defaultTitle)}>
     {blogPostData->mapWithDefault(React.null, buildStructuredData)}
   </Helmet>
 }

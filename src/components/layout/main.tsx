@@ -31,6 +31,8 @@ export const Main = styled.main`
     margin: 2rem 0;
 
     ol {
+      /* Fallback for Safari which doesn't accept strings */
+      list-style-type: circle;
       list-style-type: '–  ';
     }
   }
