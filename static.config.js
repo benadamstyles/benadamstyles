@@ -11,6 +11,11 @@ import rehypeToc from 'rehype-toc'
 import { validateBlogPostExports } from './src/util/blog'
 
 /**
+ * @typedef {Object} SiteData
+ * @property {string} title
+ */
+
+/**
  * @param {...string} paths
  */
 export const src = (...paths) => join(__dirname, 'src', ...paths)
@@ -42,6 +47,9 @@ const config = {
 
   siteRoot: 'https://www.benadamstyles.com',
 
+  /**
+   * @returns {SiteData}
+   */
   getSiteData: () => ({
     title: 'Ben Styles',
   }),
