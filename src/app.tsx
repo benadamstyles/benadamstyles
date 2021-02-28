@@ -1,8 +1,9 @@
-import * as React from 'react'
+import React, { Suspense } from 'react'
 import { Root, Routes } from 'react-static'
 import { MDXProvider } from '@mdx-js/react'
 
 import CSS from './css/CSS.gen'
+import Meta from './components/Meta.gen'
 import Catch from './components/catch'
 import Loading from './components/loading'
 import wrapper from './components/mdx/post-wrapper'
@@ -16,13 +17,17 @@ const loading = <Loading />
 
 const App = () => (
   <Catch>
+    <Suspense fallback={null}>
+      <Meta />
+    </Suspense>
+
     <MDXProvider components={components}>
       <Root>
         <CSS />
 
-        <React.Suspense fallback={loading}>
+        <Suspense fallback={loading}>
           <Routes />
-        </React.Suspense>
+        </Suspense>
 
         <Nav />
       </Root>

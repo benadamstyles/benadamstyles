@@ -10,6 +10,7 @@ import { phone, smallPhone } from '../../css/Breakpoints.gen'
 import { textColor } from '../../css/Colors.gen'
 import { tags } from '../../util/blog'
 import { Main } from '../../components/layout/main'
+import Meta from '../../components/Meta.gen'
 
 export interface BlogPost {
   readonly slug: string
@@ -170,6 +171,8 @@ const BlogIndex = () => {
 
   return (
     <Main css={mainCssOverride}>
+      <Meta title="Blog index" />
+
       <TagFilter
         selectedTags={selectedTags}
         setSelectedTags={setSelectedTags}

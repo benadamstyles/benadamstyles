@@ -13,6 +13,7 @@ import {
  */
 
 export const tags = new Set([
+  'accessibility',
   'design',
   'front end',
   'react',

@@ -25,15 +25,11 @@ module Language = {
 module SyntaxHighlighter = {
   type providedStyle
 
-  // React.element is not the same as ReactNode, although it should be
-  @genType.import(("react", "ReactNode"))
-  type node = React.element
-
   @genType.import("react-syntax-highlighter") @react.component
   external make: (
     ~language: string=?,
     ~style: providedStyle=?,
-    ~children: node=?,
+    ~children: GenType.reactNode=?,
     ~className: string=?,
   ) => React.element = "Light"
 
