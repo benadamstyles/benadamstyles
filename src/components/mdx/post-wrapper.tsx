@@ -13,9 +13,7 @@ const PostWrapper: React.FC<PostProps> = props => (
   <Main>
     <Meta
       title={props.title}
-      blogPostData={{
-        publishedDate: props.publishedDate,
-      }}
+      blogPostData={props}
     />
 
     <h1>{props.title}</h1>
