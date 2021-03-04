@@ -10,9 +10,13 @@ TypeScript has one of the most complex configuration schemas in the JavaScript e
 
 Given this size and complexity, it is not surprising that people make mistakes in their `tsconfig.json`. It helps that the file allows comments in the JSON – when building your own `tsconfig.json`, I highly recommend documenting your choices with comments. Also, when copying a boilerplate `tsconfig.json`, I recommend taking a few minutes to find the docs for each preconfigured option and make sure you understand what it's doing and whether you actually need or want it. Understanding what your code is actually doing is the first step in building maintainable software.
 
+## `lib` and `target`
+
 One of the most common mistakes I see is with the [`target`](https://www.typescriptlang.org/tsconfig#target) and [`lib`](https://www.typescriptlang.org/tsconfig#lib) options. It is extremely common to find `lib` declared in `tsconfig.json`, but it is _very_ rarely needed, especially for browser-based projects. As the docs themselves explain:
 
 > Changing `target` also changes the default value of `lib`. You may “mix and match” `target` and `lib` settings as desired, but you could just set `target` for convenience.
+
+### The problem
 
 If you've ever seen a `tsconfig.json` with something like the following in it, then you'll know why it causes confusion and uncertainty:
 
@@ -26,6 +30,8 @@ If you've ever seen a `tsconfig.json` with something like the following in it, t
 This is from a real `tsconfig.json` I found in use in a large company. Why is it targetting `es5`, but then including the `es2016` library? What is `es2017.object`? Does anyone really know?
 
 The transpiling step for this project used Babel, and `@babel/preset-env`, so there was absolutely no reason to limit the TS target to `es5`. In fact, it should have targetted `es2020`, because that matched the version of Node being used and the latest version of Babel can handle everything in `es2020`.
+
+### The solution
 
 So how do you choose what options to set? A good set of principles to follow are:
 
