@@ -18,7 +18,7 @@
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
     "@mdx-js/react": "^1.6.22",
-    "date-fns": "^2.18.0",
+    "date-fns": "^2.19.0",
     "immutable": "^4.0.0-rc.12",
     "konva": "^7.2.4",
     "polished": "^4.1.1",
