@@ -1089,10 +1089,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@davesnx/styled-ppx@^0.20.0":
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/@davesnx/styled-ppx/-/styled-ppx-0.20.0.tgz#ffafcd850c0669f54bd425915a5f82b515fdaa55"
-  integrity sha512-aKoOq3khSZRZAT1/CkIEzIm4c9RcOPJ9JN3MLlr5wzHYof9/uEIk15tPSillCThBiN2ymYMmF6DYb2HxjnGJIw==
+"@davesnx/styled-ppx@^1.5.4":
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/@davesnx/styled-ppx/-/styled-ppx-1.5.4.tgz#e96b8c9cb0e0059825dcd180c06d622aeadb26b8"
+  integrity sha512-7FnPbN7jNzQHXmM02u/h+3VUDlc0MYnhF4BsFccvASOWYrX8hvqZb67B62Z38FzzHzNexhiW6XjHWIYTxopIqg==
 
 "@emotion/babel-plugin-jsx-pragmatic@^0.1.5":
   version "0.1.5"
