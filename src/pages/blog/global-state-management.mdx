@@ -1,0 +1,12 @@
+——-
+title: Global state management is an anti-pattern
+——-
+
+
+# Global state management is an anti-pattern
+
+Let me start by saying that there are no absolutes in programming. All rules have exceptions, and this one is no different, but that doesn’t and shouldn’t stop us from having rules. That’s why eslint disable exists!
+
+All state in UIs should either be persisted, in which case your data layer(s) should reactively trigger UI updates, or a transient implementation detail of your UX, in which case it should be local to a component. In other words, if you share state, you should be able to persist it, otherwise you’re probably architecting your components in an unsustainable way, or you’re giving your user a suboptimal experience. This leaves no room for offline global state management libraries like redux or recoil – but it does leave room for React Apollo Client or Firebase.
+
+Let me show you some examples which I’ve taken from state management libraries across the React ecosystem, and why global state management is unnecessary or even wrong here:
