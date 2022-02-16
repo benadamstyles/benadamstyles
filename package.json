@@ -37,7 +37,7 @@
     "**/stylis": "4.0.7"
   },
   "devDependencies": {
-    "@babel/core": "7.13.14",
+    "@babel/core": "7.17.4",
     "@babel/preset-typescript": "^7.13.0",
     "@benadamstyles/eslint-config": "^3.0.1",
     "@emotion/babel-preset-css-prop": "^11.2.0",
