@@ -7962,10 +7962,10 @@ kleur@^3.0.3:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
-konva@^7.2.5:
-  version "7.2.5"
-  resolved "https://registry.yarnpkg.com/konva/-/konva-7.2.5.tgz#9b4ac3a353e6be66e3e69123bf2a0cbc61efeb26"
-  integrity sha512-yk/li8rUF+09QNlOdkwbEId+QvfATMe/aMGVouWW1oFoUVTYWHsQuIAE6lWy11DK8mLJEJijkNAXC5K+NVlMew==
+konva@^8.3.6:
+  version "8.3.6"
+  resolved "https://registry.yarnpkg.com/konva/-/konva-8.3.6.tgz#27bb320628506ab85c9f6a9ef74cd026ecf63406"
+  integrity sha512-onPvEqGBmPQlbdWYJsz0AtRZCec0mQr8U9D68LgtcQoAA4+Dd1ZUYZC8KyMNjg7ZvfAjXisc9kszQIAcLshY/w==
 
 language-subtag-registry@~0.3.2:
   version "0.3.21"
