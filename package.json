@@ -14,7 +14,7 @@
   ],
   "dependencies": {
     "@ahrefs/bs-emotion": "^2.0.0",
-    "@davesnx/styled-ppx": "^0.20.0",
+    "@davesnx/styled-ppx": "^0.33.3",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
     "@mdx-js/react": "^1.6.22",
