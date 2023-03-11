@@ -1,4 +1,16 @@
 import * as React from 'react'
+import styled from '@emotion/styled'
+import { Main } from '../../components/layout/main'
+
+const Button = styled.button({
+  border: 'none',
+  background: 'transparent',
+  fontSize: '1.8em',
+
+  '&:hover': {
+    opacity: 0.3,
+  },
+})
 
 interface Question {
   question: string
@@ -37,9 +49,11 @@ async function submitQuestion({ question, apiKey, apiHost }: Question) {
 const DocsGptRescript = () => {
   const [apiKey, setApiKey] = React.useState('')
   const [apiHost, setApiHost] = React.useState('')
+  const [question, setQuestion] = React.useState('')
+  const [answer, setAnswer] = React.useState('')
 
   return (
-    <div>
+    <Main>
       <input
         placeholder="OpenAI API key"
         value={apiKey}
@@ -50,18 +64,22 @@ const DocsGptRescript = () => {
         value={apiHost}
         onChange={event => setApiHost(event.target.value)}
       />
-      <button
+      <textarea
+        placeholder="Question"
+        value={question}
+        onChange={event => setQuestion(event.target.value)}
+      />
+      <Button
         type="button"
         onClick={() =>
-          submitQuestion({
-            question: 'In rescript, how do I make a record property mutable?',
-            apiKey,
-            apiHost,
-          }).then(answer => console.log(answer))
+          submitQuestion({ question, apiKey, apiHost }).then(setAnswer)
         }>
         Try me!
-      </button>
-    </div>
+      </Button>
+      <p>
+        <strong>Answer:</strong> {answer}
+      </p>
+    </Main>
   )
 }
 
