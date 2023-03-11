@@ -20,7 +20,7 @@ async function submitQuestion({ question, apiKey, apiHost }: Question) {
       question,
       api_key: apiKey,
       embeddings_key: apiKey,
-      // history: localStorage.getItem('chatHistory'), // TODO
+      history: null, // TODO
       active_docs: 'default',
     }),
   })
