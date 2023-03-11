@@ -21,15 +21,16 @@ const Form = styled.form({
 interface Question {
   question: string
   apiKey: string
-  apiHost: string
 }
 
 interface Answer {
   answer: string
 }
 
-async function submitQuestion({ question, apiKey, apiHost }: Question) {
-  const response = await fetch(`${apiHost}/api/answer`, {
+const API_HOST = 'https://docsgpt-rescript-production.up.railway.app'
+
+async function submitQuestion({ question, apiKey }: Question) {
+  const response = await fetch(`${API_HOST}/api/answer`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -60,7 +61,6 @@ interface Query<Data> {
 
 const DocsGptRescript = () => {
   const [apiKey, setApiKey] = React.useState('')
-  const [apiHost, setApiHost] = React.useState('')
   const [question, setQuestion] = React.useState('')
 
   const [{ data, loading, error }, setQuery] = React.useState<Query<string>>({
@@ -75,7 +75,7 @@ const DocsGptRescript = () => {
         onSubmit={event => {
           event.preventDefault()
           setQuery(prev => ({ ...prev, loading: true }))
-          submitQuestion({ question, apiKey, apiHost })
+          submitQuestion({ question, apiKey })
             .then(answer =>
               setQuery(prev => ({ ...prev, loading: false, data: answer }))
             )
@@ -88,11 +88,6 @@ const DocsGptRescript = () => {
             placeholder="OpenAI API key"
             value={apiKey}
             onChange={event => setApiKey(event.target.value)}
-          />
-          <input
-            placeholder="API host"
-            value={apiHost}
-            onChange={event => setApiHost(event.target.value)}
           />
         </div>
         <textarea
