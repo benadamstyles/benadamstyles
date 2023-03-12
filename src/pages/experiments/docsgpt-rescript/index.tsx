@@ -78,7 +78,7 @@ const messageCss = {
   borderRadius: '1rem',
 }
 
-const Question = styled.p({
+const Question = styled.div({
   ...messageCss,
   margin: '0 0 0 3rem',
   borderBottomRightRadius: 0,
@@ -276,8 +276,11 @@ const DocsGptRescript = () => {
 
         {history.map((message, index) =>
           index % 2 === 0 ? (
-            // eslint-disable-next-line react/no-array-index-key -- we have no id.
-            <Question key={index}>{message}</Question>
+            <Question
+              // eslint-disable-next-line react/no-array-index-key -- we have no id.
+              key={index}
+              dangerouslySetInnerHTML={{ __html: micromark(message) }}
+            />
           ) : (
             <Answer
               // eslint-disable-next-line react/no-array-index-key -- we have no id.
