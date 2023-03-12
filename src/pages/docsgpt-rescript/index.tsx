@@ -83,7 +83,7 @@ interface Answer {
 }
 
 const API_HOST = 'https://docsgpt-rescript-production.up.railway.app'
-const DEBUG = true
+const DEBUG = false
 
 async function submitQuestion({ question, apiKey, history }: Question) {
   if (DEBUG) {
