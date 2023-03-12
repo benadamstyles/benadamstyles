@@ -180,7 +180,6 @@ const DocsGptRescript = () => {
   const onSuccess = React.useCallback(({ answer, query }: Answer) => {
     transition({
       updateDOM() {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-call -- no clue why eslint complains here.
         flushSync(() => {
           setQuestion('')
           setHistory(prev => [...prev, query, answer])
