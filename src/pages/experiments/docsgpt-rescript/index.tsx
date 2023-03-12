@@ -230,7 +230,7 @@ const DocsGptRescript = () => {
           {loading ? (
             <p style={{ textAlign: 'center' }}>...loading...</p>
           ) : (
-            error ? <p>{error.toString()}</p> : null
+            error ? <p>{error.message}</p> : null
           )}
         </div>
 
