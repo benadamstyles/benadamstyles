@@ -317,7 +317,7 @@ const DocsGptRescript = () => {
               }
             }}
           />
-          <Button type="submit" disabled={disabled}>
+          <Button type="submit" disabled={disabled} title="Send">
             <span role="img" aria-label="Send">
               📮
             </span>
