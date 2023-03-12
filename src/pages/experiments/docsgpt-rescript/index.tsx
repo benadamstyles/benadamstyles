@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
-import { Global } from '@emotion/react'
+import { Global, keyframes } from '@emotion/react'
 import { flushSync } from 'react-dom'
 import { micromark } from 'micromark'
 import { Main } from '../../../components/layout/main'
@@ -40,6 +40,23 @@ const Form = styled.form({
   margin: 0,
   padding: 0,
   border: 'none',
+})
+
+const fadeInOut = keyframes`
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+`
+
+const Loading = styled.p({
+  textAlign: 'center',
+  animation: `${fadeInOut} 1s ease-in-out infinite`,
 })
 
 const inputCss = {
@@ -271,7 +288,7 @@ const DocsGptRescript = () => {
         )}
 
         {loading ? (
-          <p style={{ textAlign: 'center' }}>...loading...</p>
+          <Loading>...loading...</Loading>
         ) : (
           error && <p>{error.message}</p>
         )}
