@@ -241,6 +241,15 @@ const DocsGptRescript = () => {
       <h1>{title}</h1>
 
       <Container>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: micromark(
+              'Based on [DocsGPT](https://github.com/arc53/docsgpt) by [Arc53](https://arc53.com/), this is a proof-of-concept [ChatGPT](https://openai.com/blog/chatgpt/) chatbot trained on [ReScript](https://rescript-lang.org/) documentation.\n\nYou can ask it questions about ReScript, such as:\n\n> <span style="user-select: all">**How can I choose the file suffix of my output files?**</span>\n\n> <span style="user-select: all">**How do I make a record property mutable?**</span>\n\nHead to [the OpenAI API platform](https://platform.openai.com/) to get an API key.',
+              { allowDangerousHtml: true }
+            ),
+          }}
+        />
+
         <Input
           placeholder="OpenAI API key"
           value={apiKey}
