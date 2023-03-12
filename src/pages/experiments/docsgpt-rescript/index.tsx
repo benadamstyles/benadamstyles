@@ -216,6 +216,13 @@ const DocsGptRescript = () => {
     })
   }, [])
 
+  React.useEffect(() => {
+    window.scroll({
+      behavior: 'smooth',
+      top: document.body.scrollHeight,
+    })
+  }, [history])
+
   const [{ loading, error }, submit] = useMutation(
     {
       initialData: { query: '', answer: '' },
