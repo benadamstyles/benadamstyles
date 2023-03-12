@@ -164,7 +164,7 @@ function useMutation<Data>(
   return [state, mutate] as const
 }
 
-const title = 'DocsGPT Rescript'
+const title = 'DocsGPT for ReScript'
 
 const DocsGptRescript = () => {
   const [apiKey, setApiKey] = React.useState('')
