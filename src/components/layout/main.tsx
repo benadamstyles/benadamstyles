@@ -9,11 +9,11 @@ export const Main = styled.main`
   max-width: calc(70ch + 10rem);
 
   @media (max-width: ${phone}) {
-    padding: 5rem 2rem;
+    padding: 3rem 2rem;
   }
 
   @media (max-width: ${smallPhone}) {
-    padding: 5rem 1rem;
+    padding: 3rem 1rem;
   }
 
   /* NOTE: typography */
