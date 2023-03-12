@@ -14,6 +14,12 @@ export default css`
     padding: 0;
     background-color: ${backgroundColor};
     box-sizing: border-box;
+
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+      animation-duration: 0.2s;
+      animation-timing-function: ease-out;
+    }
   }
 
   *,
