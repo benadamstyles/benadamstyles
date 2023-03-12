@@ -2,8 +2,9 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 import { Global } from '@emotion/react'
 import { flushSync } from 'react-dom'
-import { Main } from '../../components/layout/main'
-import transition from '../../util/view-transitions'
+import { Main } from '../../../components/layout/main'
+import transition from '../../../util/view-transitions'
+import Meta from '../../../components/Meta.gen'
 
 const transitionNames = {
   QUESTION: 'question',
@@ -163,6 +164,8 @@ function useMutation<Data>(
   return [state, mutate] as const
 }
 
+const title = 'DocsGPT Rescript'
+
 const DocsGptRescript = () => {
   const [apiKey, setApiKey] = React.useState('')
   const [question, setQuestion] = React.useState('')
@@ -198,7 +201,11 @@ const DocsGptRescript = () => {
 
   return (
     <Main>
+      <Meta title={title} />
       <Global styles={globalStyles} />
+
+      <h1>{title}</h1>
+
       <Container>
         <Input
           placeholder="OpenAI API key"
