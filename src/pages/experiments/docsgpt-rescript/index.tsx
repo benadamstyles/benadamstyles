@@ -4,6 +4,7 @@ import { Global } from '@emotion/react'
 import { flushSync } from 'react-dom'
 import { Main } from '../../../components/layout/main'
 import transition from '../../../util/view-transitions'
+import { highlightColorAlpha20 } from '../../../css/Colors.gen'
 import Meta from '../../../components/Meta.gen'
 
 const transitionNames = {
@@ -57,19 +58,20 @@ const TextArea = styled.textarea({
 const messageCss = {
   padding: '0.5rem',
   borderRadius: '1rem',
-  backgroundColor: 'rgba(0, 0, 0, 0.05)',
 }
 
 const Question = styled.p({
   ...messageCss,
   margin: '0 0 0 3rem',
   borderBottomRightRadius: 0,
+  backgroundColor: highlightColorAlpha20,
 })
 
 const Answer = styled.p({
   ...messageCss,
   margin: '0 3rem 0 0',
   borderBottomLeftRadius: 0,
+  backgroundColor: 'rgba(0, 0, 0, 0.05)',
 })
 
 interface Question {
