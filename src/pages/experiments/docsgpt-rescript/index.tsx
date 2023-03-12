@@ -2,6 +2,7 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 import { Global } from '@emotion/react'
 import { flushSync } from 'react-dom'
+import { micromark } from 'micromark'
 import { Main } from '../../../components/layout/main'
 import transition from '../../../util/view-transitions'
 import { highlightColorAlpha20 } from '../../../css/Colors.gen'
@@ -56,7 +57,7 @@ const TextArea = styled.textarea({
 })
 
 const messageCss = {
-  padding: '0.5rem',
+  padding: '0.5rem 1rem',
   borderRadius: '1rem',
 }
 
@@ -67,11 +68,14 @@ const Question = styled.p({
   backgroundColor: highlightColorAlpha20,
 })
 
-const Answer = styled.p({
+const Answer = styled.div({
   ...messageCss,
   margin: '0 3rem 0 0',
   borderBottomLeftRadius: 0,
   backgroundColor: 'rgba(0, 0, 0, 0.05)',
+  '& > *:first-child': {
+    marginTop: 0,
+  },
 })
 
 interface Question {
@@ -98,8 +102,17 @@ async function submitQuestion({
       setTimeout(resolve, 1000)
     })
     return {
-      answer:
-        'Culpa culpa qui occaecat Lorem. Nisi ad qui ullamco sint nulla irure labore ullamco ut nisi sint veniam minim. Proident cillum quis enim. Do eiusmod anim ipsum amet qui aute excepteur mollit eiusmod ipsum consectetur ea. Labore anim eu enim ipsum tempor cupidatat amet enim veniam. Aliqua ut mollit dolore commodo mollit exercitation ea. Eu cupidatat est culpa.',
+      answer: `## Grocery List
+
+Here's what I need to buy at the store:
+
+-  Milk
+-  Eggs
+-  Bread
+
+**Don't forget to pick up some fresh fruit!**
+
+And while you're at it, check out this [recipe for banana bread](https://www.example.com/banana-bread-recipe). It's delicious!`,
       query: question,
     }
   }
@@ -228,26 +241,24 @@ const DocsGptRescript = () => {
           onChange={event => setApiKey(event.target.value)}
         />
 
-        <div>
-          {history.map((message, index) =>
-            index % 2 === 0 ? (
-              // eslint-disable-next-line react/no-array-index-key -- we have no id.
-              <Question key={index}>{message}</Question>
-            ) : (
-              // eslint-disable-next-line react/no-array-index-key -- we have no id.
-              <Answer key={index}>
-                <strong>{'Answer: '}</strong>
-                {message}
-              </Answer>
-            )
-          )}
-
-          {loading ? (
-            <p style={{ textAlign: 'center' }}>...loading...</p>
+        {history.map((message, index) =>
+          index % 2 === 0 ? (
+            // eslint-disable-next-line react/no-array-index-key -- we have no id.
+            <Question key={index}>{message}</Question>
           ) : (
-            error && <p>{error.message}</p>
-          )}
-        </div>
+            <Answer
+              // eslint-disable-next-line react/no-array-index-key -- we have no id.
+              key={index}
+              dangerouslySetInnerHTML={{ __html: micromark(message) }}
+            />
+          )
+        )}
+
+        {loading ? (
+          <p style={{ textAlign: 'center' }}>...loading...</p>
+        ) : (
+          error && <p>{error.message}</p>
+        )}
 
         <Form
           onSubmit={event => {
