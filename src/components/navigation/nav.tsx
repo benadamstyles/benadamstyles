@@ -18,6 +18,7 @@ const NavMenu = () => (
   <Nav>
     <NavLink href="/">Home</NavLink>
     <NavLink href="/blog">Blog</NavLink>
+    <NavLink href="/experiments">Experiments</NavLink>
   </Nav>
 )
 
