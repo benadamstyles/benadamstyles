@@ -10106,10 +10106,10 @@ react-static-plugin-source-filesystem@^7.5.3:
     chokidar "^3.0.2"
     glob "^7.1.4"
 
-react-static-plugin-typescript@^7.5.3:
-  version "7.5.3"
-  resolved "https://registry.yarnpkg.com/react-static-plugin-typescript/-/react-static-plugin-typescript-7.5.3.tgz#bf900be57de35ad7f038015c60942587391f9969"
-  integrity sha512-/IK9xNl/Pel5g3rHSHzbvVDw8vDqu3xt/4fCkajMOi09RmEHMtkOR+Iai0+GjNVNHhI0Oa3THnZluXUE+yabZg==
+react-static-plugin-typescript@^7.6.2:
+  version "7.6.2"
+  resolved "https://registry.yarnpkg.com/react-static-plugin-typescript/-/react-static-plugin-typescript-7.6.2.tgz#3d4cfe810d31f5ff1264af1047707fcb4d1f802e"
+  integrity sha512-mKEvK4Vs49gx1GPM5gsb33XEPZCmZ7KG/XrnJGySfT/M2g71nI+OaIboDR6UPRrXnJ9BEoDs6tgp+od6Dz3GBg==
   dependencies:
     "@babel/preset-typescript" "^7.3.3"
     convert-tsconfig-paths-to-webpack-aliases "^0.9.2"
