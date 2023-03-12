@@ -86,7 +86,11 @@ interface Answer {
 const API_HOST = 'https://docsgpt-rescript-production.up.railway.app'
 const DEBUG = false
 
-async function submitQuestion({ question, apiKey, history }: Question) {
+async function submitQuestion({
+  question,
+  apiKey,
+  history,
+}: Question): Promise<Answer> {
   if (DEBUG) {
     await new Promise(resolve => {
       setTimeout(resolve, 1000)
@@ -122,7 +126,16 @@ async function submitQuestion({ question, apiKey, history }: Question) {
     throw Error(`${response.status}: ${response.statusText}`)
   }
 
-  return (await response.json()) as Answer
+  const json: unknown = await response.json()
+
+  if (json && typeof json === 'object' && 'answer' in json && 'query' in json) {
+    const { answer, query } = json
+    if (typeof answer === 'string' && typeof query === 'string') {
+      return { answer, query }
+    }
+  }
+
+  throw Error(`Invalid response: ${JSON.stringify(json)}`)
 }
 
 interface Query<Data> {
@@ -230,7 +243,7 @@ const DocsGptRescript = () => {
           {loading ? (
             <p style={{ textAlign: 'center' }}>...loading...</p>
           ) : (
-            error ? <p>{error.message}</p> : null
+            error && <p>{error.message}</p>
           )}
         </div>
 
@@ -249,10 +262,11 @@ const DocsGptRescript = () => {
             onKeyPress={event => {
               if (event.key === 'Enter' && !event.shiftKey) {
                 event.preventDefault()
-                const { form } = event.target as HTMLTextAreaElement
-                if (form) {
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-call -- requestSubmit() is a standard DOM API.
-                  form.requestSubmit()
+                if (event.target instanceof HTMLTextAreaElement) {
+                  const { form } = event.target
+                  if (form) {
+                    form.requestSubmit()
+                  }
                 }
               }
             }}
