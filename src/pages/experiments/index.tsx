@@ -17,7 +17,7 @@ const ExperimentsIndex = () => (
     <Meta title="Experiments index" />
 
     <List>
-      {[{ slug: 'docsgpt-rescript', title: 'DocsGPT Rescript' }].map(
+      {[{ slug: 'docsgpt-rescript', title: 'DocsGPT for ReScript' }].map(
         (experiment: Experiment) => (
           <li key={experiment.slug}>
             <a href={`/experiments/${experiment.slug}`}>
