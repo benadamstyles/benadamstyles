@@ -123,10 +123,18 @@ async function submitQuestion({
 
 Here's what I need to buy at the store:
 
+\`\`\`rescript
 -  Milk
 -  Eggs
 -  Bread
+\`\`\`
 
+or this:
+\`\`\`
+-  Milk
+-  Eggs
+-  Bread
+\`\`\`
 **Don't forget to pick up some fresh fruit!**
 
 And while you're at it, check out this [recipe for banana bread](https://www.example.com/banana-bread-recipe). It's delicious!`,
