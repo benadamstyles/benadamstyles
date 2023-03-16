@@ -217,6 +217,67 @@ function useMutation<Data>(
   return [state, mutate] as const
 }
 
+type CompilationResult =
+  | {
+      type: 'success'
+      ['js_code']: string
+      warnings: unknown[]
+      ['type_hints']?: unknown[]
+    }
+  | {
+      type: 'unexpected_error'
+      msg: string
+    }
+  | {
+      type: 'syntax_error' | 'type_error' | 'warning_error' | 'other_error'
+      errors: unknown[]
+    }
+
+interface Compiler {
+  rescript: {
+    compile: (code: string) => CompilationResult
+  }
+}
+
+function useCompiler() {
+  const [compiler, setCompiler] = React.useState<Compiler | undefined>(
+    undefined
+  )
+
+  React.useEffect(() => {
+    /* eslint-disable fp/no-mutation -- how else? */
+    const scriptElementCompiler = document.createElement('script')
+    scriptElementCompiler.type = 'text/javascript'
+    scriptElementCompiler.src =
+      'https://cdn.rescript-lang.org/v10.1.2/compiler.js'
+
+    const scriptElementReact = document.createElement('script')
+    scriptElementReact.type = 'text/javascript'
+    scriptElementReact.src =
+      'https://cdn.rescript-lang.org/v10.1.2/@rescript/react/cmij.js'
+    /* eslint-enable fp/no-mutation */
+
+    const unsafeWindow = (window as unknown) as {
+      ['rescript_compiler']: { make: () => Compiler }
+    }
+
+    const onLoad = () => setCompiler(unsafeWindow.rescript_compiler.make())
+
+    scriptElementCompiler.addEventListener('load', onLoad)
+
+    document.head.appendChild(scriptElementCompiler)
+    document.head.appendChild(scriptElementReact)
+
+    return () => {
+      scriptElementCompiler.removeEventListener('load', onLoad)
+      document.head.removeChild(scriptElementCompiler)
+      document.head.removeChild(scriptElementReact)
+    }
+  }, [])
+
+  return compiler
+}
+
 const title = 'DocsGPT for ReScript'
 
 const DocsGptRescript = () => {
