@@ -80,6 +80,7 @@ const messageCss = {
 
 const Question = styled.div({
   ...messageCss,
+  overflowX: 'auto',
   margin: '0 0 0 3rem',
   borderBottomRightRadius: 0,
   backgroundColor: highlightColorAlpha20,
@@ -87,6 +88,7 @@ const Question = styled.div({
 
 const Answer = styled.div({
   ...messageCss,
+  overflowX: 'auto',
   margin: '0 3rem 0 0',
   borderBottomLeftRadius: 0,
   backgroundColor: 'rgba(0, 0, 0, 0.05)',
