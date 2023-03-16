@@ -328,6 +328,8 @@ const DocsGptRescript = () => {
   const [apiKey, setApiKey] = React.useState('')
   const [question, setQuestion] = React.useState('')
 
+  const [textAreaRows, setTextAreaRows] = React.useState(1)
+
   const [history, setHistory] = React.useState<string[]>([])
 
   const compilationResults = useCompilation(history)
@@ -437,7 +439,15 @@ const DocsGptRescript = () => {
             disabled={disabled}
             placeholder="Question"
             value={question}
-            onChange={event => setQuestion(event.target.value)}
+            rows={textAreaRows}
+            onChange={({ target: { value, scrollHeight, clientHeight } }) => {
+              if (scrollHeight > clientHeight) {
+                const heightPerLine = clientHeight / textAreaRows
+                const lines = Math.ceil(scrollHeight / heightPerLine)
+                setTextAreaRows(lines)
+              }
+              setQuestion(value)
+            }}
             onKeyPress={event => {
               if (event.key === 'Enter' && !event.shiftKey) {
                 event.preventDefault()
