@@ -278,6 +278,50 @@ function useCompiler() {
   return compiler
 }
 
+function useCompilation(history: string[]) {
+  const [results, setResults] = React.useState<
+    (CompilationResult[] | undefined)[]
+  >([])
+
+  const compiler = useCompiler()
+
+  const codeblocksByMessage = React.useMemo(
+    () =>
+      history.map((message, index) => {
+        if (index % 2 === 0) {
+          return undefined
+        }
+
+        return Array.from(message.matchAll(/```([\S]*)\n(.*?)```/gsu))
+          .map(([, language, code]) => ({ language, code }))
+          .flatMap(({ language, code }) =>
+            language === 'rescript' || language === 'res' || language === ''
+              ? code
+              : []
+          )
+      }),
+    [history]
+  )
+
+  // Compile any new codeblocks.
+  React.useEffect(() => {
+    if (compiler && results.length !== codeblocksByMessage.length) {
+      const newCodeblocksByMessage = codeblocksByMessage.slice(results.length)
+
+      setResults(prev => [
+        ...prev,
+        ...newCodeblocksByMessage.map((codeblocks):
+          | CompilationResult[]
+          | undefined =>
+          codeblocks?.map(code => compiler.rescript.compile(code))
+        ),
+      ])
+    }
+  }, [codeblocksByMessage, compiler, results])
+
+  return results
+}
+
 const title = 'DocsGPT for ReScript'
 
 const DocsGptRescript = () => {
@@ -285,6 +329,8 @@ const DocsGptRescript = () => {
   const [question, setQuestion] = React.useState('')
 
   const [history, setHistory] = React.useState<string[]>([])
+
+  const compilationResults = useCompilation(history)
 
   const mutation = React.useCallback(
     () => submitQuestion({ question, apiKey, history }),
@@ -343,21 +389,36 @@ const DocsGptRescript = () => {
           onChange={event => setApiKey(event.target.value)}
         />
 
-        {history.map((message, index) =>
-          index % 2 === 0 ? (
-            <Question
+        {history.map((message, index) => {
+          if (index % 2 === 0) {
+            return (
+              <Question
+                // eslint-disable-next-line react/no-array-index-key -- we have no id.
+                key={index}
+                dangerouslySetInnerHTML={{ __html: micromark(message) }}
+              />
+            )
+          }
+
+          const results = compilationResults[index]
+
+          return (
+            <React.Fragment
               // eslint-disable-next-line react/no-array-index-key -- we have no id.
-              key={index}
-              dangerouslySetInnerHTML={{ __html: micromark(message) }}
-            />
-          ) : (
-            <Answer
-              // eslint-disable-next-line react/no-array-index-key -- we have no id.
-              key={index}
-              dangerouslySetInnerHTML={{ __html: micromark(message) }}
-            />
+              key={index}>
+              <Answer
+                dangerouslySetInnerHTML={{ __html: micromark(message) }}
+              />
+              {results && (
+                <p>
+                  {results.every(res => res?.type === 'success')
+                    ? '✅ All ReScript code in this reply compiles successfully.'
+                    : '❌ DocsGPT replied with invalid ReScript code.'}
+                </p>
+              )}
+            </React.Fragment>
           )
-        )}
+        })}
 
         {loading ? (
           <Loading>...loading...</Loading>
