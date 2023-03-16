@@ -80,6 +80,7 @@ const messageCss = {
 
 const Question = styled.div({
   ...messageCss,
+  overflowX: 'auto',
   margin: '0 0 0 3rem',
   borderBottomRightRadius: 0,
   backgroundColor: highlightColorAlpha20,
@@ -87,6 +88,7 @@ const Question = styled.div({
 
 const Answer = styled.div({
   ...messageCss,
+  overflowX: 'auto',
   margin: '0 3rem 0 0',
   borderBottomLeftRadius: 0,
   backgroundColor: 'rgba(0, 0, 0, 0.05)',
@@ -123,10 +125,18 @@ async function submitQuestion({
 
 Here's what I need to buy at the store:
 
+\`\`\`rescript
 -  Milk
 -  Eggs
 -  Bread
+\`\`\`
 
+or this:
+\`\`\`
+-  Milk
+-  Eggs
+-  Bread
+\`\`\`
 **Don't forget to pick up some fresh fruit!**
 
 And while you're at it, check out this [recipe for banana bread](https://www.example.com/banana-bread-recipe). It's delicious!`,
@@ -209,13 +219,122 @@ function useMutation<Data>(
   return [state, mutate] as const
 }
 
+type CompilationResult =
+  | {
+      type: 'success'
+      ['js_code']: string
+      warnings: unknown[]
+      ['type_hints']?: unknown[]
+    }
+  | {
+      type: 'unexpected_error'
+      msg: string
+    }
+  | {
+      type: 'syntax_error' | 'type_error' | 'warning_error' | 'other_error'
+      errors: unknown[]
+    }
+
+interface Compiler {
+  rescript: {
+    compile: (code: string) => CompilationResult
+  }
+}
+
+function useCompiler() {
+  const [compiler, setCompiler] = React.useState<Compiler | undefined>(
+    undefined
+  )
+
+  React.useEffect(() => {
+    /* eslint-disable fp/no-mutation -- how else? */
+    const scriptElementCompiler = document.createElement('script')
+    scriptElementCompiler.type = 'text/javascript'
+    scriptElementCompiler.src =
+      'https://cdn.rescript-lang.org/v10.1.2/compiler.js'
+
+    const scriptElementReact = document.createElement('script')
+    scriptElementReact.type = 'text/javascript'
+    scriptElementReact.src =
+      'https://cdn.rescript-lang.org/v10.1.2/@rescript/react/cmij.js'
+    /* eslint-enable fp/no-mutation */
+
+    const unsafeWindow = (window as unknown) as {
+      ['rescript_compiler']: { make: () => Compiler }
+    }
+
+    const onLoad = () => setCompiler(unsafeWindow.rescript_compiler.make())
+
+    scriptElementCompiler.addEventListener('load', onLoad)
+
+    document.head.appendChild(scriptElementCompiler)
+    document.head.appendChild(scriptElementReact)
+
+    return () => {
+      scriptElementCompiler.removeEventListener('load', onLoad)
+      document.head.removeChild(scriptElementCompiler)
+      document.head.removeChild(scriptElementReact)
+    }
+  }, [])
+
+  return compiler
+}
+
+function useCompilation(history: string[]) {
+  const [results, setResults] = React.useState<
+    (CompilationResult[] | undefined)[]
+  >([])
+
+  const compiler = useCompiler()
+
+  const codeblocksByMessage = React.useMemo(
+    () =>
+      history.map((message, index) => {
+        if (index % 2 === 0) {
+          return undefined
+        }
+
+        return Array.from(message.matchAll(/```([\S]*)\n(.*?)```/gsu))
+          .map(([, language, code]) => ({ language, code }))
+          .flatMap(({ language, code }) =>
+            language === 'rescript' || language === 'res' || language === ''
+              ? code
+              : []
+          )
+      }),
+    [history]
+  )
+
+  // Compile any new codeblocks.
+  React.useEffect(() => {
+    if (compiler && results.length !== codeblocksByMessage.length) {
+      const newCodeblocksByMessage = codeblocksByMessage.slice(results.length)
+
+      setResults(prev => [
+        ...prev,
+        ...newCodeblocksByMessage.map((codeblocks):
+          | CompilationResult[]
+          | undefined =>
+          codeblocks?.map(code => compiler.rescript.compile(code))
+        ),
+      ])
+    }
+  }, [codeblocksByMessage, compiler, results])
+
+  return results
+}
+
 const title = 'DocsGPT for ReScript'
 
 const DocsGptRescript = () => {
   const [apiKey, setApiKey] = React.useState('')
   const [question, setQuestion] = React.useState('')
 
+  const [textAreaRows, setTextAreaRows] = React.useState(1)
+
   const [history, setHistory] = React.useState<string[]>([])
+
+  const compilationResults = useCompilation(history)
 
   const mutation = React.useCallback(
     () => submitQuestion({ question, apiKey, history }),
@@ -274,21 +393,36 @@ const DocsGptRescript = () => {
           onChange={event => setApiKey(event.target.value)}
         />
 
-        {history.map((message, index) =>
-          index % 2 === 0 ? (
-            <Question
+        {history.map((message, index) => {
+          if (index % 2 === 0) {
+            return (
+              <Question
+                // eslint-disable-next-line react/no-array-index-key -- we have no id.
+                key={index}
+                dangerouslySetInnerHTML={{ __html: micromark(message) }}
+              />
+            )
+          }
+
+          const results = compilationResults[index]
+
+          return (
+            <React.Fragment
               // eslint-disable-next-line react/no-array-index-key -- we have no id.
-              key={index}
-              dangerouslySetInnerHTML={{ __html: micromark(message) }}
-            />
-          ) : (
-            <Answer
-              // eslint-disable-next-line react/no-array-index-key -- we have no id.
-              key={index}
-              dangerouslySetInnerHTML={{ __html: micromark(message) }}
-            />
+              key={index}>
+              <Answer
+                dangerouslySetInnerHTML={{ __html: micromark(message) }}
+              />
+              {results && (
+                <p>
+                  {results.every(res => res?.type === 'success')
+                    ? '✅ All ReScript code in this reply compiles successfully.'
+                    : '❌ DocsGPT replied with invalid ReScript code.'}
+                </p>
+              )}
+            </React.Fragment>
           )
-        )}
+        })}
 
         {loading ? (
           <Loading>...loading...</Loading>
@@ -307,7 +441,15 @@ const DocsGptRescript = () => {
             disabled={disabled}
             placeholder="Question"
             value={question}
-            onChange={event => setQuestion(event.target.value)}
+            rows={textAreaRows}
+            onChange={({ target: { value, scrollHeight, clientHeight } }) => {
+              if (scrollHeight > clientHeight) {
+                const heightPerLine = clientHeight / textAreaRows
+                const lines = Math.ceil(scrollHeight / heightPerLine)
+                setTextAreaRows(lines)
+              }
+              setQuestion(value)
+            }}
             onKeyPress={event => {
               if (event.key === 'Enter' && !event.shiftKey) {
                 event.preventDefault()
