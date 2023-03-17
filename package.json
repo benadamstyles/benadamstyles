@@ -79,7 +79,7 @@
     "jest": "^29.5.0",
     "maid": "^0.3.0",
     "prettier": "^2.2.1",
-    "react-hot-loader": "^4.13.0",
+    "react-hot-loader": "^4.13.1",
     "react-static-plugin-emotion": "^7.5.0",
     "react-static-plugin-mdx": "^7.5.4",
     "react-static-plugin-sitemap": "^7.5.3",
