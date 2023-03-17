@@ -413,7 +413,7 @@ const DocsGptRescript = () => {
               <Answer
                 dangerouslySetInnerHTML={{ __html: micromark(message) }}
               />
-              {results && (
+              {results && results.length > 0 && (
                 <p>
                   {results.every(res => res?.type === 'success')
                     ? '✅ All ReScript code in this reply compiles successfully.'
