@@ -24,6 +24,9 @@ export const src = (...paths) => join(__dirname, 'src', ...paths)
  * @type {import('react-static').ReactStaticConfig}
  */
 const config = {
+  // Attempt to fix flaky build failures on Netlify, which provides up to 32 cores.
+  maxThreads: 8,
+
   entry: src('index.tsx'),
 
   plugins: [
