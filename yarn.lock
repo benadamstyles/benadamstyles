@@ -1341,10 +1341,10 @@
   resolved "https://registry.yarnpkg.com/@benadamstyles/eslint-config/-/eslint-config-3.0.1.tgz#922d49f590b881839671e3bab7f67ccb03092a1b"
   integrity sha512-aBTiA2eXtuLi/6VSJzTkSPTFy6WmZc3EuVdhIoXFvDNgYDRCqv5EyJi/shU+GW+q8+DfbW3vW35Y7W6zT0bP4w==
 
-"@davesnx/styled-ppx@^0.20.0":
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/@davesnx/styled-ppx/-/styled-ppx-0.20.0.tgz#ffafcd850c0669f54bd425915a5f82b515fdaa55"
-  integrity sha512-aKoOq3khSZRZAT1/CkIEzIm4c9RcOPJ9JN3MLlr5wzHYof9/uEIk15tPSillCThBiN2ymYMmF6DYb2HxjnGJIw==
+"@davesnx/styled-ppx@^0.38.0":
+  version "0.38.0"
+  resolved "https://registry.yarnpkg.com/@davesnx/styled-ppx/-/styled-ppx-0.38.0.tgz#151653ead1281da8a181cd74781d8bc7b9fa2809"
+  integrity sha512-K3M/rtCwKLGDd0NM6g9T3JnZ78jBbqaa5Vc+1mjysvOn4Bpe7sXW9rAFpZFFRz50+apoWobMPoTTFpdUL2om8Q==
 
 "@emotion/babel-plugin-jsx-pragmatic@^0.1.5":
   version "0.1.5"
