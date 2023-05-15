@@ -8098,10 +8098,10 @@ kleur@^4.0.3:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-4.1.5.tgz#95106101795f7050c6c650f350c683febddb1780"
   integrity sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==
 
-konva@^7.2.5:
-  version "7.2.5"
-  resolved "https://registry.yarnpkg.com/konva/-/konva-7.2.5.tgz#9b4ac3a353e6be66e3e69123bf2a0cbc61efeb26"
-  integrity sha512-yk/li8rUF+09QNlOdkwbEId+QvfATMe/aMGVouWW1oFoUVTYWHsQuIAE6lWy11DK8mLJEJijkNAXC5K+NVlMew==
+konva@^9.0.2:
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/konva/-/konva-9.0.2.tgz#586c03dff3ea894f0cfe132cf803926f3f666b97"
+  integrity sha512-kHPqZkIN191ysRD5OnWezIzcJtENyMZkCqRxi4szq9iyGzBDugxZkx5RmHWkmuDE9cR1lyeJoeQTeV5hoaGplg==
 
 language-subtag-registry@~0.3.2:
   version "0.3.21"
